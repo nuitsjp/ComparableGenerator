@@ -17,12 +17,9 @@ namespace ComparableGenerator
     /// <summary>
     /// Class to produce the template output
     /// </summary>
-    
-    #line 1 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CompareByAttributeTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class CompareByAttributeTemplate : CompareByAttributeTemplateBase
     {
-#line hidden
         /// <summary>
         /// Create the template output
         /// </summary>
@@ -47,9 +44,6 @@ namespace ComparableGenerator
             return this.GenerationEnvironment.ToString();
         }
     }
-    
-    #line default
-    #line hidden
     #region Base class
     /// <summary>
     /// Base class for this transformation

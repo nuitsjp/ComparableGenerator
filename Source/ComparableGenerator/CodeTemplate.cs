@@ -17,103 +17,47 @@ namespace ComparableGenerator
     /// <summary>
     /// Class to produce the template output
     /// </summary>
-    
-    #line 1 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class CodeTemplate : CodeTemplateBase
     {
-#line hidden
         /// <summary>
         /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
             this.Write("using System;\r\n\r\nnamespace ");
-            
-            #line 9 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
-            
-            #line default
-            #line hidden
             this.Write("\r\n{\r\n    public partial struct ");
-            
-            #line 11 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type));
-            
-            #line default
-            #line hidden
             this.Write(" : IComparable<");
-            
-            #line 11 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type));
-            
-            #line default
-            #line hidden
             this.Write(">\r\n    {\r\n        public int CompareTo(");
-            
-            #line 13 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type));
-            
-            #line default
-            #line hidden
             this.Write(" other)\r\n        {\r\n            int compared;\r\n");
-            
-            #line 16 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
 
 foreach(var member in Members) { 
 
-            
-            #line default
-            #line hidden
             this.Write("            compared = ");
-            
-            #line 19 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
-            
-            #line default
-            #line hidden
             this.Write(".CompareTo(other.");
-            
-            #line 19 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
-            
-            #line default
-            #line hidden
             this.Write(");\r\n");
-            
-            #line 20 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
  
     if(member == Members.Last()) { 
 
-            
-            #line default
-            #line hidden
             this.Write("            return compared;\r\n");
-            
-            #line 24 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
  
     } else { 
 
-            
-            #line default
-            #line hidden
             this.Write("            if (compared != 0) return compared;\r\n");
-            
-            #line 28 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
  
     }
 }
 
-            
-            #line default
-            #line hidden
             this.Write("        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
-    
-    #line default
-    #line hidden
     #region Base class
     /// <summary>
     /// Base class for this transformation
