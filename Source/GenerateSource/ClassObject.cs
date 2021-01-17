@@ -1,27 +1,20 @@
 ﻿using System;
+using ComparableGenerator;
 
 namespace GenerateSource
 {
-    public class ClassObject : IComparable<ClassObject>
+    [Comparable]
+    public partial class ClassObject
     {
+        [CompareBy]
         public int Value1 { get; set; }
-        public int Value2 { get; set; }
+
+        [CompareBy(Priority = 2)]
+        public int Value2;
+
+        [CompareBy(Priority = 1)]
         public int Value3 { get; set; }
 
-        public int CompareTo(ClassObject? other)
-        {
-            if (other is null) return 1;
-
-            int compared;
-
-            compared = Value1.CompareTo(other.Value1);
-            if (compared != 0) return compared;
-
-            compared = Value2.CompareTo(other.Value2);
-            if (compared != 0) return compared;
-
-            compared = Value3.CompareTo(other.Value3);
-            return compared;
-        }
+        public int NotApplicable { get; set; }
     }
 }

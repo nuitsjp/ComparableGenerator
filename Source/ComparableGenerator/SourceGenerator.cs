@@ -65,12 +65,14 @@ namespace ComparableGenerator
                             .Select(x => x.Name)
                             .ToList();
 
-                    context.AddSource("StructObject.Partial.cs", new CodeTemplate
+                    var codeTemplate = new CodeTemplate
                     {
                         Namespace = typeSymbol.ContainingNamespace.ToDisplayString(),
-                        Type = typeSymbol.Name,
+                        Name = typeSymbol.Name,
+                        Type = targetType is StructDeclarationSyntax ? "struct" : "class",
                         Members = members
-                    }.TransformText());
+                    };
+                    context.AddSource($"{codeTemplate.Namespace}.{codeTemplate.Name}.Partial.cs", codeTemplate.TransformText());
                 }
             }
             catch (Exception e)

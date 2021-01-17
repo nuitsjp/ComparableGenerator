@@ -11,7 +11,7 @@ namespace ComparableGenerator.Test
         public static IEnumerable<object[]> CompareWith { get; } =
             new List<object[]>
             {
-                //new object[]{typeof(ClassObject) },
+                new object[]{typeof(ClassObject) },
                 new object[]{typeof(StructObject)}
             };
 
@@ -25,6 +25,7 @@ namespace ComparableGenerator.Test
         }
 
         [Theory]
+        [InlineData(typeof(GenerateSource.NoComparable.ClassObject))]
         [InlineData(typeof(GenerateSource.NoComparable.StructObject))]
         public void Should_not_implement_ICompare_for_CompareAttribute_is_not_defined(Type compareWith)
         {

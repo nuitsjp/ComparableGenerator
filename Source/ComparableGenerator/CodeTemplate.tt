@@ -8,21 +8,21 @@ using System;
 
 namespace <#= Namespace #>
 {
-    public partial struct <#= Type #> : IComparable, IComparable<<#= Type #>>
+    public partial <#= Type #> <#= Name #> : IComparable, IComparable<<#= Name #>>
     {
         public int CompareTo(object obj)
         {
             if (obj is null) return 1;
 
-            if (!(obj is <#= Type #>))
+            if (!(obj is <#= Name #>))
             {
-                throw new ArgumentException("Object is not a <#= Namespace #>.<#= Type #>.");
+                throw new ArgumentException("Object is not a <#= Namespace #>.<#= Name #>.");
             }
 
-            return CompareTo((<#= Type #>)obj);
+            return CompareTo((<#= Name #>)obj);
         }
 
-        public int CompareTo(<#= Type #> other)
+        public int CompareTo(<#= Name #> other)
         {
             int compared;
 <#
