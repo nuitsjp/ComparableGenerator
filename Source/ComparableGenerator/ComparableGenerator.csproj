@@ -35,6 +35,11 @@
 
   <ItemGroup>
     <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Include="CodeTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CodeTemplate.tt</DependentUpon>
+    </None>
     <None Include="ComparableAttributeTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -48,6 +53,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="CodeTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CodeTemplate.cs</LastGenOutput>
+    </None>
     <None Update="ComparableAttributeTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ComparableAttributeTemplate.cs</LastGenOutput>
@@ -63,6 +72,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="CodeTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CodeTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="ComparableAttributeTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

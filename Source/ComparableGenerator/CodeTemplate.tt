@@ -1,0 +1,34 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System;
+
+namespace <#= Namespace #>
+{
+    public partial struct <#= Type #> : IComparable<<#= Type #>>
+    {
+        public int CompareTo(<#= Type #> other)
+        {
+            int compared;
+<#
+    foreach(var member in Members) { 
+#>
+            compared = <#= member #>.CompareTo(other.<#= member #>);
+<# 
+        if(member == Members.Last()) { 
+#>
+            return compared;
+<# 
+        } else { 
+#>
+            if (compared != 0) return compared;
+<# 
+        }
+    }
+#>
+        }
+    }
+}
