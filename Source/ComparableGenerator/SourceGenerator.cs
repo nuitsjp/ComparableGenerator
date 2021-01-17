@@ -37,6 +37,7 @@ namespace ComparableGenerator
 
                     var members =
                         targetType.Members
+                            .Where(x => x.AttributeLists.SelectMany(x => x.Attributes).FirstOrDefault(x => x.Name.ToString() is "CompareBy" or "CompareByAttribute") != null)
                             .Select(x => context.Compilation.GetSemanticModel(x.SyntaxTree).GetDeclaredSymbol(x))
                             .Where(x => x is not null)
                             .Cast<ISymbol>()

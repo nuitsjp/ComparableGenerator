@@ -14,20 +14,20 @@ namespace <#= Namespace #>
         {
             int compared;
 <#
-    foreach(var member in Members) { 
+foreach(var member in Members) { 
 #>
             compared = <#= member #>.CompareTo(other.<#= member #>);
 <# 
-        if(member == Members.Last()) { 
+    if(member == Members.Last()) { 
 #>
             return compared;
 <# 
-        } else { 
+    } else { 
 #>
             if (compared != 0) return compared;
 <# 
-        }
     }
+}
 #>
         }
     }

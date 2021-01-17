@@ -15,6 +15,8 @@ namespace GenerateSource
         [CompareBy]
         public int Value3 { get; set; }
 
+        public int NotApplicable { get; set; }
+
         //public int CompareTo(object obj)
         //{
         //    throw new NotImplementedException();

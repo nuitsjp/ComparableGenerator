@@ -60,7 +60,7 @@ namespace ComparableGenerator
             
             #line 16 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
 
-    foreach(var member in Members) { 
+foreach(var member in Members) { 
 
             
             #line default
@@ -83,7 +83,7 @@ namespace ComparableGenerator
             
             #line 20 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
  
-        if(member == Members.Last()) { 
+    if(member == Members.Last()) { 
 
             
             #line default
@@ -92,7 +92,7 @@ namespace ComparableGenerator
             
             #line 24 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
  
-        } else { 
+    } else { 
 
             
             #line default
@@ -101,8 +101,8 @@ namespace ComparableGenerator
             
             #line 28 "C:\Users\nuits.jp\source\repos\ComparableGenerator\Source\ComparableGenerator\CodeTemplate.tt"
  
-        }
     }
+}
 
             
             #line default
