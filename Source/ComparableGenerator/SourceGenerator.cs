@@ -20,6 +20,8 @@ namespace ComparableGenerator
 
         public void Execute(GeneratorExecutionContext context)
         {
+            context.AddSource("ComparableAttribute.cs", new ComparableAttributeTemplate().TransformText());
+            context.AddSource("CompareByAttribute.cs", new CompareByAttributeTemplate().TransformText());
             try
             {
 

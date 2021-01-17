@@ -1,0 +1,22 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+using System;
+
+namespace ComparableGenerator
+{
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+    public sealed class CompareByAttribute : Attribute
+    {
+        public const int DefaultPriority = 0;
+
+        /// <summary>
+        /// Priority in CompareTo.
+        /// </summary>
+        // ReSharper disable once MemberInitializerValueIgnored
+        public int Priority { get; set; } = DefaultPriority;
+    }
+}
