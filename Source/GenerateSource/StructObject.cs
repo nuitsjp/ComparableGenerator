@@ -4,7 +4,7 @@ using ComparableGenerator;
 namespace GenerateSource
 {
     [Comparable]
-    public partial struct StructObject// : IComparable
+    public partial struct StructObject
     {
         [CompareBy]
         public int Value1 { get; set; }
