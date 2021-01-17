@@ -29,9 +29,18 @@ namespace ComparableGenerator
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             this.Write("\r\n{\r\n    public partial struct ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Type));
-            this.Write(" : IComparable<");
+            this.Write(" : IComparable, IComparable<");
             this.Write(this.ToStringHelper.ToStringWithCulture(Type));
-            this.Write(">\r\n    {\r\n        public int CompareTo(");
+            this.Write(">\r\n    {\r\n        public int CompareTo(object obj)\r\n        {\r\n            if (ob" +
+                    "j is null) return 1;\r\n\r\n            if (!(obj is ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(Type));
+            this.Write("))\r\n            {\r\n                throw new ArgumentException(\"Object is not a ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
+            this.Write(".");
+            this.Write(this.ToStringHelper.ToStringWithCulture(Type));
+            this.Write(".\");\r\n            }\r\n\r\n            return CompareTo((");
+            this.Write(this.ToStringHelper.ToStringWithCulture(Type));
+            this.Write(")obj);\r\n        }\r\n\r\n        public int CompareTo(");
             this.Write(this.ToStringHelper.ToStringWithCulture(Type));
             this.Write(" other)\r\n        {\r\n            int compared;\r\n");
 

@@ -8,8 +8,20 @@ using System;
 
 namespace <#= Namespace #>
 {
-    public partial struct <#= Type #> : IComparable<<#= Type #>>
+    public partial struct <#= Type #> : IComparable, IComparable<<#= Type #>>
     {
+        public int CompareTo(object obj)
+        {
+            if (obj is null) return 1;
+
+            if (!(obj is <#= Type #>))
+            {
+                throw new ArgumentException("Object is not a <#= Namespace #>.<#= Type #>.");
+            }
+
+            return CompareTo((<#= Type #>)obj);
+        }
+
         public int CompareTo(<#= Type #> other)
         {
             int compared;

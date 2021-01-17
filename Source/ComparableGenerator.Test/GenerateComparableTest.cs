@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using GenerateSource;
 using Xunit;
@@ -6,40 +8,114 @@ namespace ComparableGenerator.Test
 {
     public class GenerateComparableTest
     {
-        [Fact]
-        public void Compare_by_concrete_type_by_first_member()
-        {
-            var obj1 = new StructObject {Value1 = 1};
-            var obj2 = new StructObject {Value1 = 2};
+        public static IEnumerable<object[]> CompareWith { get; } =
+            new List<object[]>
+            {
+                //new object[]{typeof(ClassObject) },
+                new object[]{typeof(StructObject)}
+            };
 
-            obj1.CompareTo(obj2).Should().Be(obj1.Value1.CompareTo(obj2.Value1));
+        [Theory]
+        [MemberData(nameof(CompareWith))]
+        public void Should_implement_ICompare_for_CompareAttribute_is_defined(Type compareWith)
+        {
+            var obj = Activator.CreateInstance(compareWith);
+            obj.Should().BeAssignableTo<IComparable>();
+            obj.Should().BeAssignableTo(typeof(IComparable<>).MakeGenericType(compareWith));
         }
 
-        [Fact]
-        public void Compare_by_concrete_type_by_last_member()
+        [Theory]
+        [InlineData(typeof(GenerateSource.NoComparable.StructObject))]
+        public void Should_not_implement_ICompare_for_CompareAttribute_is_not_defined(Type compareWith)
         {
-            var obj1 = new StructObject {Value1 = 0, Value2 = 1, Value3 = 0};
-            var obj2 = new StructObject {Value1 = 0, Value2 = 2, Value3 = 0};
-
-            obj1.CompareTo(obj2).Should().Be(obj1.Value2.CompareTo(obj2.Value2));
+            var obj = Activator.CreateInstance(compareWith);
+            obj.Should().NotBeAssignableTo<IComparable>();
+            obj.Should().NotBeAssignableTo(typeof(IComparable<>).MakeGenericType(compareWith));
         }
 
-        [Fact]
-        public void Compare_by_concrete_type_order_by_priority()
+        [Theory]
+        [MemberData(nameof(CompareWith))]
+        public void Should_return_1_for_CompareTo_null(Type compareWith)
         {
-            var obj1 = new StructObject { Value1 = 0, Value2 = 2, Value3 = 1 };
-            var obj2 = new StructObject { Value1 = 0, Value2 = 1, Value3 = 2 };
-
-            obj1.CompareTo(obj2).Should().Be(obj1.Value3.CompareTo(obj2.Value3));
+            var comparable = (IComparable)Activator.CreateInstance(compareWith)!;
+            comparable.CompareTo(null).Should().Be(1);
         }
 
-        [Fact]
-        public void Members_with_undefined_CompareBy_attribute_will_be_excluded()
+        [Theory]
+        [MemberData(nameof(CompareWith))]
+        public void Should_throw_ArgumentException_for_CompareTo_different_type(Type compareWith)
         {
-            var obj1 = new StructObject { Value1 = 0, Value2 = 0, Value3 = 0, NotApplicable = 1};
-            var obj2 = new StructObject { Value1 = 0, Value2 = 0, Value3 = 0, NotApplicable = 2};
+            var comparable = (IComparable)Activator.CreateInstance(compareWith)!;
+            var instanceOfDifferentType = string.Empty;
+            comparable.Invoking(x => x.CompareTo(instanceOfDifferentType))
+                .Should().Throw<ArgumentException>()
+                .WithMessage($"Object is not a {compareWith.FullName}.");
+        }
 
-            obj1.CompareTo(obj2).Should().Be(0);
+        [Theory]
+        [MemberData(nameof(CompareWith))]
+        public void Should_return_CompareTo_result_of_first_member(Type compareWith)
+        {
+            var instance0 = (dynamic)Activator.CreateInstance(compareWith)!;
+            instance0.Value1 = 1;
+            var instance1 = (dynamic)Activator.CreateInstance(compareWith)!;
+            instance1.Value1 = 2;
+
+            ((IComparable)instance0).CompareTo((object)instance1)
+                .Should().Be(instance0.Value1.CompareTo(instance1.Value1));
+        }
+
+        [Theory]
+        [MemberData(nameof(CompareWith))]
+        public void Should_return_CompareTo_result_of_intermediate_member(Type compareWith)
+        {
+            var instance0 = (dynamic)Activator.CreateInstance(compareWith)!;
+            instance0.Value1 = 0;
+            instance0.Value2 = 2;
+            instance0.Value3 = 1;
+            var instance1 = (dynamic)Activator.CreateInstance(compareWith)!;
+            instance1.Value1 = 0;
+            instance1.Value2 = 1;
+            instance1.Value3 = 2;
+
+            ((IComparable)instance0).CompareTo((object)instance1)
+                .Should().Be(instance0.Value3.CompareTo(instance1.Value3));
+        }
+
+        [Theory]
+        [MemberData(nameof(CompareWith))]
+        public void Should_return_CompareTo_result_of_last_member(Type compareWith)
+        {
+            var instance0 = (dynamic)Activator.CreateInstance(compareWith)!;
+            instance0.Value1 = 0;
+            instance0.Value2 = 1;
+            instance0.Value3 = 0;
+            var instance1 = (dynamic)Activator.CreateInstance(compareWith)!;
+            instance1.Value1 = 0;
+            instance1.Value2 = 2;
+            instance1.Value3 = 1;
+
+            ((IComparable)instance0).CompareTo((object)instance1)
+                .Should().Be(instance0.Value2.CompareTo(instance1.Value2));
+        }
+
+        [Theory]
+        [MemberData(nameof(CompareWith))]
+        public void Should_return_CompareTo_result_exclude_not_applicable_member(Type compareWith)
+        {
+            var instance0 = (dynamic)Activator.CreateInstance(compareWith)!;
+            instance0.Value1 = 0;
+            instance0.Value2 = 0;
+            instance0.Value3 = 0;
+            instance0.NotApplicable = 1;
+            var instance1 = (dynamic)Activator.CreateInstance(compareWith)!;
+            instance1.Value1 = 0;
+            instance1.Value2 = 0;
+            instance1.Value3 = 0;
+            instance1.NotApplicable = 2;
+
+            ((IComparable)instance0).CompareTo((object)instance1)
+                .Should().Be(0);
         }
     }
 }
