@@ -18,8 +18,17 @@ namespace ComparableGenerator.Test
         [Fact]
         public void Compare_by_concrete_type_by_last_member()
         {
-            var obj1 = new StructObject {Value1 = 0, Value2 = 0, Value3 = 1};
-            var obj2 = new StructObject {Value1 = 0, Value2 = 0, Value3 = 2};
+            var obj1 = new StructObject {Value1 = 0, Value2 = 1, Value3 = 0};
+            var obj2 = new StructObject {Value1 = 0, Value2 = 2, Value3 = 0};
+
+            obj1.CompareTo(obj2).Should().Be(obj1.Value2.CompareTo(obj2.Value2));
+        }
+
+        [Fact]
+        public void Compare_by_concrete_type_order_by_priority()
+        {
+            var obj1 = new StructObject { Value1 = 0, Value2 = 2, Value3 = 1 };
+            var obj2 = new StructObject { Value1 = 0, Value2 = 1, Value3 = 2 };
 
             obj1.CompareTo(obj2).Should().Be(obj1.Value3.CompareTo(obj2.Value3));
         }

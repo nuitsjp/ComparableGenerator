@@ -37,8 +37,29 @@ namespace ComparableGenerator
 
                     var members =
                         targetType.Members
-                            .Where(x => x.AttributeLists.SelectMany(x => x.Attributes).FirstOrDefault(x => x.Name.ToString() is "CompareBy" or "CompareByAttribute") != null)
-                            .Select(x => context.Compilation.GetSemanticModel(x.SyntaxTree).GetDeclaredSymbol(x))
+                            .Select(x =>
+                            {
+                                var compareBy = x
+                                    .AttributeLists
+                                    .SelectMany(attribute => attribute.Attributes)
+                                    .FirstOrDefault(attribute => attribute.Name.ToString() is "CompareBy" or "CompareByAttribute");
+                                return (Member: x, CompareBy: compareBy);
+                            })
+                            .Where(x => x.CompareBy is not null)
+                            .Select(x =>
+                            {
+                                var compareBy = x.CompareBy;
+                                var argument = compareBy?.ArgumentList?.Arguments.SingleOrDefault();
+                                if (argument is null)
+                                {
+                                    return (Member: x.Member, Priority: 0);
+                                }
+
+                                var expression = (LiteralExpressionSyntax)argument.Expression;
+                                return (Member: x.Member, Priority: (int)expression.Token.Value);
+                            })
+                            .OrderBy(x => x.Priority)
+                            .Select(x => context.Compilation.GetSemanticModel(x.Member.SyntaxTree).GetDeclaredSymbol(x.Member))
                             .Where(x => x is not null)
                             .Cast<ISymbol>()
                             .Select(x => x.Name)
