@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -9,6 +10,16 @@ namespace ComparableGenerator
     [Generator]
     public class SourceGenerator : ISourceGenerator
     {
+        private const string Category = "ComparableGenerator";
+        private const string Id = "CG0001";
+        private const string MessageFormat = "Define CompareByAttribute for the any property of Type '{0}.{1}'";
+        private static readonly DiagnosticDescriptor NoMembersWithCompareByAttributeDefined = new DiagnosticDescriptor(id: Id,
+            title: "No members with CompareByAttribute defined",
+            messageFormat: MessageFormat,
+            category: Category,
+            DiagnosticSeverity.Error,
+            isEnabledByDefault: true);
+        
         public void Initialize(GeneratorInitializationContext context)
         {
 #if DEBUG
@@ -72,7 +83,15 @@ namespace ComparableGenerator
                         Type = targetType is StructDeclarationSyntax ? "struct" : "class",
                         Members = members
                     };
-                    context.AddSource($"{codeTemplate.Namespace}.{codeTemplate.Name}.Partial.cs", codeTemplate.TransformText());
+
+                    if (members.Any())
+                    {
+                        context.AddSource($"{codeTemplate.Namespace}.{codeTemplate.Name}.Partial.cs", codeTemplate.TransformText());
+                    }
+                    else
+                    {
+                        context.ReportDiagnostic(NoMembersWithCompareByAttributeDefined.CreateDiagnostic(targetType, typeSymbol));
+                    }
                 }
             }
             catch (Exception e)
@@ -101,5 +120,13 @@ namespace ComparableGenerator
                 }
             }
         }
+    }
+
+    internal static class DiagnosticDescriptorExtensions
+    {
+        internal static Diagnostic CreateDiagnostic(this DiagnosticDescriptor descriptor, SyntaxNode syntaxNode,
+            ISymbol symbol)
+            => Diagnostic.Create(descriptor, Location.Create(syntaxNode.SyntaxTree, syntaxNode.Span),
+                symbol.ContainingNamespace.ToString(), symbol.Name);
     }
 }
