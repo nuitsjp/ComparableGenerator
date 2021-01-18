@@ -16,15 +16,6 @@ namespace ComparableGenerator.Test
             };
 
         [Theory]
-        [MemberData(nameof(CompareWith))]
-        public void Should_implement_ICompare_for_CompareAttribute_is_defined(Type compareWith)
-        {
-            var obj = Activator.CreateInstance(compareWith);
-            obj.Should().BeAssignableTo<IComparable>();
-            obj.Should().BeAssignableTo(typeof(IComparable<>).MakeGenericType(compareWith));
-        }
-
-        [Theory]
         [InlineData(typeof(GenerateSource.NoComparable.ClassObject))]
         [InlineData(typeof(GenerateSource.NoComparable.StructObject))]
         public void Should_not_implement_ICompare_for_CompareAttribute_is_not_defined(Type compareWith)
@@ -32,6 +23,15 @@ namespace ComparableGenerator.Test
             var obj = Activator.CreateInstance(compareWith);
             obj.Should().NotBeAssignableTo<IComparable>();
             obj.Should().NotBeAssignableTo(typeof(IComparable<>).MakeGenericType(compareWith));
+        }
+
+        [Theory]
+        [MemberData(nameof(CompareWith))]
+        public void Should_implement_ICompare_for_CompareAttribute_is_defined(Type compareWith)
+        {
+            var obj = Activator.CreateInstance(compareWith);
+            obj.Should().BeAssignableTo<IComparable>();
+            obj.Should().BeAssignableTo(typeof(IComparable<>).MakeGenericType(compareWith));
         }
 
         [Theory]
