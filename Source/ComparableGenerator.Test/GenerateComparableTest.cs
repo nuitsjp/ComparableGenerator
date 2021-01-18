@@ -36,10 +36,17 @@ namespace ComparableGenerator.Test
 
         [Theory]
         [MemberData(nameof(CompareWith))]
-        public void Should_return_1_for_CompareTo_null(Type compareWith)
+        public void Should_return_1_for_CompareTo_by_null_object(Type compareWith)
         {
             var comparable = (IComparable)Activator.CreateInstance(compareWith)!;
             comparable.CompareTo(null).Should().Be(1);
+        }
+
+        [Fact]
+        public void Should_return_1_for_CompareTo_by_null_concrete_object()
+        {
+            var comparable = new ClassObject();
+            comparable.CompareTo((ClassObject)null!).Should().Be(1);
         }
 
         [Theory]

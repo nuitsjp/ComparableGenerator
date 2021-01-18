@@ -33,8 +33,8 @@ namespace ComparableGenerator
             this.Write(this.ToStringHelper.ToStringWithCulture(Name));
             this.Write(" : IComparable, IComparable<");
             this.Write(this.ToStringHelper.ToStringWithCulture(Name));
-            this.Write(">\r\n    {\r\n        public int CompareTo(object obj)\r\n        {\r\n            if (ob" +
-                    "j is null) return 1;\r\n\r\n            if (!(obj is ");
+            this.Write(">\r\n    {\r\n        public int CompareTo(object other)\r\n        {\r\n            if (" +
+                    "other is null) return 1;\r\n\r\n            if (!(other is ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Name));
             this.Write("))\r\n            {\r\n                throw new ArgumentException(\"Object is not a ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
@@ -42,9 +42,17 @@ namespace ComparableGenerator
             this.Write(this.ToStringHelper.ToStringWithCulture(Name));
             this.Write(".\");\r\n            }\r\n\r\n            return CompareTo((");
             this.Write(this.ToStringHelper.ToStringWithCulture(Name));
-            this.Write(")obj);\r\n        }\r\n\r\n        public int CompareTo(");
+            this.Write(")other);\r\n        }\r\n\r\n        public int CompareTo(");
             this.Write(this.ToStringHelper.ToStringWithCulture(Name));
-            this.Write(" other)\r\n        {\r\n            int compared;\r\n");
+            this.Write(" other)\r\n        {\r\n");
+
+if(Type == "class") {
+
+            this.Write("            if (other is null) return 1;\r\n");
+
+}
+
+            this.Write("            int compared;\r\n");
 
 foreach(var member in Members) { 
 

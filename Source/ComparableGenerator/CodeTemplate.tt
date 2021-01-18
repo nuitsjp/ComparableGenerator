@@ -10,20 +10,27 @@ namespace <#= Namespace #>
 {
     public partial <#= Type #> <#= Name #> : IComparable, IComparable<<#= Name #>>
     {
-        public int CompareTo(object obj)
+        public int CompareTo(object other)
         {
-            if (obj is null) return 1;
+            if (other is null) return 1;
 
-            if (!(obj is <#= Name #>))
+            if (!(other is <#= Name #>))
             {
                 throw new ArgumentException("Object is not a <#= Namespace #>.<#= Name #>.");
             }
 
-            return CompareTo((<#= Name #>)obj);
+            return CompareTo((<#= Name #>)other);
         }
 
         public int CompareTo(<#= Name #> other)
         {
+<#
+if(Type == "class") {
+#>
+            if (other is null) return 1;
+<#
+}
+#>
             int compared;
 <#
 foreach(var member in Members) { 
