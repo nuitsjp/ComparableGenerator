@@ -13,12 +13,12 @@ namespace ComparableGenerator
         private const string Category = "ComparableGenerator";
         private const string Id = "CG0001";
         private const string MessageFormat = "Define CompareByAttribute for the any property of Type '{0}.{1}'";
-        private static readonly DiagnosticDescriptor NoMembersWithCompareByAttributeDefined = new DiagnosticDescriptor(id: Id,
-            title: "No members with CompareByAttribute defined",
-            messageFormat: MessageFormat,
-            category: Category,
+        private static readonly DiagnosticDescriptor NoMembersWithCompareByAttributeDefined = new(Id,
+            "No members with CompareByAttribute defined",
+            MessageFormat,
+            Category,
             DiagnosticSeverity.Error,
-            isEnabledByDefault: true);
+            true);
         
         public void Initialize(GeneratorInitializationContext context)
         {
