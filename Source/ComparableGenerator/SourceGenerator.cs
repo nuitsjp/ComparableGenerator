@@ -34,8 +34,6 @@ namespace ComparableGenerator
 
         public void Execute(GeneratorExecutionContext context)
         {
-            context.AddSource("ComparableAttribute.cs", new ComparableAttributeTemplate().TransformText());
-            context.AddSource("CompareByAttribute.cs", new CompareByAttributeTemplate().TransformText());
             try
             {
                 var receiver = context.SyntaxReceiver as SyntaxReceiver;
@@ -126,7 +124,7 @@ namespace ComparableGenerator
     {
         internal static Diagnostic CreateDiagnostic(this DiagnosticDescriptor descriptor, SyntaxNode syntaxNode,
             ISymbol symbol)
-            => Diagnostic.Create(descriptor, Location.Create(syntaxNode.SyntaxTree, syntaxNode.Span),
+            => Diagnostic.Create(descriptor, syntaxNode.GetLocation(),
                 symbol.ContainingNamespace.ToString(), symbol.Name);
     }
 }

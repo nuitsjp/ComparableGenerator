@@ -61,7 +61,7 @@ namespace ComparableGenerator.Properties {
         }
         
         /// <summary>
-        ///   Type names should be all uppercase. に類似しているローカライズされた文字列を検索します。
+        ///   変数を定数に変更できる. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string AnalyzerDescription {
             get {
@@ -70,7 +70,7 @@ namespace ComparableGenerator.Properties {
         }
         
         /// <summary>
-        ///   Type name &apos;{0}&apos; contains lowercase letters に類似しているローカライズされた文字列を検索します。
+        ///   定数に変更できる に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string AnalyzerMessageFormat {
             get {
@@ -79,7 +79,7 @@ namespace ComparableGenerator.Properties {
         }
         
         /// <summary>
-        ///   Type name contains lowercase letters に類似しているローカライズされた文字列を検索します。
+        ///   定数にする に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string AnalyzerTitle {
             get {

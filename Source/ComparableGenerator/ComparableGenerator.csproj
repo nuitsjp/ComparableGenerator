@@ -27,6 +27,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,10 +39,6 @@
     <None Update="CodeTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>CodeTemplate.cs</LastGenOutput>
-    </None>
-    <None Update="ComparableAttributeTemplate.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ComparableAttributeTemplate.cs</LastGenOutput>
     </None>
     <None Update="CompareByAttributeTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -58,11 +55,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>CodeTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Update="ComparableAttributeTemplate.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ComparableAttributeTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="CompareByAttributeTemplate.cs">
       <DesignTime>True</DesignTime>
