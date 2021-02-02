@@ -34,15 +34,14 @@ namespace ComparableGenerator
             this.Write(" : IComparable, IComparable<");
             this.Write(this.ToStringHelper.ToStringWithCulture(Name));
             this.Write(">\r\n    {\r\n        public int CompareTo(object other)\r\n        {\r\n            if (" +
-                    "other is null) return 1;\r\n\r\n            if (!(other is ");
+                    "other is null) return 1;\r\n\r\n\r\n            if (other is ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Name));
-            this.Write("))\r\n            {\r\n                throw new ArgumentException(\"Object is not a ");
+            this.Write(" concreteObject)\r\n            {\r\n                return CompareTo(concreteObject)" +
+                    ";\r\n            }\r\n\r\n            throw new ArgumentException(\"Object is not a ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             this.Write(".");
             this.Write(this.ToStringHelper.ToStringWithCulture(Name));
-            this.Write(".\");\r\n            }\r\n\r\n            return CompareTo((");
-            this.Write(this.ToStringHelper.ToStringWithCulture(Name));
-            this.Write(")other);\r\n        }\r\n\r\n        public int CompareTo(");
+            this.Write(".\");\r\n        }\r\n\r\n        public int CompareTo(");
             this.Write(this.ToStringHelper.ToStringWithCulture(Name));
             this.Write(" other)\r\n        {\r\n");
 

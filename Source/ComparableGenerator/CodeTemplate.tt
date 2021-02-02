@@ -14,12 +14,13 @@ namespace <#= Namespace #>
         {
             if (other is null) return 1;
 
-            if (!(other is <#= Name #>))
+
+            if (other is <#= Name #> concreteObject)
             {
-                throw new ArgumentException("Object is not a <#= Namespace #>.<#= Name #>.");
+                return CompareTo(concreteObject);
             }
 
-            return CompareTo((<#= Name #>)other);
+            throw new ArgumentException("Object is not a <#= Namespace #>.<#= Name #>.");
         }
 
         public int CompareTo(<#= Name #> other)
