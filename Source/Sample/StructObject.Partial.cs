@@ -8,9 +8,9 @@ namespace MyNamespace
         {
             if (other is null) return 1;
 
-            if (other is ClassObject classObject)
+            if (other is StructObject concreteObject)
             {
-                return CompareTo(classObject);
+                return CompareTo(concreteObject);
             }
 
             throw new ArgumentException("Object is not a MyNamespace.StructObject.");
@@ -18,7 +18,9 @@ namespace MyNamespace
 
         public int CompareTo(StructObject other)
         {
-            var compared = Value1.CompareTo(other.Value1);
+            int compared;
+
+            compared = Value1.CompareTo(other.Value1);
             if (compared != 0) return compared;
 
             compared = Value3.CompareTo(other.Value3);

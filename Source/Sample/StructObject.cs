@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MyNamespace
+﻿namespace MyNamespace
 {
     public partial struct StructObject
     {

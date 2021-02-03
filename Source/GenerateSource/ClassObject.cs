@@ -1,5 +1,4 @@
-﻿using System;
-using ComparableGenerator;
+﻿using ComparableGenerator;
 
 namespace GenerateSource
 {
