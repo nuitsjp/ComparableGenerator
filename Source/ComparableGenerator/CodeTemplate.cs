@@ -34,7 +34,7 @@ namespace ComparableGenerator
             this.Write(" : IComparable, IComparable<");
             this.Write(this.ToStringHelper.ToStringWithCulture(Name));
             this.Write(">\r\n    {\r\n        public int CompareTo(object other)\r\n        {\r\n            if (" +
-                    "other is null) return 1;\r\n\r\n\r\n            if (other is ");
+                    "other is null) return 1;\r\n\r\n            if (other is ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Name));
             this.Write(" concreteObject)\r\n            {\r\n                return CompareTo(concreteObject)" +
                     ";\r\n            }\r\n\r\n            throw new ArgumentException(\"Object is not a ");
@@ -47,27 +47,30 @@ namespace ComparableGenerator
 
 if(Type == "class") {
 
-            this.Write("            if (other is null) return 1;\r\n");
+            this.Write("            if (other is null) return 1;\r\n\r\n");
 
 }
 
-            this.Write("            int compared;\r\n");
+            this.Write("            int compared;\r\n\r\n");
 
 foreach(var member in Members) { 
 
-            this.Write("            compared = ");
+ 
+    if(member == Members.Last()) { 
+
+            this.Write("            return ");
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
             this.Write(".CompareTo(other.");
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
             this.Write(");\r\n");
  
-    if(member == Members.Last()) { 
-
-            this.Write("            return compared;\r\n");
- 
     } else { 
 
-            this.Write("            if (compared != 0) return compared;\r\n");
+            this.Write("            compared = ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(member));
+            this.Write(".CompareTo(other.");
+            this.Write(this.ToStringHelper.ToStringWithCulture(member));
+            this.Write(");\r\n            if (compared != 0) return compared;\r\n\r\n");
  
     }
 }

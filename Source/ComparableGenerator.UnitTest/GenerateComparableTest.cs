@@ -41,8 +41,7 @@ namespace MyNamespace
 
             var outputCode = outputCompilation.SyntaxTrees.Last();
             var text = await outputCode.GetTextAsync();
-
-            text.Should().Be(@"using System;
+            text.ToString().Should().Be(@"using System;
 
 namespace MyNamespace
 {
@@ -64,7 +63,9 @@ namespace MyNamespace
         {
             if (other is null) return 1;
 
-            var compared = Value1.CompareTo(other.Value1);
+            int compared;
+
+            compared = Value1.CompareTo(other.Value1);
             if (compared != 0) return compared;
 
             compared = Value3.CompareTo(other.Value3);

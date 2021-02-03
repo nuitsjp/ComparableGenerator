@@ -44,6 +44,13 @@ namespace ComparableGenerator
                     var typeSymbol = context.Compilation.GetSemanticModel(targetType.SyntaxTree).GetDeclaredSymbol(targetType);
                     if (typeSymbol == null) throw new Exception("can not get typeSymbol.");
 
+                    var multipleVariablesFields = 
+                        targetType
+                            .Members
+                            .OfType<FieldDeclarationSyntax>()
+                            .Where(x => 1 < x.Declaration.Variables.Count);
+                    if(multipleVariablesFields.Any()) continue;
+
                     var members =
                         targetType.Members
                             .Select(x =>
@@ -68,10 +75,18 @@ namespace ComparableGenerator
                                 return (Member: x.Member, Priority: (int)expression.Token.Value);
                             })
                             .OrderBy(x => x.Priority)
-                            .Select(x => context.Compilation.GetSemanticModel(x.Member.SyntaxTree).GetDeclaredSymbol(x.Member))
-                            .Where(x => x is not null)
-                            .Cast<ISymbol>()
-                            .Select(x => x.Name)
+                            .Select(x =>
+                            {
+                                if (x.Member is FieldDeclarationSyntax field)
+                                {
+                                    return field.Declaration.Variables.Single().Identifier.Text;
+                                }
+                                else
+                                {
+                                    return context.Compilation.GetSemanticModel(x.Member.SyntaxTree)
+                                        .GetDeclaredSymbol(x.Member)!.Name;
+                                }
+                            })
                             .ToList();
 
                     var codeTemplate = new CodeTemplate

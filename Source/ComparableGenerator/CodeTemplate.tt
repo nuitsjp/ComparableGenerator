@@ -14,7 +14,6 @@ namespace <#= Namespace #>
         {
             if (other is null) return 1;
 
-
             if (other is <#= Name #> concreteObject)
             {
                 return CompareTo(concreteObject);
@@ -29,22 +28,25 @@ namespace <#= Namespace #>
 if(Type == "class") {
 #>
             if (other is null) return 1;
+
 <#
 }
 #>
             int compared;
+
 <#
 foreach(var member in Members) { 
 #>
-            compared = <#= member #>.CompareTo(other.<#= member #>);
 <# 
     if(member == Members.Last()) { 
 #>
-            return compared;
+            return <#= member #>.CompareTo(other.<#= member #>);
 <# 
     } else { 
 #>
+            compared = <#= member #>.CompareTo(other.<#= member #>);
             if (compared != 0) return compared;
+
 <# 
     }
 }
