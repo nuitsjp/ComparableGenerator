@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using FluentAssertions;
+using FluentAssertions.Execution;
+using FluentAssertions.Primitives;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
+using Xunit.Sdk;
 
 namespace ComparableGenerator.UnitTest
 {
@@ -39,9 +43,10 @@ namespace MyNamespace
 
             RunGenerator(inputCompilation, out var outputCompilation, out var diagnostics);
 
-            var outputCode = outputCompilation.SyntaxTrees.Last();
-            var text = await outputCode.GetTextAsync();
-            text.ToString().Should().Be(@"using System;
+
+            diagnostics.Should().BeEmpty();
+
+            var expected = CSharpSyntaxTree.ParseText(@"using System;
 
 namespace MyNamespace
 {
@@ -76,12 +81,14 @@ namespace MyNamespace
     }
 }
 ");
-
-            diagnostics.Should().BeEmpty();
+            outputCompilation.SyntaxTrees
+                .Should().HaveCount(2)
+                .And.Subject.Last()
+                    .Should().Be(expected);
         }
 
         [Fact]
-        public async Task Should_be_generated_for_struct()
+        public void Should_be_generated_for_struct()
         {
             var inputCompilation = CreateCompilation(@"
 using ComparableGenerator;
@@ -107,9 +114,9 @@ namespace MyNamespace
 
             RunGenerator(inputCompilation, out var outputCompilation, out var diagnostics);
 
-            var outputCode = outputCompilation.SyntaxTrees.Last();
-            var text = await outputCode.GetTextAsync();
-            text.ToString().Should().Be(@"using System;
+            diagnostics.Should().BeEmpty();
+
+            var expected = CSharpSyntaxTree.ParseText(@"using System;
 
 namespace MyNamespace
 {
@@ -143,7 +150,10 @@ namespace MyNamespace
 }
 ");
 
-            diagnostics.Should().BeEmpty();
+            outputCompilation.SyntaxTrees
+                .Should().HaveCount(2)
+                .And.Subject.Last()
+                    .Should().Be(expected);
         }
 
         private static Compilation CreateCompilation(string source)
@@ -158,6 +168,46 @@ namespace MyNamespace
             var generator = new SourceGenerator();
             GeneratorDriver driver = CSharpGeneratorDriver.Create(generator);
             return driver.RunGeneratorsAndUpdateCompilation(inputCompilation, out outputCompilation, out diagnostics);
+        }
+    }
+
+    public static class SyntaxTreeExtensions
+    {
+        public static SyntaxTreeAssertions Should(this SyntaxTree instance)
+        {
+            return new SyntaxTreeAssertions(instance);
+        }
+
+        public class SyntaxTreeAssertions : ReferenceTypeAssertions<SyntaxTree, SyntaxTreeAssertions>
+        {
+            public SyntaxTreeAssertions(SyntaxTree instance)
+            {
+                Subject = instance;
+            }
+
+            protected override string Identifier => "syntaxTree";
+
+            public AndConstraint<SyntaxTreeAssertions> Be(SyntaxTree syntaxTree)
+            {
+                var diff = Subject.GetChanges(syntaxTree);
+                if (diff.Any())
+                {
+                    throw new SyntaxTreesNotEqualException(Subject, syntaxTree);
+                }
+
+
+                return new AndConstraint<SyntaxTreeAssertions>(this);
+            }
+        }
+
+        public class SyntaxTreesNotEqualException : AssertActualExpectedException
+        {
+            private const string _message = "Generated SyntaxTree differs from the expected one.";
+
+            public SyntaxTreesNotEqualException(
+                SyntaxTree expected,
+                SyntaxTree actual)
+                : base(expected, actual, _message, "Expected SyntaxTree", "Actual SyntaxTree") { }
         }
     }
 }
