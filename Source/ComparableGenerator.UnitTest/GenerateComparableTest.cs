@@ -17,7 +17,7 @@ namespace ComparableGenerator.UnitTest
     public class GenerateComparableTest
     {
         [Fact]
-        public async Task Should_be_generated_for_class()
+        public void Should_be_generated_for_class()
         {
             var inputCompilation = CreateCompilation(@"
 using System;
