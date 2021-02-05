@@ -35,7 +35,10 @@ namespace ComparableGenerator
         {
             var classDeclarationSyntax = (ClassDeclarationSyntax)context.Node;
 
-            if (classDeclarationSyntax.Members.Any())
+            if (classDeclarationSyntax.Members.Any(x => x
+                .AttributeLists
+                .SelectMany(attribute => attribute.Attributes)
+                .Any(attribute => attribute.Name.ToString() is "CompareBy" or "CompareByAttribute")))
             {
                 return;
             }

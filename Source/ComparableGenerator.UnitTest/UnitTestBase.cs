@@ -33,7 +33,7 @@ namespace MyNamespace
         public int NotApplicable { get; set; }
     }
 }")]
-        public abstract Task Should_be_generated_for_class(string inputCompilation);
+        public abstract Task Should_be_generated_for_class(string source);
 
 
         [Theory]
@@ -58,7 +58,7 @@ namespace MyNamespace
     }
 }
 ")]
-        public abstract Task Should_be_generated_for_struct(string inputCompilation);
+        public abstract Task Should_be_generated_for_struct(string source);
 
         [Theory]
         [InlineData(@"
@@ -69,6 +69,7 @@ namespace MyNamespace
     [Comparable]
     public class MyClass
     {
+        public int Value { get; set; }
     }
 }
 ")]

@@ -16,9 +16,9 @@ namespace ComparableGenerator.UnitTest
 {
     public class SourceGeneratorTest : UnitTestBase
     {
-        public override Task Should_be_generated_for_class(string inputCompilation)
+        public override Task Should_be_generated_for_class(string source)
         {
-            RunGenerator(CreateCompilation(inputCompilation), out var outputCompilation, out var diagnostics);
+            RunGenerator(CreateCompilation(source), out var outputCompilation, out var diagnostics);
 
 
             diagnostics.Should().BeEmpty();
@@ -66,9 +66,9 @@ namespace MyNamespace
             return Task.CompletedTask;
         }
 
-        public override Task Should_be_generated_for_struct(string inputCompilation)
+        public override Task Should_be_generated_for_struct(string source)
         {
-            RunGenerator(CreateCompilation(inputCompilation), out var outputCompilation, out var diagnostics);
+            RunGenerator(CreateCompilation(source), out var outputCompilation, out var diagnostics);
 
             diagnostics.Should().BeEmpty();
 
