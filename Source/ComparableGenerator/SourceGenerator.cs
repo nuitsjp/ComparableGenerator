@@ -10,16 +10,6 @@ namespace ComparableGenerator
     [Generator]
     public class SourceGenerator : ISourceGenerator
     {
-        private const string Category = "ComparableGenerator";
-        private const string Id = "CG0001";
-        private const string MessageFormat = "Define CompareByAttribute for the any property of Type '{0}.{1}'";
-        private static readonly DiagnosticDescriptor NoMembersWithCompareByAttributeDefined = new(Id,
-            "No members with CompareByAttribute defined",
-            MessageFormat,
-            Category,
-            DiagnosticSeverity.Error,
-            true);
-        
         public void Initialize(GeneratorInitializationContext context)
         {
 #if DEBUG
@@ -100,10 +90,6 @@ namespace ComparableGenerator
                     if (members.Any())
                     {
                         context.AddSource($"{codeTemplate.Namespace}.{codeTemplate.Name}.Partial.cs", codeTemplate.TransformText());
-                    }
-                    else
-                    {
-                        context.ReportDiagnostic(NoMembersWithCompareByAttributeDefined.CreateDiagnostic(targetType, typeSymbol));
                     }
                 }
             }

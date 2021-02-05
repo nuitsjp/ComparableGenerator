@@ -14,11 +14,11 @@ using Xunit.Sdk;
 
 namespace ComparableGenerator.UnitTest
 {
-    public class GenerateComparableTest : UnitTestBase
+    public class SourceGeneratorTest : UnitTestBase
     {
-        public override void Should_be_generated_for_class(Compilation inputCompilation)
+        public override Task Should_be_generated_for_class(string inputCompilation)
         {
-            RunGenerator(inputCompilation, out var outputCompilation, out var diagnostics);
+            RunGenerator(CreateCompilation(inputCompilation), out var outputCompilation, out var diagnostics);
 
 
             diagnostics.Should().BeEmpty();
@@ -62,11 +62,13 @@ namespace MyNamespace
                 .Should().HaveCount(2)
                 .And.Subject.Last()
                     .Should().Be(expected);
+
+            return Task.CompletedTask;
         }
 
-        public override void Should_be_generated_for_struct(Compilation inputCompilation)
+        public override Task Should_be_generated_for_struct(string inputCompilation)
         {
-            RunGenerator(inputCompilation, out var outputCompilation, out var diagnostics);
+            RunGenerator(CreateCompilation(inputCompilation), out var outputCompilation, out var diagnostics);
 
             diagnostics.Should().BeEmpty();
 
@@ -108,6 +110,19 @@ namespace MyNamespace
                 .Should().HaveCount(2)
                 .And.Subject.Last()
                     .Should().Be(expected);
+
+            return Task.CompletedTask;
+        }
+
+        public override Task Should_not_be_generated_When_not_exists_CompareBy(string source)
+        {
+            RunGenerator(CreateCompilation(source), out var outputCompilation, out var diagnostics);
+
+            diagnostics.Should().BeEmpty();
+            outputCompilation.SyntaxTrees
+                .Should().HaveCount(1);
+
+            return Task.CompletedTask;
         }
 
         private static Compilation CreateCompilation(string source)

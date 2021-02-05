@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
@@ -10,10 +11,8 @@ namespace ComparableGenerator.UnitTest
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public abstract class UnitTestBase
     {
-        public static IEnumerable<object[]> Input_to_Should_be_generated_for_class { get; } =
-            new List<object[]>
-            {
-                new object[]{ CreateCompilation(@"
+        [Theory]
+        [InlineData(@"
 using System;
 using ComparableGenerator;
 
@@ -33,18 +32,12 @@ namespace MyNamespace
 
         public int NotApplicable { get; set; }
     }
-}") }
-            };
+}")]
+        public abstract Task Should_be_generated_for_class(string inputCompilation);
+
 
         [Theory]
-        [MemberData(nameof(Input_to_Should_be_generated_for_class))]
-        public abstract void Should_be_generated_for_class(Compilation inputCompilation);
-
-
-        public static IEnumerable<object[]> Input_to_Should_be_generated_for_struct { get; } =
-            new List<object[]>
-            {
-                new object[]{ CreateCompilation(@"
+        [InlineData(@"
 using ComparableGenerator;
 
 namespace MyNamespace
@@ -64,12 +57,22 @@ namespace MyNamespace
         public int NotApplicable { get; set; }
     }
 }
-") }
-            };
+")]
+        public abstract Task Should_be_generated_for_struct(string inputCompilation);
 
         [Theory]
-        [MemberData(nameof(Input_to_Should_be_generated_for_struct))]
-        public abstract void Should_be_generated_for_struct(Compilation inputCompilation);
+        [InlineData(@"
+using ComparableGenerator;
+
+namespace MyNamespace
+{
+    [Comparable]
+    public class MyClass
+    {
+    }
+}
+")]
+        public abstract Task Should_not_be_generated_When_not_exists_CompareBy(string source);
 
         private static Compilation CreateCompilation(string source)
             => CSharpCompilation.Create("compilation",
