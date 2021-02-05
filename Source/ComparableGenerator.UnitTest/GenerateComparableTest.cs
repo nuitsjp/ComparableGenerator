@@ -14,33 +14,10 @@ using Xunit.Sdk;
 
 namespace ComparableGenerator.UnitTest
 {
-    public class GenerateComparableTest
+    public class GenerateComparableTest : UnitTestBase
     {
-        [Fact]
-        public void Should_be_generated_for_class()
+        public override void Should_be_generated_for_class(Compilation inputCompilation)
         {
-            var inputCompilation = CreateCompilation(@"
-using System;
-using ComparableGenerator;
-
-namespace MyNamespace
-{
-    [Comparable]
-    public partial class ClassObject
-    {
-        [CompareBy]
-        public int Value1 { get; set; }
-
-        [CompareBy(Priority = 2)]
-        public int Value2;
-
-        [CompareBy(Priority = 1)]
-        public int Value3 { get; set; }
-
-        public int NotApplicable { get; set; }
-    }
-}");
-
             RunGenerator(inputCompilation, out var outputCompilation, out var diagnostics);
 
 
@@ -87,31 +64,8 @@ namespace MyNamespace
                     .Should().Be(expected);
         }
 
-        [Fact]
-        public void Should_be_generated_for_struct()
+        public override void Should_be_generated_for_struct(Compilation inputCompilation)
         {
-            var inputCompilation = CreateCompilation(@"
-using ComparableGenerator;
-
-namespace MyNamespace
-{
-    [Comparable]
-    public partial struct StructObject
-    {
-        [CompareBy]
-        public int Value1 { get; set; }
-
-        [CompareBy(Priority = 2)] 
-        public int Value2;
-
-        [CompareBy(Priority = 1)]
-        public int Value3 { get; set; }
-
-        public int NotApplicable { get; set; }
-    }
-}
-");
-
             RunGenerator(inputCompilation, out var outputCompilation, out var diagnostics);
 
             diagnostics.Should().BeEmpty();
