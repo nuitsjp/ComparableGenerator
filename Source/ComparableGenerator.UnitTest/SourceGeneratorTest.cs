@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Immutable;
 using System.IO;
-using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using FluentAssertions;
-using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
@@ -19,8 +18,7 @@ namespace ComparableGenerator.UnitTest
             source.RunGenerator(out var outputCompilation, out var diagnostics);
 
             diagnostics.Should().BeEmpty();
-            outputCompilation.SyntaxTrees
-                .Should().HaveCount(1);
+            outputCompilation.Should().BeNotGenerated();
 
             return Task.CompletedTask;
         }
@@ -32,6 +30,7 @@ namespace ComparableGenerator.UnitTest
 
             diagnostics.Should().BeEmpty();
 
+            #region Expected
             var expected = CSharpSyntaxTree.ParseText(@"using System;
 
 namespace MyNamespace
@@ -67,10 +66,9 @@ namespace MyNamespace
     }
 }
 ");
-            outputCompilation.SyntaxTrees
-                .Should().HaveCount(2)
-                .And.Subject.Last()
-                    .Should().Be(expected);
+            #endregion
+
+            outputCompilation.Should().BeGenerated(expected);
 
             return Task.CompletedTask;
         }
@@ -81,6 +79,7 @@ namespace MyNamespace
 
             diagnostics.Should().BeEmpty();
 
+            #region Expected
             var expected = CSharpSyntaxTree.ParseText(@"using System;
 
 namespace MyNamespace
@@ -114,38 +113,21 @@ namespace MyNamespace
     }
 }
 ");
+            #endregion
 
-            outputCompilation.SyntaxTrees
-                .Should().HaveCount(2)
-                .And.Subject.Last()
-                    .Should().Be(expected);
+            outputCompilation.Should().BeGenerated(expected);
 
             return Task.CompletedTask;
         }
 
         public override Task Should_not_be_generated_When_not_exists_CompareBy(string source)
         {
-            RunGenerator(CreateCompilation(source), out var outputCompilation, out var diagnostics);
+            source.RunGenerator(out var outputCompilation, out var diagnostics);
 
             diagnostics.Should().BeEmpty();
-            outputCompilation.SyntaxTrees
-                .Should().HaveCount(1);
+            outputCompilation.Should().BeNotGenerated();
 
             return Task.CompletedTask;
-        }
-
-        private static Compilation CreateCompilation(string source)
-            => CSharpCompilation.Create("compilation",
-                new[] { CSharpSyntaxTree.ParseText(source) },
-                new[] { MetadataReference.CreateFromFile(typeof(Binder).GetTypeInfo().Assembly.Location) },
-                new CSharpCompilationOptions(OutputKind.ConsoleApplication));
-
-        private GeneratorDriver RunGenerator(Compilation inputCompilation, out Compilation outputCompilation,
-            out ImmutableArray<Diagnostic> diagnostics)
-        {
-            var generator = new SourceGenerator();
-            GeneratorDriver driver = CSharpGeneratorDriver.Create(generator);
-            return driver.RunGeneratorsAndUpdateCompilation(inputCompilation, out outputCompilation, out diagnostics);
         }
     }
 }
