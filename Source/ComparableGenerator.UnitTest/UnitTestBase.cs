@@ -13,6 +13,19 @@ namespace ComparableGenerator.UnitTest
     {
         [Theory]
         [InlineData(@"
+using ComparableGenerator;
+
+    namespace MyNamespace
+    {
+        public class MyClass
+    {
+    }
+}
+")]
+        public abstract Task Should_not_be_generated_for_CompareAttribute_is_not_defined(string source);
+
+        [Theory]
+        [InlineData(@"
 using System;
 using ComparableGenerator;
 

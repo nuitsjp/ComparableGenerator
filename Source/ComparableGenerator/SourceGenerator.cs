@@ -10,6 +10,8 @@ namespace ComparableGenerator
     [Generator]
     public class SourceGenerator : ISourceGenerator
     {
+        internal const string SourceSuffix = "GeneratedByComparableGenerator";
+
         public void Initialize(GeneratorInitializationContext context)
         {
 #if DEBUG
@@ -89,7 +91,7 @@ namespace ComparableGenerator
 
                     if (members.Any())
                     {
-                        context.AddSource($"{codeTemplate.Namespace}.{codeTemplate.Name}.Partial.cs", codeTemplate.TransformText());
+                        context.AddSource($"{codeTemplate.Namespace}.{codeTemplate.Name}.{SourceSuffix}.cs", codeTemplate.TransformText());
                     }
                 }
             }

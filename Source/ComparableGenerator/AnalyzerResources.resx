@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AnalyzerDescription" xml:space="preserve">
-    <value>Variable can be made constant..</value>
+  <data name="DescriptionWhereCompareByIsNotDefined" xml:space="preserve">
+    <value>Variable can be made constant.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
-  <data name="AnalyzerMessageFormat" xml:space="preserve">
-    <value>can be made constant</value>
+  <data name="MessageFormatWhereCompareByIsNotDefined" xml:space="preserve">
+    <value>Specify CompareByAttribute for the any property of Type {0}.{1}</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
-  <data name="AnalyzerTitle" xml:space="preserve">
-    <value>Make Constant.</value>
+  <data name="TitleWhereCompareByIsNotDefined" xml:space="preserve">
+    <value>CompareBy is not defined</value>
     <comment>The title of the diagnostic.</comment>
   </data>
 </root>

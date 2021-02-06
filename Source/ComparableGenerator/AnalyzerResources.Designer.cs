@@ -22,14 +22,14 @@ namespace ComparableGenerator {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    public class AnalyzerResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal AnalyzerResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ComparableGenerator {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComparableGenerator.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComparableGenerator.AnalyzerResources", typeof(AnalyzerResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,29 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Variable can be made constant.. に類似しているローカライズされた文字列を検索します。
+        ///   Variable can be made constant. に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string AnalyzerDescription {
+        public static string DescriptionWhereCompareByIsNotDefined {
             get {
-                return ResourceManager.GetString("AnalyzerDescription", resourceCulture);
+                return ResourceManager.GetString("DescriptionWhereCompareByIsNotDefined", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   can be made constant に類似しているローカライズされた文字列を検索します。
+        ///   Specify CompareByAttribute for the any property of Type {0}.{1} に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string AnalyzerMessageFormat {
+        public static string MessageFormatWhereCompareByIsNotDefined {
             get {
-                return ResourceManager.GetString("AnalyzerMessageFormat", resourceCulture);
+                return ResourceManager.GetString("MessageFormatWhereCompareByIsNotDefined", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Make Constant. に類似しているローカライズされた文字列を検索します。
+        ///   CompareBy is not defined に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string AnalyzerTitle {
+        public static string TitleWhereCompareByIsNotDefined {
             get {
-                return ResourceManager.GetString("AnalyzerTitle", resourceCulture);
+                return ResourceManager.GetString("TitleWhereCompareByIsNotDefined", resourceCulture);
             }
         }
     }

@@ -16,6 +16,17 @@ namespace ComparableGenerator.UnitTest
 {
     public class SourceGeneratorTest : UnitTestBase
     {
+        public override Task Should_not_be_generated_for_CompareAttribute_is_not_defined(string source)
+        {
+            RunGenerator(CreateCompilation(source), out var outputCompilation, out var diagnostics);
+
+            diagnostics.Should().BeEmpty();
+            outputCompilation.SyntaxTrees
+                .Should().HaveCount(1);
+
+            return Task.CompletedTask;
+        }
+
         public override Task Should_be_generated_for_class(string source)
         {
             RunGenerator(CreateCompilation(source), out var outputCompilation, out var diagnostics);
