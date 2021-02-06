@@ -4,6 +4,7 @@ using FluentAssertions.Primitives;
 using Microsoft.CodeAnalysis;
 using Xunit.Sdk;
 
+// ReSharper disable once CheckNamespace
 namespace ComparableGenerator.UnitTest
 {
     public static class SyntaxTreeExtensions
