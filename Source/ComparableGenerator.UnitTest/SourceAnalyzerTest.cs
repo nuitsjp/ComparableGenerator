@@ -25,7 +25,11 @@ namespace ComparableGenerator.UnitTest
 
         public override async Task Should_not_be_generated_When_not_exists_CompareBy(string source)
         {
-            var expected = VerifyCS.Diagnostic(SourceAnalyzer.CompareByIsNotDefined.Rule).WithLocation(7, 18);
+            var expected =
+                VerifyCS
+                    .Diagnostic(SourceAnalyzer.CompareByIsNotDefined.Rule)
+                    .WithLocation(7, 18)
+                    .WithArguments("MyNamespace", "MyClass");
             await VerifyCS.VerifyAnalyzerAsync(source, expected);
         }
     }

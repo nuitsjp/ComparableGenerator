@@ -51,7 +51,15 @@ namespace ComparableGenerator
                 return;
             }
 
-            context.ReportDiagnostic(Diagnostic.Create(CompareByIsNotDefined.Rule, classDeclarationSyntax.Identifier.GetLocation()));
+            var namespaceDeclarationSyntax = (NamespaceDeclarationSyntax) classDeclarationSyntax.Parent!;
+            var namespaceName = (IdentifierNameSyntax) namespaceDeclarationSyntax.Name;
+
+            context.ReportDiagnostic(
+                Diagnostic.Create(
+                    CompareByIsNotDefined.Rule, 
+                    classDeclarationSyntax.Identifier.GetLocation(),
+                    namespaceName.Identifier.Value,
+                    classDeclarationSyntax.Identifier.Value));
         }
 
         private static void AnalyzeSymbol(SymbolAnalysisContext context)
