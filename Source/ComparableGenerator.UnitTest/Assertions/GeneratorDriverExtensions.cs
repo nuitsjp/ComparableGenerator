@@ -3,10 +3,9 @@ using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-// ReSharper disable once CheckNamespace
-namespace ComparableGenerator.UnitTest
+namespace ComparableGenerator.UnitTest.Assertions
 {
-    public static class StringExtensions
+    public static class GeneratorDriverExtensions
     {
         public static GeneratorDriver RunGenerator(this string source, out Compilation outputCompilation,
             out ImmutableArray<Diagnostic> diagnostics)

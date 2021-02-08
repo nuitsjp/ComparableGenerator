@@ -1,6 +1,4 @@
-﻿using ComparableGenerator;
-
-namespace GenerateSource.NoComparable
+﻿namespace GenerateSource.NoComparable
 {
     public class ClassObject
     {

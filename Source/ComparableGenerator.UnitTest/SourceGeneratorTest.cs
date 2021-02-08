@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Immutable;
-using System.IO;
-using System.Reflection;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
+using ComparableGenerator.UnitTest.Assertions;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Xunit;
 
 namespace ComparableGenerator.UnitTest
 {
