@@ -7,17 +7,16 @@ namespace ComparableGenerator.UnitTest.Assertions
 {
     public static class GeneratorDriverExtensions
     {
-        public static GeneratorDriver RunGenerator(this string source, out Compilation outputCompilation,
-            out ImmutableArray<Diagnostic> diagnostics)
+        public static GeneratorDriverRunResult RunGenerator(this string source)
         {
             var inputCompilation = CSharpCompilation.Create("compilation",
-                new[] {CSharpSyntaxTree.ParseText(source)},
-                new[] {MetadataReference.CreateFromFile(typeof(Binder).GetTypeInfo().Assembly.Location)},
+                new[] { CSharpSyntaxTree.ParseText(source) },
+                new[] { MetadataReference.CreateFromFile(typeof(Binder).GetTypeInfo().Assembly.Location) },
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication));
 
             var generator = new SourceGenerator();
             GeneratorDriver driver = CSharpGeneratorDriver.Create(generator);
-            return driver.RunGeneratorsAndUpdateCompilation(inputCompilation, out outputCompilation, out diagnostics);
+            return driver.RunGeneratorsAndUpdateCompilation(inputCompilation, out _, out _).GetRunResult();
         }
     }
 }

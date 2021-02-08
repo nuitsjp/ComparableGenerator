@@ -7,23 +7,14 @@ namespace ComparableGenerator.UnitTest
 {
     public class SourceGeneratorTest : UnitTestBase
     {
-        public override Task Should_not_be_generated_for_CompareAttribute_is_not_defined(string source)
+        public override async Task Should_not_be_generated_for_CompareAttribute_is_not_defined(string source)
         {
-            source.RunGenerator(out var outputCompilation, out var diagnostics);
-
-            diagnostics.Should().BeEmpty();
-            outputCompilation.Should().BeNotGenerated();
-
-            return Task.CompletedTask;
+            await source.RunGenerator()
+                .Should().BeNotGeneratedAsync();
         }
 
-        public override Task Should_be_generated_for_class(string source)
+        public override async Task Should_be_generated_for_class(string source)
         {
-            source.RunGenerator(out var outputCompilation, out var diagnostics);
-
-
-            diagnostics.Should().BeEmpty();
-
             #region Expected
             var expected = CSharpSyntaxTree.ParseText(@"using System;
 
@@ -62,17 +53,12 @@ namespace MyNamespace
 ");
             #endregion
 
-            outputCompilation.Should().BeGenerated(expected);
-
-            return Task.CompletedTask;
+            await source.RunGenerator()
+                .Should().BeGeneratedAsync(expected);
         }
 
-        public override Task Should_be_generated_for_struct(string source)
+        public override async Task Should_be_generated_for_struct(string source)
         {
-            source.RunGenerator(out var outputCompilation, out var diagnostics);
-
-            diagnostics.Should().BeEmpty();
-
             #region Expected
             var expected = CSharpSyntaxTree.ParseText(@"using System;
 
@@ -109,19 +95,14 @@ namespace MyNamespace
 ");
             #endregion
 
-            outputCompilation.Should().BeGenerated(expected);
-
-            return Task.CompletedTask;
+            await source.RunGenerator()
+                .Should().BeGeneratedAsync(expected);
         }
 
-        public override Task Should_not_be_generated_When_not_exists_CompareBy(string source)
+        public override async Task Should_not_be_generated_When_not_exists_CompareBy(string source)
         {
-            source.RunGenerator(out var outputCompilation, out var diagnostics);
-
-            diagnostics.Should().BeEmpty();
-            outputCompilation.Should().BeNotGenerated();
-
-            return Task.CompletedTask;
+            await source.RunGenerator()
+                .Should().BeNotGeneratedAsync();
         }
     }
 }
