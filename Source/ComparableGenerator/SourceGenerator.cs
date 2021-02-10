@@ -63,7 +63,7 @@ namespace ComparableGenerator
                                 }
 
                                 var expression = (LiteralExpressionSyntax)argument.Expression;
-                                return (Member: x.Member, Priority: (int)expression.Token.Value);
+                                return (Member: x.Member, Priority: (int)expression.Token.Value!);
                             })
                             .OrderBy(x => x.Priority)
                             .Select(x =>

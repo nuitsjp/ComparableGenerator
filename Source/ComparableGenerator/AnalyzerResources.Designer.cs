@@ -61,7 +61,7 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   If CompareByAttribute is declared for any member, then ComparableAttribute must be declared for Type. に類似しているローカライズされた文字列を検索します。
+        ///   Type that declares CompareByAttribute should declare ComparableAttribute. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DescriptionWhereComparableIsNotDefined {
             get {
@@ -70,7 +70,7 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Type that declares ComparalbeAttribute should declare ComparaByAttribute for any members. に類似しているローカライズされた文字列を検索します。
+        ///   Type that declares ComparableAttribute should declare CompareByAttribute for any members. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DescriptionWhereCompareByIsNotDefined {
             get {
@@ -79,7 +79,7 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Type &quot;{0}.{1}&quot; does not declare ComparableAttribute. に類似しているローカライズされた文字列を検索します。
+        ///   Type &quot;{0}.{1}&quot; does not declare ComparableAttribute に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MessageFormatWhereComparableIsNotDefined {
             get {
@@ -88,7 +88,7 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Type &quot;{0}.{1}&quot; does not have any member with CompareByAttribute declared. に類似しているローカライズされた文字列を検索します。
+        ///   Type &quot;{0}.{1}&quot; does not have any member with CompareByAttribute declared に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MessageFormatWhereCompareByIsNotDefined {
             get {
@@ -97,7 +97,7 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Type does not declare ComparableAttribute. に類似しているローカライズされた文字列を検索します。
+        ///   Type does not declare ComparableAttribute に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string TitleWhereComparableIsNotDefined {
             get {
@@ -106,7 +106,7 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Type does not have any member with CompareByAttribute declared. に類似しているローカライズされた文字列を検索します。
+        ///   Type does not have any member with CompareByAttribute declared に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string TitleWhereCompareByIsNotDefined {
             get {
