@@ -16,7 +16,7 @@ namespace ComparableGenerator
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(SourceFixProvider)), Shared]
     public class SourceFixProvider : CodeFixProvider
     {
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(SourceAnalyzer.CompareIsNotDefined.DiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(SourceAnalyzer.ComparableIsNotDefined.DiagnosticId);
 
         public sealed override FixAllProvider GetFixAllProvider()
         {
@@ -33,14 +33,14 @@ namespace ComparableGenerator
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
             // Find the type declaration identified by the diagnostic.
-            var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<TypeDeclarationSyntax>().First();
+            var declaration = root!.FindToken(diagnosticSpan.Start).Parent!.AncestorsAndSelf().OfType<TypeDeclarationSyntax>().First();
 
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: CodeFixResources.CodeFixTitle,
+                    title: CodeFixResources.CodeFixTitleWhereComparableIsNotDefined,
                     c => AppendComparableAsync(context.Document, declaration, c),
-                    equivalenceKey: nameof(CodeFixResources.CodeFixTitle)),
+                    equivalenceKey: nameof(CodeFixResources.CodeFixTitleWhereComparableIsNotDefined)),
                 diagnostic);
         }
 

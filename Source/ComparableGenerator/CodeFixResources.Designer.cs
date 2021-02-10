@@ -61,11 +61,11 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Make uppercase に類似しているローカライズされた文字列を検索します。
+        ///   Append ComparableAttribute. に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CodeFixTitle {
+        internal static string CodeFixTitleWhereComparableIsNotDefined {
             get {
-                return ResourceManager.GetString("CodeFixTitle", resourceCulture);
+                return ResourceManager.GetString("CodeFixTitleWhereComparableIsNotDefined", resourceCulture);
             }
         }
     }

@@ -117,28 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DescriptionWhereCompareByIsNotDefined" xml:space="preserve">
-    <value>Variable can be made constant.</value>
+  <data name="DescriptionWhereComparableIsNotDefined" xml:space="preserve">
+    <value>If CompareByAttribute is declared for any member, then ComparableAttribute must be declared for Type.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
-  <data name="DescriptionWhereCompareIsNotDefined" xml:space="preserve">
-    <value>Variable can be made constant.</value>
+  <data name="DescriptionWhereCompareByIsNotDefined" xml:space="preserve">
+    <value>Type that declares ComparalbeAttribute should declare ComparaByAttribute for any members.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
+  </data>
+  <data name="MessageFormatWhereComparableIsNotDefined" xml:space="preserve">
+    <value>Type "{0}.{1}" does not declare ComparableAttribute.</value>
+    <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="MessageFormatWhereCompareByIsNotDefined" xml:space="preserve">
-    <value>Specify CompareByAttribute for the any property of Type {0}.{1}</value>
+    <value>Type "{0}.{1}" does not have any member with CompareByAttribute declared.</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
-  <data name="MessageFormatWhereCompareIsNotDefined" xml:space="preserve">
-    <value>Specify CompareByAttribute for the any property of Type {0}.{1}</value>
-    <comment>The format-able message the diagnostic displays.</comment>
-  </data>
-  <data name="TitleWhereCompareByIsNotDefined" xml:space="preserve">
-    <value>CompareBy is not defined</value>
+  <data name="TitleWhereComparableIsNotDefined" xml:space="preserve">
+    <value>Type does not declare ComparableAttribute.</value>
     <comment>The title of the diagnostic.</comment>
   </data>
-  <data name="TitleWhereCompareIsNotDefined" xml:space="preserve">
-    <value>CompareBy is not defined</value>
+  <data name="TitleWhereCompareByIsNotDefined" xml:space="preserve">
+    <value>Type does not have any member with CompareByAttribute declared.</value>
     <comment>The title of the diagnostic.</comment>
   </data>
 </root>

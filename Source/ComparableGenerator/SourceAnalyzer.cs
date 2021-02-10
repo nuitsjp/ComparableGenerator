@@ -22,13 +22,13 @@ namespace ComparableGenerator
             public static readonly DiagnosticDescriptor Rule = new(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Error, true, Description);
         }
 
-        public class CompareIsNotDefined
+        public class ComparableIsNotDefined
         {
             public const string DiagnosticId = "CG0002";
 
-            private static readonly LocalizableString Title = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereCompareIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
-            private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(AnalyzerResources.MessageFormatWhereCompareIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
-            private static readonly LocalizableString Description = new LocalizableResourceString(nameof(AnalyzerResources.DescriptionWhereCompareIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private static readonly LocalizableString Title = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereComparableIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereComparableIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private static readonly LocalizableString Description = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereComparableIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
             private const string Category = "Usege";
 
             public static readonly DiagnosticDescriptor Rule = new(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Error, true, Description);
@@ -37,7 +37,7 @@ namespace ComparableGenerator
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => 
             ImmutableArray.Create(
                 CompareByIsNotDefined.Rule,
-                CompareIsNotDefined.Rule);
+                ComparableIsNotDefined.Rule);
 
         public override void Initialize(AnalysisContext context)
         {
@@ -73,7 +73,7 @@ namespace ComparableGenerator
 
                 context.ReportDiagnostic(
                     Diagnostic.Create(
-                        CompareIsNotDefined.Rule,
+                        ComparableIsNotDefined.Rule,
                         classDeclarationSyntax.Identifier.GetLocation(),
                         namespaceName.Identifier.Value,
                         classDeclarationSyntax.Identifier.Value));

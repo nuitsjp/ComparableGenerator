@@ -61,7 +61,16 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Variable can be made constant. に類似しているローカライズされた文字列を検索します。
+        ///   If CompareByAttribute is declared for any member, then ComparableAttribute must be declared for Type. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DescriptionWhereComparableIsNotDefined {
+            get {
+                return ResourceManager.GetString("DescriptionWhereComparableIsNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Type that declares ComparalbeAttribute should declare ComparaByAttribute for any members. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DescriptionWhereCompareByIsNotDefined {
             get {
@@ -70,16 +79,16 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Variable can be made constant. に類似しているローカライズされた文字列を検索します。
+        ///   Type &quot;{0}.{1}&quot; does not declare ComparableAttribute. に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string DescriptionWhereCompareIsNotDefined {
+        public static string MessageFormatWhereComparableIsNotDefined {
             get {
-                return ResourceManager.GetString("DescriptionWhereCompareIsNotDefined", resourceCulture);
+                return ResourceManager.GetString("MessageFormatWhereComparableIsNotDefined", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Specify CompareByAttribute for the any property of Type {0}.{1} に類似しているローカライズされた文字列を検索します。
+        ///   Type &quot;{0}.{1}&quot; does not have any member with CompareByAttribute declared. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MessageFormatWhereCompareByIsNotDefined {
             get {
@@ -88,29 +97,20 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Specify CompareByAttribute for the any property of Type {0}.{1} に類似しているローカライズされた文字列を検索します。
+        ///   Type does not declare ComparableAttribute. に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string MessageFormatWhereCompareIsNotDefined {
+        public static string TitleWhereComparableIsNotDefined {
             get {
-                return ResourceManager.GetString("MessageFormatWhereCompareIsNotDefined", resourceCulture);
+                return ResourceManager.GetString("TitleWhereComparableIsNotDefined", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   CompareBy is not defined に類似しているローカライズされた文字列を検索します。
+        ///   Type does not have any member with CompareByAttribute declared. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string TitleWhereCompareByIsNotDefined {
             get {
                 return ResourceManager.GetString("TitleWhereCompareByIsNotDefined", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   CompareBy is not defined に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string TitleWhereCompareIsNotDefined {
-            get {
-                return ResourceManager.GetString("TitleWhereCompareIsNotDefined", resourceCulture);
             }
         }
     }

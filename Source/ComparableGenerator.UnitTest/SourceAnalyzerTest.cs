@@ -55,7 +55,7 @@ namespace MyNamespace
 ";
             #endregion
             await source.CreateAnalyzer()
-                .Should().Contain(SourceAnalyzer.CompareIsNotDefined.Rule)
+                .Should().Contain(SourceAnalyzer.ComparableIsNotDefined.Rule)
                     .WithLocation(6, 18)
                     .WithArguments("MyNamespace", "MyClass")
                     .WithCodeFix(fixedCode)
