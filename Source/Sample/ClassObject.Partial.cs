@@ -20,6 +20,7 @@ namespace MyNamespace
         {
             if (other is null) return 1;
 
+            // ReSharper disable once JoinDeclarationAndInitializer
             int compared;
             
             compared = Value1.CompareTo(other.Value1);

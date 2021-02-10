@@ -46,7 +46,7 @@ namespace ComparableGenerator.Test
         public void Should_return_1_for_CompareTo_by_null_concrete_object()
         {
             var comparable = new ClassObject();
-            comparable.CompareTo((ClassObject)null!).Should().Be(1);
+            comparable.CompareTo(null!).Should().Be(1);
         }
 
         [Theory]

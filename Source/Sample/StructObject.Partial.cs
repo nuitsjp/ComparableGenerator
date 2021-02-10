@@ -18,6 +18,7 @@ namespace MyNamespace
 
         public int CompareTo(StructObject other)
         {
+            // ReSharper disable once JoinDeclarationAndInitializer
             int compared;
 
             compared = Value1.CompareTo(other.Value1);

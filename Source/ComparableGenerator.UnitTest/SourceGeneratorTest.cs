@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using ComparableGenerator.UnitTest.Assertions;
-using FluentAssertions;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace ComparableGenerator.UnitTest
 {
+    // ReSharper disable once UnusedMember.Global
     public class SourceGeneratorTest : UnitTestBase
     {
         public override async Task Should_not_be_generated_for_CompareAttribute_is_not_defined(string source)

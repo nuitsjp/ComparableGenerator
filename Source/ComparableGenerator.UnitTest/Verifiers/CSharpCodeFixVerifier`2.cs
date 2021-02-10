@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
+// ReSharper disable UnusedMember.Global
 
 namespace ComparableGenerator.UnitTest.Verifiers
 {

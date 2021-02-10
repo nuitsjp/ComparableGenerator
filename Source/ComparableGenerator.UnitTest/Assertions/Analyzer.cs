@@ -13,7 +13,5 @@
         {
             return new(this);
         }
-
-        public static Analyzer Create(string source) => new (source);
     }
 }

@@ -5,6 +5,7 @@ using VerifyCS = ComparableGenerator.UnitTest.Verifiers.CSharpAnalyzerVerifier<
 
 namespace ComparableGenerator.UnitTest
 {
+    // ReSharper disable once UnusedMember.Global
     public class SourceAnalyzerTest : UnitTestBase
     {
         public override async Task Should_not_be_generated_for_CompareAttribute_is_not_defined(string source)

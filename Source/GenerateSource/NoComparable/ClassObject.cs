@@ -1,4 +1,5 @@
-﻿namespace GenerateSource.NoComparable
+﻿// ReSharper disable UnusedMember.Global
+namespace GenerateSource.NoComparable
 {
     public class ClassObject
     {

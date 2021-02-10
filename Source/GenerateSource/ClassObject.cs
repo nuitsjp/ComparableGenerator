@@ -14,6 +14,7 @@ namespace GenerateSource
         [CompareBy(Priority = 1)]
         public int Value3 { get; set; }
 
+        // ReSharper disable once UnusedMember.Global
         public int NotApplicable { get; set; }
     }
 }

@@ -59,11 +59,11 @@ namespace ComparableGenerator
                                 var argument = compareBy?.ArgumentList?.Arguments.SingleOrDefault();
                                 if (argument is null)
                                 {
-                                    return (Member: x.Member, Priority: 0);
+                                    return (x.Member, Priority: 0);
                                 }
 
                                 var expression = (LiteralExpressionSyntax)argument.Expression;
-                                return (Member: x.Member, Priority: (int)expression.Token.Value!);
+                                return (x.Member, Priority: (int)expression.Token.Value!);
                             })
                             .OrderBy(x => x.Priority)
                             .Select(x =>
@@ -120,13 +120,5 @@ namespace ComparableGenerator
                 }
             }
         }
-    }
-
-    internal static class DiagnosticDescriptorExtensions
-    {
-        internal static Diagnostic CreateDiagnostic(this DiagnosticDescriptor descriptor, SyntaxNode syntaxNode,
-            ISymbol symbol)
-            => Diagnostic.Create(descriptor, syntaxNode.GetLocation(),
-                symbol.ContainingNamespace.ToString(), symbol.Name);
     }
 }
