@@ -39,11 +39,26 @@ namespace ComparableGenerator.UnitTest
 
         public override async Task Should_not_be_generated_When_not_exists_Compare(string source)
         {
+            #region FixedCode
+            var fixedCode = @"
+using ComparableGenerator;
+
+namespace MyNamespace
+{
+[Comparable]    public class MyClass
+    {
+        [CompareBy]
+        public int Value { get; set; }
+    }
+}
+";
+            #endregion
             await source.CreateAnalyzer()
                 .Should().Contain(SourceAnalyzer.CompareIsNotDefined.Rule)
-                .WithLocation(6, 18)
-                .WithArguments("MyNamespace", "MyClass")
-                .VerifyAnalyzerAsync();
+                    .WithLocation(6, 18)
+                    .WithArguments("MyNamespace", "MyClass")
+                    .WithCodeFix(fixedCode)
+                .VerifyCodeFixAsync();
         }
     }
 }

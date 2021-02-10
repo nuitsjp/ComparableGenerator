@@ -9,6 +9,7 @@ namespace ComparableGenerator.UnitTest.Assertions
     {
         private readonly Analyzer _analyzer;
         private DiagnosticResult _diagnosticResult;
+        private string _fixedCode;
         public ContainAssertions(Analyzer analyzer, DiagnosticDescriptor rule)
         {
             _analyzer = analyzer;
@@ -26,10 +27,20 @@ namespace ComparableGenerator.UnitTest.Assertions
             _diagnosticResult = _diagnosticResult.WithArguments(arguments);
             return this;
         }
+        public ContainAssertions WithCodeFix(string fixedCode)
+        {
+            _fixedCode = fixedCode;
+            return this;
+        }
 
         public async Task VerifyAnalyzerAsync()
         {
             await CSharpAnalyzerVerifier<SourceAnalyzer>.VerifyAnalyzerAsync(_analyzer.Source, _diagnosticResult);
+        }
+
+        public async Task VerifyCodeFixAsync()
+        {
+            await CSharpCodeFixVerifier<SourceAnalyzer, SourceFixProvider>.VerifyCodeFixAsync(_analyzer.Source, _diagnosticResult, _fixedCode);
         }
 
     }
