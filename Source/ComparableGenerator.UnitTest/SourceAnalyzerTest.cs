@@ -36,5 +36,14 @@ namespace ComparableGenerator.UnitTest
                     .WithArguments("MyNamespace", "MyClass")
                 .VerifyAnalyzerAsync();
         }
+
+        public override async Task Should_not_be_generated_When_not_exists_Compare(string source)
+        {
+            await source.CreateAnalyzer()
+                .Should().Contain(SourceAnalyzer.CompareIsNotDefined.Rule)
+                .WithLocation(6, 18)
+                .WithArguments("MyNamespace", "MyClass")
+                .VerifyAnalyzerAsync();
+        }
     }
 }

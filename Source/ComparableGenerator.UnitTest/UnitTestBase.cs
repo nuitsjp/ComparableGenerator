@@ -87,6 +87,22 @@ namespace MyNamespace
 ")]
         public abstract Task Should_not_be_generated_When_not_exists_CompareBy(string source);
 
+        [Theory]
+        [InlineData(@"
+using ComparableGenerator;
+
+namespace MyNamespace
+{
+    public class MyClass
+    {
+        [CompareBy]
+        public int Value { get; set; }
+    }
+}
+")]
+        public abstract Task Should_not_be_generated_When_not_exists_Compare(string source);
+
+
         private static Compilation CreateCompilation(string source)
             => CSharpCompilation.Create("compilation",
                 new[] { CSharpSyntaxTree.ParseText(source) },

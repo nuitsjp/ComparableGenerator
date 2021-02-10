@@ -121,11 +121,23 @@
     <value>Variable can be made constant.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
+  <data name="DescriptionWhereCompareIsNotDefined" xml:space="preserve">
+    <value>Variable can be made constant.</value>
+    <comment>An optional longer localizable description of the diagnostic.</comment>
+  </data>
   <data name="MessageFormatWhereCompareByIsNotDefined" xml:space="preserve">
     <value>Specify CompareByAttribute for the any property of Type {0}.{1}</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
+  <data name="MessageFormatWhereCompareIsNotDefined" xml:space="preserve">
+    <value>Specify CompareByAttribute for the any property of Type {0}.{1}</value>
+    <comment>The format-able message the diagnostic displays.</comment>
+  </data>
   <data name="TitleWhereCompareByIsNotDefined" xml:space="preserve">
+    <value>CompareBy is not defined</value>
+    <comment>The title of the diagnostic.</comment>
+  </data>
+  <data name="TitleWhereCompareIsNotDefined" xml:space="preserve">
     <value>CompareBy is not defined</value>
     <comment>The title of the diagnostic.</comment>
   </data>

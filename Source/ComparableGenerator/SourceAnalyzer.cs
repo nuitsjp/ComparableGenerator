@@ -22,7 +22,22 @@ namespace ComparableGenerator
             public static readonly DiagnosticDescriptor Rule = new(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Error, true, Description);
         }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(CompareByIsNotDefined.Rule);
+        public class CompareIsNotDefined
+        {
+            public const string DiagnosticId = "CG0002";
+
+            private static readonly LocalizableString Title = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereCompareIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(AnalyzerResources.MessageFormatWhereCompareIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private static readonly LocalizableString Description = new LocalizableResourceString(nameof(AnalyzerResources.DescriptionWhereCompareIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private const string Category = "Usege";
+
+            public static readonly DiagnosticDescriptor Rule = new(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Error, true, Description);
+        }
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => 
+            ImmutableArray.Create(
+                CompareByIsNotDefined.Rule,
+                CompareIsNotDefined.Rule);
 
         public override void Initialize(AnalysisContext context)
         {
@@ -36,30 +51,48 @@ namespace ComparableGenerator
         {
             var classDeclarationSyntax = (ClassDeclarationSyntax)context.Node;
 
-            if (!classDeclarationSyntax.AttributeLists
+            var isDefinedCompare = classDeclarationSyntax.AttributeLists
                 .SelectMany(x => x.Attributes)
-                .Any(x => x.Name.ToString() is "Comparable" or "ComparableByAttribute"))
-            {
-                return;
-            }
-
-            if (classDeclarationSyntax.Members.Any(x => x
+                .Any(x => x.Name.ToString() is "Comparable" or "ComparableByAttribute");
+            var isDefinedCompareBy = classDeclarationSyntax.Members.Any(x => x
                 .AttributeLists
                 .SelectMany(attribute => attribute.Attributes)
-                .Any(attribute => attribute.Name.ToString() is "CompareBy" or "CompareByAttribute")))
+                .Any(attribute => attribute.Name.ToString() is "CompareBy" or "CompareByAttribute"));
+
+            if ((isDefinedCompare && isDefinedCompareBy)
+                || (!isDefinedCompare && !isDefinedCompareBy))
             {
                 return;
             }
 
-            var namespaceDeclarationSyntax = (NamespaceDeclarationSyntax) classDeclarationSyntax.Parent!;
-            var namespaceName = (IdentifierNameSyntax) namespaceDeclarationSyntax.Name;
 
-            context.ReportDiagnostic(
-                Diagnostic.Create(
-                    CompareByIsNotDefined.Rule, 
-                    classDeclarationSyntax.Identifier.GetLocation(),
-                    namespaceName.Identifier.Value,
-                    classDeclarationSyntax.Identifier.Value));
+            if (!isDefinedCompare)
+            {
+                var namespaceDeclarationSyntax = (NamespaceDeclarationSyntax)classDeclarationSyntax.Parent!;
+                var namespaceName = (IdentifierNameSyntax)namespaceDeclarationSyntax.Name;
+
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        CompareIsNotDefined.Rule,
+                        classDeclarationSyntax.Identifier.GetLocation(),
+                        namespaceName.Identifier.Value,
+                        classDeclarationSyntax.Identifier.Value));
+                return;
+            }
+
+            if (!isDefinedCompareBy)
+            {
+                var namespaceDeclarationSyntax = (NamespaceDeclarationSyntax)classDeclarationSyntax.Parent!;
+                var namespaceName = (IdentifierNameSyntax)namespaceDeclarationSyntax.Name;
+
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        CompareByIsNotDefined.Rule,
+                        classDeclarationSyntax.Identifier.GetLocation(),
+                        namespaceName.Identifier.Value,
+                        classDeclarationSyntax.Identifier.Value));
+                return;
+            }
         }
 
         private static void AnalyzeSymbol(SymbolAnalysisContext context)

@@ -70,6 +70,15 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
+        ///   Variable can be made constant. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DescriptionWhereCompareIsNotDefined {
+            get {
+                return ResourceManager.GetString("DescriptionWhereCompareIsNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Specify CompareByAttribute for the any property of Type {0}.{1} に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MessageFormatWhereCompareByIsNotDefined {
@@ -79,11 +88,29 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
+        ///   Specify CompareByAttribute for the any property of Type {0}.{1} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MessageFormatWhereCompareIsNotDefined {
+            get {
+                return ResourceManager.GetString("MessageFormatWhereCompareIsNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   CompareBy is not defined に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string TitleWhereCompareByIsNotDefined {
             get {
                 return ResourceManager.GetString("TitleWhereCompareByIsNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   CompareBy is not defined に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string TitleWhereCompareIsNotDefined {
+            get {
+                return ResourceManager.GetString("TitleWhereCompareIsNotDefined", resourceCulture);
             }
         }
     }
