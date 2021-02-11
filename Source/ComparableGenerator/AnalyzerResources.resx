@@ -125,6 +125,10 @@
     <value>Type that declares ComparableAttribute should declare CompareByAttribute for any members.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
+  <data name="DescriptionWhereMemberWithSamePriority" xml:space="preserve">
+    <value>Type that declares ComparableAttribute should declare CompareByAttribute for any members.</value>
+    <comment>An optional longer localizable description of the diagnostic.</comment>
+  </data>
   <data name="MessageFormatWhereComparableIsNotDefined" xml:space="preserve">
     <value>Type "{0}.{1}" does not declare ComparableAttribute</value>
     <comment>The format-able message the diagnostic displays.</comment>
@@ -133,12 +137,20 @@
     <value>Type "{0}.{1}" does not have any member with CompareByAttribute declared</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
+  <data name="MessageFormatWhereMemberWithSamePriority" xml:space="preserve">
+    <value>Type "{0}.{1}" does not declare ComparableAttribute</value>
+    <comment>The format-able message the diagnostic displays.</comment>
+  </data>
   <data name="TitleWhereComparableIsNotDefined" xml:space="preserve">
     <value>Type does not declare ComparableAttribute</value>
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="TitleWhereCompareByIsNotDefined" xml:space="preserve">
     <value>Type does not have any member with CompareByAttribute declared</value>
+    <comment>The title of the diagnostic.</comment>
+  </data>
+  <data name="TitleWhereMemberWithSamePriority" xml:space="preserve">
+    <value>Type does not declare ComparableAttribute</value>
     <comment>The title of the diagnostic.</comment>
   </data>
 </root>

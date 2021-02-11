@@ -122,5 +122,11 @@ namespace MyNamespace
             await source.RunGenerator()
                 .Should().BeNotGeneratedAsync();
         }
+
+        public override async Task Should_be_error_When_CompareBy_with_same_priority_is_defined_for_class(string source)
+        {
+            await source.RunGenerator()
+                .Should().BeNotGeneratedAsync();
+        }
     }
 }

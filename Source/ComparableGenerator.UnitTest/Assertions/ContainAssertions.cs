@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using ComparableGenerator.UnitTest.Verifiers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
@@ -7,12 +8,12 @@ namespace ComparableGenerator.UnitTest.Assertions
 {
     public class ContainAssertions
     {
-        private readonly Analyzer _analyzer;
+        private readonly AnalyzerAssertions _analyzerAssertions;
         private DiagnosticResult _diagnosticResult;
         private string _fixedCode;
-        public ContainAssertions(Analyzer analyzer, DiagnosticDescriptor rule)
+        public ContainAssertions(AnalyzerAssertions analyzerAssertions, Analyzer analyzer, DiagnosticDescriptor rule)
         {
-            _analyzer = analyzer;
+            _analyzerAssertions = analyzerAssertions;
             _diagnosticResult = CSharpAnalyzerVerifier<SourceAnalyzer>.Diagnostic(rule);
         }
 
@@ -33,14 +34,22 @@ namespace ComparableGenerator.UnitTest.Assertions
             return this;
         }
 
+        public AnalyzerAssertions And()
+        {
+            _analyzerAssertions.AddDiagnosticResult(_diagnosticResult);
+            return _analyzerAssertions;
+        }
+
         public async Task VerifyAnalyzerAsync()
         {
-            await CSharpAnalyzerVerifier<SourceAnalyzer>.VerifyAnalyzerAsync(_analyzer.Source, _diagnosticResult);
+            _analyzerAssertions.AddDiagnosticResult(_diagnosticResult);
+            await CSharpAnalyzerVerifier<SourceAnalyzer>.VerifyAnalyzerAsync(_analyzerAssertions.Subject.Source, _analyzerAssertions.DiagnosticResults.ToArray());
         }
 
         public async Task VerifyCodeFixAsync()
         {
-            await CSharpCodeFixVerifier<SourceAnalyzer, SourceFixProvider>.VerifyCodeFixAsync(_analyzer.Source, _diagnosticResult, _fixedCode);
+            _analyzerAssertions.AddDiagnosticResult(_diagnosticResult);
+            await CSharpCodeFixVerifier<SourceAnalyzer, SourceFixProvider>.VerifyCodeFixAsync(_analyzerAssertions.Subject.Source, _analyzerAssertions.DiagnosticResults.ToArray(), _fixedCode);
         }
 
     }

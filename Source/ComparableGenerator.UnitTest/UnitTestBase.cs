@@ -97,6 +97,7 @@ namespace MyNamespace
     }
 }
 ")]
+
         public abstract Task Should_be_error_When_Comparable_is_defined_and_CompareBy_is_undefined_for_struct(string source);
 
         [Theory]
@@ -128,5 +129,35 @@ namespace MyNamespace
 }
 ")]
         public abstract Task Should_be_error_When_Comparable_is_undefined_and_CompareBy_is_defined_for_struct(string source);
+
+        [Theory]
+        [InlineData(@"
+using ComparableGenerator;
+
+namespace MyNamespace
+{
+    [Comparable]
+    public class MyClass
+    {
+        [CompareBy]
+        public int Value1 { get; set; }
+
+        [CompareBy(Priority = 1)]
+        public int Value2;
+
+        public int Value3 { get; set; }
+
+        [CompareBy(Priority = 0)]
+        public int Value4;
+
+        [CompareBy(Priority = 1)]
+        public int Value5;
+
+        [CompareBy(Priority = 2)]
+        public int Value6;
+    }
+}
+")]
+        public abstract Task Should_be_error_When_CompareBy_with_same_priority_is_defined_for_class(string source);
     }
 }

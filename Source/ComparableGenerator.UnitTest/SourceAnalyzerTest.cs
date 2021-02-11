@@ -42,8 +42,8 @@ namespace ComparableGenerator.UnitTest
         {
             await source.CreateAnalyzer()
                 .Should().Contain(SourceAnalyzer.CompareByIsNotDefined.Rule)
-                .WithLocation(7, 19)
-                .WithArguments("MyNamespace", "MyClass")
+                    .WithLocation(7, 19)
+                    .WithArguments("MyNamespace", "MyClass")
                 .VerifyAnalyzerAsync();
         }
 
@@ -91,10 +91,28 @@ namespace MyNamespace
             #endregion
             await source.CreateAnalyzer()
                 .Should().Contain(SourceAnalyzer.ComparableIsNotDefined.Rule)
-                .WithLocation(6, 19)
-                .WithArguments("MyNamespace", "MyClass")
-                .WithCodeFix(fixedCode)
+                    .WithLocation(6, 19)
+                    .WithArguments("MyNamespace", "MyClass")
+                    .WithCodeFix(fixedCode)
                 .VerifyCodeFixAsync();
+        }
+
+        public override async Task Should_be_error_When_CompareBy_with_same_priority_is_defined_for_class(string source)
+        {
+            await source.CreateAnalyzer()
+                .Should().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
+                    .WithLocation(9, 9)
+                    .WithArguments("MyNamespace", "MyClass")
+                .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
+                    .WithLocation(12, 9)
+                    .WithArguments("MyNamespace", "MyClass")
+                .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
+                    .WithLocation(17, 9)
+                    .WithArguments("MyNamespace", "MyClass")
+                .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
+                    .WithLocation(20, 9)
+                    .WithArguments("MyNamespace", "MyClass")
+                .VerifyAnalyzerAsync();
         }
     }
 }
