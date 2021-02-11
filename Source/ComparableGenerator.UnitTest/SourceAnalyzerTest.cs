@@ -114,5 +114,23 @@ namespace MyNamespace
                     .WithArguments("MyNamespace", "MyClass")
                 .VerifyAnalyzerAsync();
         }
+
+        public override async Task Should_be_error_When_CompareBy_with_same_priority_is_defined_for_struct(string source)
+        {
+            await source.CreateAnalyzer()
+                .Should().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
+                    .WithLocation(9, 9)
+                    .WithArguments("MyNamespace", "MyClass")
+                .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
+                    .WithLocation(12, 9)
+                    .WithArguments("MyNamespace", "MyClass")
+                .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
+                    .WithLocation(17, 9)
+                    .WithArguments("MyNamespace", "MyClass")
+                .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
+                    .WithLocation(20, 9)
+                    .WithArguments("MyNamespace", "MyClass")
+                .VerifyAnalyzerAsync();
+        }
     }
 }
