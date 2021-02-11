@@ -18,7 +18,7 @@ using ComparableGenerator;
     }
 }
 ")]
-        public abstract Task Should_not_be_generated_for_CompareAttribute_is_not_defined(string source);
+        public abstract Task Should_not_be_generated_When_Comparable_and_CompareBy_is_undefined(string source);
 
         [Theory]
         [InlineData(@"
@@ -82,7 +82,22 @@ namespace MyNamespace
     }
 }
 ")]
-        public abstract Task Should_not_be_generated_When_not_exists_CompareBy(string source);
+        public abstract Task Should_be_error_When_Comparable_is_defined_and_CompareBy_is_undefined_for_class(string source);
+
+        [Theory]
+        [InlineData(@"
+using ComparableGenerator;
+
+namespace MyNamespace
+{
+    [Comparable]
+    public struct MyClass
+    {
+        public int Value { get; set; }
+    }
+}
+")]
+        public abstract Task Should_be_error_When_Comparable_is_defined_and_CompareBy_is_undefined_for_struct(string source);
 
         [Theory]
         [InlineData(@"
@@ -97,6 +112,21 @@ namespace MyNamespace
     }
 }
 ")]
-        public abstract Task Should_not_be_generated_When_not_exists_Compare(string source);
+        public abstract Task Should_be_error_When_Comparable_is_undefined_and_CompareBy_is_defined_for_class(string source);
+
+        [Theory]
+        [InlineData(@"
+using ComparableGenerator;
+
+namespace MyNamespace
+{
+    public struct MyClass
+    {
+        [CompareBy]
+        public int Value { get; set; }
+    }
+}
+")]
+        public abstract Task Should_be_error_When_Comparable_is_undefined_and_CompareBy_is_defined_for_struct(string source);
     }
 }

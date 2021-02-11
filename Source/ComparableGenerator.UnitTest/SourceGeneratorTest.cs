@@ -7,7 +7,7 @@ namespace ComparableGenerator.UnitTest
     // ReSharper disable once UnusedMember.Global
     public class SourceGeneratorTest : UnitTestBase
     {
-        public override async Task Should_not_be_generated_for_CompareAttribute_is_not_defined(string source)
+        public override async Task Should_not_be_generated_When_Comparable_and_CompareBy_is_undefined(string source)
         {
             await source.RunGenerator()
                 .Should().BeNotGeneratedAsync();
@@ -99,13 +99,25 @@ namespace MyNamespace
                 .Should().BeGeneratedAsync(expected);
         }
 
-        public override async Task Should_not_be_generated_When_not_exists_CompareBy(string source)
+        public override async Task Should_be_error_When_Comparable_is_defined_and_CompareBy_is_undefined_for_class(string source)
         {
             await source.RunGenerator()
                 .Should().BeNotGeneratedAsync();
         }
 
-        public override async Task Should_not_be_generated_When_not_exists_Compare(string source)
+        public override async Task Should_be_error_When_Comparable_is_defined_and_CompareBy_is_undefined_for_struct(string source)
+        {
+            await source.RunGenerator()
+                .Should().BeNotGeneratedAsync();
+        }
+
+        public override async Task Should_be_error_When_Comparable_is_undefined_and_CompareBy_is_defined_for_class(string source)
+        {
+            await source.RunGenerator()
+                .Should().BeNotGeneratedAsync();
+        }
+
+        public override async Task Should_be_error_When_Comparable_is_undefined_and_CompareBy_is_defined_for_struct(string source)
         {
             await source.RunGenerator()
                 .Should().BeNotGeneratedAsync();

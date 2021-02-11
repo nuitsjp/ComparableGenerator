@@ -43,13 +43,13 @@ namespace ComparableGenerator
         {
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.None);
             context.EnableConcurrentExecution();
-            //context.RegisterSymbolAction(AnalyzeSymbol, SymbolKind.NamedType);
             context.RegisterSyntaxNodeAction(AnalyzeClassNode, SyntaxKind.ClassDeclaration);
+            context.RegisterSyntaxNodeAction(AnalyzeClassNode, SyntaxKind.StructDeclaration);
         }
 
         private void AnalyzeClassNode(SyntaxNodeAnalysisContext context)
         {
-            var classDeclarationSyntax = (ClassDeclarationSyntax)context.Node;
+            var classDeclarationSyntax = (TypeDeclarationSyntax)context.Node;
 
             var isDefinedCompare = classDeclarationSyntax.AttributeLists
                 .SelectMany(x => x.Attributes)
