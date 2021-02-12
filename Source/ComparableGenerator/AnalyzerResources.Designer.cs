@@ -88,6 +88,15 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
+        ///   Members that declare CompareByAttribute must implement IComparable. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DescriptionWhereNotImplementedIComparable {
+            get {
+                return ResourceManager.GetString("DescriptionWhereNotImplementedIComparable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Type &quot;{0}.{1}&quot; does not declare ComparableAttribute に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MessageFormatWhereComparableIsNotDefined {
@@ -115,6 +124,15 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
+        ///   &quot;{0}&quot; does not implemented IComparable に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MessageFormatWhereNotImplementedIComparable {
+            get {
+                return ResourceManager.GetString("MessageFormatWhereNotImplementedIComparable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Type does not declare ComparableAttribute に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string TitleWhereComparableIsNotDefined {
@@ -138,6 +156,15 @@ namespace ComparableGenerator {
         public static string TitleWhereMemberWithSamePriority {
             get {
                 return ResourceManager.GetString("TitleWhereMemberWithSamePriority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Member does not implemented IComparable に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string TitleWhereNotImplementedIComparabl {
+            get {
+                return ResourceManager.GetString("TitleWhereNotImplementedIComparabl", resourceCulture);
             }
         }
     }

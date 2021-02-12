@@ -132,5 +132,23 @@ namespace MyNamespace
                     .WithArguments("MyNamespace", "MyClass")
                 .VerifyAnalyzerAsync();
         }
+
+        public override async Task Should_be_error_When_CompareBy_property_does_not_implement_IComparable(string source)
+        {
+            await source.CreateAnalyzer()
+                .Should().Contain(SourceAnalyzer.NotImplementedIComparable.Rule)
+                .WithLocation(10, 16)
+                .WithArguments("Value")
+                .VerifyAnalyzerAsync();
+        }
+
+        public override async Task Should_be_error_When_CompareBy_field_does_not_implement_IComparable(string source)
+        {
+            await source.CreateAnalyzer()
+                .Should().Contain(SourceAnalyzer.NotImplementedIComparable.Rule)
+                .WithLocation(10, 16)
+                .WithArguments("Value")
+                .VerifyAnalyzerAsync();
+        }
     }
 }

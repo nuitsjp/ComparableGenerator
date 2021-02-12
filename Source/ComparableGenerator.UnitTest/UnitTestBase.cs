@@ -189,5 +189,37 @@ namespace MyNamespace
 }
 ")]
         public abstract Task Should_be_error_When_CompareBy_with_same_priority_is_defined_for_struct(string source);
+
+        [Theory]
+        [InlineData(@"
+using ComparableGenerator;
+
+namespace MyNamespace
+{
+    [Comparable]
+    public struct MyClass
+    {
+        [CompareBy]
+        public object Value { get; set; }
+    }
+}
+")]
+        public abstract Task Should_be_error_When_CompareBy_property_does_not_implement_IComparable(string source);
+
+        [Theory]
+        [InlineData(@"
+using ComparableGenerator;
+
+namespace MyNamespace
+{
+    [Comparable]
+    public struct MyClass
+    {
+        [CompareBy]
+        public object Value;
+    }
+}
+")]
+        public abstract Task Should_be_error_When_CompareBy_field_does_not_implement_IComparable(string source);
     }
 }

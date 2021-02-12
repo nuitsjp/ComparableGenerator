@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -47,11 +46,24 @@ namespace ComparableGenerator
             public static readonly DiagnosticDescriptor Rule = new(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Error, true, Description);
         }
 
+        public class NotImplementedIComparable
+        {
+            public const string DiagnosticId = "CG0004";
+
+            private static readonly LocalizableString Title = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereNotImplementedIComparabl), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereNotImplementedIComparabl), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private static readonly LocalizableString Description = new LocalizableResourceString(nameof(AnalyzerResources.DescriptionWhereNotImplementedIComparable), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private const string Category = "Usege";
+
+            public static readonly DiagnosticDescriptor Rule = new(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Error, true, Description);
+        }
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => 
             ImmutableArray.Create(
                 CompareByIsNotDefined.Rule,
                 ComparableIsNotDefined.Rule,
-                MemberWithSamePriority.Rule);
+                MemberWithSamePriority.Rule,
+                NotImplementedIComparable.Rule);
 
         public override void Initialize(AnalysisContext context)
         {
@@ -59,6 +71,22 @@ namespace ComparableGenerator
             context.EnableConcurrentExecution();
             context.RegisterSyntaxNodeAction(AnalyzeClassNode, SyntaxKind.ClassDeclaration);
             context.RegisterSyntaxNodeAction(AnalyzeClassNode, SyntaxKind.StructDeclaration);
+            context.RegisterSyntaxNodeAction(AnalyzeMember, SyntaxKind.PropertyDeclaration);
+            context.RegisterSyntaxNodeAction(AnalyzeMember, SyntaxKind.FieldDeclaration);
+        }
+
+        private void AnalyzeMember(SyntaxNodeAnalysisContext context)
+        {
+            var memberDeclarationSyntax = (MemberDeclarationSyntax)context.Node;
+            var typeInfo = context.SemanticModel.GetTypeInfo(memberDeclarationSyntax.GetTypeSymbol())!;
+            if (typeInfo.Type!.IsNotImplementedIComparable())
+            {
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        NotImplementedIComparable.Rule,
+                        memberDeclarationSyntax.GetTypeLocation(),
+                        memberDeclarationSyntax.GetName()));
+            }
         }
 
         private void AnalyzeClassNode(SyntaxNodeAnalysisContext context)
@@ -100,10 +128,7 @@ namespace ComparableGenerator
                         typeDeclarationSyntax.Identifier.Value));
             }
 
-            var membersWithSamePriority = compareByMembers
-                .GroupBy(x => x.Priority, x => x.Member)
-                .Where(x => 1 < x.Count())
-                .SelectMany(x => x);
+            var membersWithSamePriority = compareByMembers.GetSamePriorityMembers();
             foreach (var memberDeclarationSyntax in membersWithSamePriority)
             {
                 var namespaceDeclarationSyntax = (NamespaceDeclarationSyntax)typeDeclarationSyntax.Parent!;
@@ -119,32 +144,13 @@ namespace ComparableGenerator
         }
     }
 
-    public static class TypeDeclarationSyntaxExtensions
+    public static class TypeSymbolExtensions
     {
-        public static IEnumerable<(MemberDeclarationSyntax Member, int Priority)> GetCompareByMembers(this TypeDeclarationSyntax typeDeclarationSyntax)
+        public static bool IsNotImplementedIComparable(this ITypeSymbol typeSymbol)
         {
-            return typeDeclarationSyntax.Members
-                .Select(x =>
-                {
-                    var compareBy = x
-                        .AttributeLists
-                        .SelectMany(attribute => attribute.Attributes)
-                        .FirstOrDefault(attribute => attribute.Name.ToString() is "CompareBy" or "CompareByAttribute");
-                    return (Member: x, CompareBy: compareBy);
-                })
-                .Where(x => x.CompareBy is not null)
-                .Select(x =>
-                {
-                    var compareBy = x.CompareBy;
-                    var argument = compareBy?.ArgumentList?.Arguments.SingleOrDefault();
-                    if (argument is null)
-                    {
-                        return (x.Member, Priority: 0);
-                    }
-
-                    var expression = (LiteralExpressionSyntax) argument.Expression;
-                    return (x.Member, Priority: (int) expression.Token.Value!);
-                });
+            return !typeSymbol.Interfaces.Any(x =>
+                x.ContainingNamespace.Name == "System"
+                && x.Name == "IComparable");
         }
     }
 }

@@ -129,6 +129,10 @@
     <value>Type that declares ComparableAttribute should declare CompareByAttribute for any members.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
+  <data name="DescriptionWhereNotImplementedIComparable" xml:space="preserve">
+    <value>Members that declare CompareByAttribute must implement IComparable.</value>
+    <comment>An optional longer localizable description of the diagnostic.</comment>
+  </data>
   <data name="MessageFormatWhereComparableIsNotDefined" xml:space="preserve">
     <value>Type "{0}.{1}" does not declare ComparableAttribute</value>
     <comment>The format-able message the diagnostic displays.</comment>
@@ -141,6 +145,10 @@
     <value>Type "{0}.{1}" does not declare ComparableAttribute</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
+  <data name="MessageFormatWhereNotImplementedIComparable" xml:space="preserve">
+    <value>"{0}" does not implemented IComparable</value>
+    <comment>The format-able message the diagnostic displays.</comment>
+  </data>
   <data name="TitleWhereComparableIsNotDefined" xml:space="preserve">
     <value>Type does not declare ComparableAttribute</value>
     <comment>The title of the diagnostic.</comment>
@@ -151,6 +159,10 @@
   </data>
   <data name="TitleWhereMemberWithSamePriority" xml:space="preserve">
     <value>Type does not declare ComparableAttribute</value>
+    <comment>The title of the diagnostic.</comment>
+  </data>
+  <data name="TitleWhereNotImplementedIComparabl" xml:space="preserve">
+    <value>Member does not implemented IComparable</value>
     <comment>The title of the diagnostic.</comment>
   </data>
 </root>
