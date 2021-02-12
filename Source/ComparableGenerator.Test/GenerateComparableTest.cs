@@ -125,5 +125,15 @@ namespace ComparableGenerator.Test
             ((IComparable)instance0).CompareTo((object)instance1)
                 .Should().Be(0);
         }
+
+        [Fact]
+        public void Should_return_CompareTo_result_for_composite_object()
+        {
+            var instance0 = new CompositeObject {Value = new ClassObject {Value1 = 1}};
+            var instance1 = new CompositeObject {Value = new ClassObject {Value1 = 2}};
+
+            instance0.CompareTo(instance1)
+                .Should().Be(instance0.Value.Value1.CompareTo(instance1.Value.Value1));
+        }
     }
 }

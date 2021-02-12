@@ -13,7 +13,7 @@ namespace ComparableGenerator.UnitTest.Assertions
         {
         }
 
-        public Task BeGeneratedAsync(SyntaxTree expected)
+        public Task BeGeneratedAsync(params SyntaxTree[] expected)
         {
             if (Subject.GeneratedTrees.IsEmpty)
             {
@@ -23,17 +23,24 @@ namespace ComparableGenerator.UnitTest.Assertions
             if (Subject.Diagnostics.Any())
             {
                 throw new GenerateSourceException("Diagnostics has been generated.");
-
             }
 
-            var actual = Subject.GeneratedTrees.Last();
-
-            var diff = actual.GetChanges(expected);
-            if (diff.Any())
+            if (Subject.GeneratedTrees.Length != expected.Length)
             {
-                throw new SyntaxTreesNotEqualException(actual, expected);
+                throw new GenerateSourceException($"Number of expected is {expected.Length}, but actual is {Subject.GeneratedTrees.Length}.");
             }
 
+            for (var i = 0; i < expected.Length; i++)
+            {
+                var actual = Subject.GeneratedTrees[i];
+
+                var diff = actual.GetChanges(expected[i]);
+                if (diff.Any())
+                {
+                    throw new SyntaxTreesNotEqualException(expected.First(), actual);
+                }
+
+            }
 
             return Task.CompletedTask;
         }

@@ -95,7 +95,7 @@ namespace ComparableGenerator
 
             var isDefinedComparable = typeDeclarationSyntax.AttributeLists
                 .SelectMany(x => x.Attributes)
-                .Any(x => x.Name.ToString() is "Comparable" or "ComparableByAttribute");
+                .Any(x => x.Name.ToString() is "Comparable" or "ComparableAttribute");
             var compareByMembers = typeDeclarationSyntax
                 .GetCompareByMembers()
                 .ToList();
@@ -148,9 +148,23 @@ namespace ComparableGenerator
     {
         public static bool IsNotImplementedIComparable(this ITypeSymbol typeSymbol)
         {
-            return !typeSymbol.Interfaces.Any(x =>
+            if (typeSymbol.Interfaces.Any(x =>
                 x.ContainingNamespace.Name == "System"
-                && x.Name == "IComparable");
+                && x.Name == "IComparable")) return false;
+
+            var attributes = typeSymbol.GetAttributes();
+
+            if (typeSymbol.GetAttributes()
+                .Any(x => x.AttributeClass!.ContainingNamespace.Name == "ComparableGenerator"
+                          && x.AttributeClass.Name == "ComparableAttribute")) return false;
+
+            // If the CompareBy member is the target of code generation,
+            // it is determined by looking at the attributes declared in the code.
+            // Namespaces have not been determined, so if there is a better way, we will modify it.
+            if (typeSymbol.GetAttributes()
+                .Any(x => x.AttributeClass!.Name is "Comparable" or "ComparableAttribute")) return false;
+
+            return true;
         }
     }
 }

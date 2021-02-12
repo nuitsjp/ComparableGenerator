@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using ComparableGenerator.UnitTest.Assertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace ComparableGenerator.UnitTest
@@ -93,6 +94,75 @@ namespace MyNamespace
     }
 }
 ");
+            #endregion
+
+            await source.RunGenerator()
+                .Should().BeGeneratedAsync(expected);
+        }
+
+        public override async Task Should_be_generated_for_composite(string source)
+        {
+            #region Expected
+
+            var expected = new []
+            {
+                CSharpSyntaxTree.ParseText(@"using System;
+
+namespace MyNamespace
+{
+    public partial struct CompositeObject : IComparable, IComparable<CompositeObject>
+    {
+        public int CompareTo(object other)
+        {
+            if (other is null) return 1;
+
+            if (other is CompositeObject concreteObject)
+            {
+                return CompareTo(concreteObject);
+            }
+
+            throw new ArgumentException(""Object is not a MyNamespace.CompositeObject."");
+        }
+
+        public int CompareTo(CompositeObject other)
+        {
+            int compared;
+
+            return Value.CompareTo(other.Value);
+        }
+    }
+}
+"),
+                CSharpSyntaxTree.ParseText(@"using System;
+
+namespace MyNamespace
+{
+    public partial class ClassObject : IComparable, IComparable<ClassObject>
+    {
+        public int CompareTo(object other)
+        {
+            if (other is null) return 1;
+
+            if (other is ClassObject concreteObject)
+            {
+                return CompareTo(concreteObject);
+            }
+
+            throw new ArgumentException(""Object is not a MyNamespace.ClassObject."");
+        }
+
+        public int CompareTo(ClassObject other)
+        {
+            if (other is null) return 1;
+
+            int compared;
+
+            return Value.CompareTo(other.Value);
+        }
+    }
+}
+")
+            };
             #endregion
 
             await source.RunGenerator()

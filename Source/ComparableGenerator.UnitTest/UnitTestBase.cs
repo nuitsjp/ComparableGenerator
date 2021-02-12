@@ -76,6 +76,29 @@ using ComparableGenerator;
 namespace MyNamespace
 {
     [Comparable]
+    public partial struct CompositeObject
+    {
+        [CompareBy]
+        public ClassObject Value { get; set; }
+    }
+
+    [ComparableAttribute]
+    public partial class ClassObject
+    {
+        [CompareBy]
+        public int Value { get; set; }
+    }
+}
+")]
+        public abstract Task Should_be_generated_for_composite(string source);
+
+        [Theory]
+        [InlineData(@"
+using ComparableGenerator;
+
+namespace MyNamespace
+{
+    [Comparable]
     public class MyClass
     {
         public int Value { get; set; }
@@ -197,7 +220,7 @@ using ComparableGenerator;
 namespace MyNamespace
 {
     [Comparable]
-    public struct MyClass
+    public class MyClass
     {
         [CompareBy]
         public object Value { get; set; }
