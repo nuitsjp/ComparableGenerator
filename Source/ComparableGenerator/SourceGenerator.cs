@@ -36,13 +36,6 @@ namespace ComparableGenerator
                     var typeSymbol = context.Compilation.GetSemanticModel(targetType.SyntaxTree).GetDeclaredSymbol(targetType);
                     if (typeSymbol == null) throw new Exception("can not get typeSymbol.");
 
-                    var multipleVariablesFields = 
-                        targetType
-                            .Members
-                            .OfType<FieldDeclarationSyntax>()
-                            .Where(x => 1 < x.Declaration.Variables.Count);
-                    if(multipleVariablesFields.Any()) continue;
-
                     var compareByMembers = targetType.GetCompareByMembers().ToArray();
                     if(compareByMembers.GetSamePriorityMembers().Any()) continue;
 
@@ -98,15 +91,23 @@ namespace ComparableGenerator
             {
                 if (syntaxNode is TypeDeclarationSyntax typeDeclarationSyntax && typeDeclarationSyntax.AttributeLists.Count > 0)
                 {
+                    // Comparable is not declared.
                     var attr = 
                         typeDeclarationSyntax
                             .AttributeLists
                             .SelectMany(x => x.Attributes)
                             .FirstOrDefault(x => x.Name.ToString() is "Comparable" or "ComparableAttribute");
-                    if (attr != null)
-                    {
-                        Targets.Add(typeDeclarationSyntax);
-                    }
+                    if (attr == null) return;
+
+                    // Multiple variable fields exist.
+                    var multipleVariablesFields =
+                        typeDeclarationSyntax
+                            .Members
+                            .OfType<FieldDeclarationSyntax>()
+                            .Where(x => 1 < x.Declaration.Variables.Count);
+                    if (multipleVariablesFields.Any()) return;
+
+                    Targets.Add(typeDeclarationSyntax);
                 }
             }
         }
