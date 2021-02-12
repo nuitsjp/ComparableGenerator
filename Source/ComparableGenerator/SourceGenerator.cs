@@ -111,40 +111,4 @@ namespace ComparableGenerator
             }
         }
     }
-
-    public static class MemberDeclarationSyntaxExtensions
-    {
-        public static TypeSyntax GetTypeSymbol(this MemberDeclarationSyntax memberDeclarationSyntax)
-        {
-            if (memberDeclarationSyntax is PropertyDeclarationSyntax propertyDeclarationSyntax)
-            {
-                return propertyDeclarationSyntax.Type;
-            }
-
-            var fieldDeclarationSyntax = (FieldDeclarationSyntax)memberDeclarationSyntax;
-            return fieldDeclarationSyntax.Declaration.Type;
-        }
-
-        public static string GetName(this MemberDeclarationSyntax memberDeclarationSyntax)
-        {
-            if (memberDeclarationSyntax is PropertyDeclarationSyntax propertyDeclarationSyntax)
-            {
-                return propertyDeclarationSyntax.Identifier.Text;
-            }
-
-            var fieldDeclarationSyntax = (FieldDeclarationSyntax)memberDeclarationSyntax;
-            return fieldDeclarationSyntax.Declaration.Variables.First().Identifier.Text;
-        }
-
-        public static Location GetTypeLocation(this MemberDeclarationSyntax memberDeclarationSyntax)
-        {
-            if (memberDeclarationSyntax is PropertyDeclarationSyntax propertyDeclarationSyntax)
-            {
-                return propertyDeclarationSyntax.Type.GetLocation();
-            }
-
-            var fieldDeclarationSyntax = (FieldDeclarationSyntax)memberDeclarationSyntax;
-            return fieldDeclarationSyntax.Declaration.Type.GetLocation();
-        }
-    }
 }
