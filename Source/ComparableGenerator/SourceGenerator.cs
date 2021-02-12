@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -43,7 +44,15 @@ namespace ComparableGenerator
                     if(multipleVariablesFields.Any()) continue;
 
                     var compareByMembers = targetType.GetCompareByMembers().ToArray();
-                    if(compareByMembers.GetSamePriorityMembers().Any()) continue;;
+                    if(compareByMembers.GetSamePriorityMembers().Any()) continue;
+
+                    if (compareByMembers.Select(x => x.Member)
+                        .Any(x => context
+                                .Compilation
+                                .GetSemanticModel(x.SyntaxTree)
+                                .GetTypeInfo(x.GetTypeSymbol())
+                                .Type!
+                            .IsNotImplementedIComparable())) continue;
 
                     var members =
                         compareByMembers.OrderBy(x => x.Priority)
@@ -100,6 +109,20 @@ namespace ComparableGenerator
                     }
                 }
             }
+        }
+    }
+
+    public static class MemberDeclarationSyntaxExtensions
+    {
+        public static TypeSyntax GetTypeSymbol(this MemberDeclarationSyntax memberDeclarationSyntax)
+        {
+            if (memberDeclarationSyntax is PropertyDeclarationSyntax propertyDeclarationSyntax)
+            {
+                return propertyDeclarationSyntax.Type;
+            }
+
+            var fieldDeclarationSyntax = (FieldDeclarationSyntax)memberDeclarationSyntax;
+            return fieldDeclarationSyntax.Declaration.Type;
         }
     }
 }

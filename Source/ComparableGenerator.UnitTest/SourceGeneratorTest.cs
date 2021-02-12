@@ -134,5 +134,17 @@ namespace MyNamespace
             await source.RunGenerator()
                 .Should().BeNotGeneratedAsync();
         }
+
+        public override async Task Should_be_error_When_CompareBy_property_does_not_implement_IComparable(string source)
+        {
+            await source.RunGenerator()
+                .Should().BeNotGeneratedAsync();
+        }
+
+        public override async Task Should_be_error_When_CompareBy_field_does_not_implement_IComparable(string source)
+        {
+            await source.RunGenerator()
+                .Should().BeNotGeneratedAsync();
+        }
     }
 }
