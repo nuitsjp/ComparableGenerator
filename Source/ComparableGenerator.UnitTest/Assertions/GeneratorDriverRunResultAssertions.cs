@@ -41,7 +41,7 @@ namespace ComparableGenerator.UnitTest.Assertions
         public Task BeNotGeneratedAsync()
         {
             
-            if (1 < Subject.GeneratedTrees.Length)
+            if (!Subject.GeneratedTrees.IsEmpty)
             {
                 throw new GenerateSourceException("Source has been generated.");
             }
