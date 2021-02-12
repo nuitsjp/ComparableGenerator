@@ -42,30 +42,11 @@ namespace ComparableGenerator
                             .Where(x => 1 < x.Declaration.Variables.Count);
                     if(multipleVariablesFields.Any()) continue;
 
-                    var members =
-                        targetType.Members
-                            .Select(x =>
-                            {
-                                var compareBy = x
-                                    .AttributeLists
-                                    .SelectMany(attribute => attribute.Attributes)
-                                    .FirstOrDefault(attribute => attribute.Name.ToString() is "CompareBy" or "CompareByAttribute");
-                                return (Member: x, CompareBy: compareBy);
-                            })
-                            .Where(x => x.CompareBy is not null)
-                            .Select(x =>
-                            {
-                                var compareBy = x.CompareBy;
-                                var argument = compareBy?.ArgumentList?.Arguments.SingleOrDefault();
-                                if (argument is null)
-                                {
-                                    return (x.Member, Priority: 0);
-                                }
+                    var compareByMembers = targetType.GetCompareByMembers().ToArray();
+                    if(compareByMembers.GetSamePriorityMembers().Any()) continue;;
 
-                                var expression = (LiteralExpressionSyntax)argument.Expression;
-                                return (x.Member, Priority: (int)expression.Token.Value!);
-                            })
-                            .OrderBy(x => x.Priority)
+                    var members =
+                        compareByMembers.OrderBy(x => x.Priority)
                             .Select(x =>
                             {
                                 if (x.Member is FieldDeclarationSyntax field)
