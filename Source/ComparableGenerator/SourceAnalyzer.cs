@@ -27,8 +27,8 @@ namespace ComparableGenerator
             public const string DiagnosticId = "CG0002";
 
             private static readonly LocalizableString Title = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereComparableIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
-            private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereComparableIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
-            private static readonly LocalizableString Description = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereComparableIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(AnalyzerResources.MessageFormatWhereComparableIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private static readonly LocalizableString Description = new LocalizableResourceString(nameof(AnalyzerResources.DescriptionWhereComparableIsNotDefined), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
             private const string Category = "Usege";
 
             public static readonly DiagnosticDescriptor Rule = new(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Error, true, Description);
@@ -39,8 +39,8 @@ namespace ComparableGenerator
             public const string DiagnosticId = "CG0003";
 
             private static readonly LocalizableString Title = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereMemberWithSamePriority), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
-            private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereMemberWithSamePriority), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
-            private static readonly LocalizableString Description = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereMemberWithSamePriority), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(AnalyzerResources.MessageFormatWhereMemberWithSamePriority), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private static readonly LocalizableString Description = new LocalizableResourceString(nameof(AnalyzerResources.DescriptionWhereMemberWithSamePriority), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
             private const string Category = "Usege";
 
             public static readonly DiagnosticDescriptor Rule = new(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Error, true, Description);
@@ -51,7 +51,7 @@ namespace ComparableGenerator
             public const string DiagnosticId = "CG0004";
 
             private static readonly LocalizableString Title = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereNotImplementedIComparabl), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
-            private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(AnalyzerResources.TitleWhereNotImplementedIComparabl), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
+            private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(AnalyzerResources.MessageFormatWhereNotImplementedIComparable), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
             private static readonly LocalizableString Description = new LocalizableResourceString(nameof(AnalyzerResources.DescriptionWhereNotImplementedIComparable), AnalyzerResources.ResourceManager, typeof(AnalyzerResources));
             private const string Category = "Usege";
 
@@ -112,7 +112,6 @@ namespace ComparableGenerator
                         typeDeclarationSyntax.Identifier.GetLocation(),
                         namespaceName.Identifier.Value,
                         typeDeclarationSyntax.Identifier.Value));
-                return;
             }
 
             if (isDefinedComparable && !isDefinedCompareBy)
@@ -131,15 +130,11 @@ namespace ComparableGenerator
             var membersWithSamePriority = compareByMembers.GetSamePriorityMembers();
             foreach (var memberDeclarationSyntax in membersWithSamePriority)
             {
-                var namespaceDeclarationSyntax = (NamespaceDeclarationSyntax)typeDeclarationSyntax.Parent!;
-                var namespaceName = (IdentifierNameSyntax)namespaceDeclarationSyntax.Name;
-
                 context.ReportDiagnostic(
                     Diagnostic.Create(
                         MemberWithSamePriority.Rule,
                         memberDeclarationSyntax.GetLocation(),
-                        namespaceName.Identifier.Value,
-                        typeDeclarationSyntax.Identifier.Value));
+                        memberDeclarationSyntax.GetName()));
             }
         }
     }

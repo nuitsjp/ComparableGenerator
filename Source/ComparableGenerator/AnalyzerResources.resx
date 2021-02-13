@@ -126,7 +126,7 @@
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="DescriptionWhereMemberWithSamePriority" xml:space="preserve">
-    <value>Type that declares ComparableAttribute should declare CompareByAttribute for any members.</value>
+    <value>All CompareByAttribute priorities must be different.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="DescriptionWhereNotImplementedIComparable" xml:space="preserve">
@@ -142,7 +142,7 @@
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="MessageFormatWhereMemberWithSamePriority" xml:space="preserve">
-    <value>Type "{0}.{1}" does not declare ComparableAttribute</value>
+    <value>There is a member with the same priority as the priority of "{0}"</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="MessageFormatWhereNotImplementedIComparable" xml:space="preserve">
@@ -158,7 +158,7 @@
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="TitleWhereMemberWithSamePriority" xml:space="preserve">
-    <value>Type does not declare ComparableAttribute</value>
+    <value>CompareByAttribute priority is not unique for Type</value>
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="TitleWhereNotImplementedIComparabl" xml:space="preserve">

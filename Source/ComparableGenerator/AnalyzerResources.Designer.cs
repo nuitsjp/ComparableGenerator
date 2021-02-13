@@ -79,7 +79,7 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Type that declares ComparableAttribute should declare CompareByAttribute for any members. に類似しているローカライズされた文字列を検索します。
+        ///   All CompareByAttribute priorities must be different. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DescriptionWhereMemberWithSamePriority {
             get {
@@ -115,7 +115,7 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Type &quot;{0}.{1}&quot; does not declare ComparableAttribute に類似しているローカライズされた文字列を検索します。
+        ///   There is a member with the same priority as the priority of &quot;{0}&quot; に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MessageFormatWhereMemberWithSamePriority {
             get {
@@ -151,7 +151,7 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Type does not declare ComparableAttribute に類似しているローカライズされた文字列を検索します。
+        ///   CompareByAttribute priority is not unique for Type に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string TitleWhereMemberWithSamePriority {
             get {

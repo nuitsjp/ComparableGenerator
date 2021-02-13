@@ -116,16 +116,16 @@ namespace MyNamespace
             await source.CreateAnalyzer()
                 .Should().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
                     .WithLocation(9, 9)
-                    .WithArguments("MyNamespace", "MyClass")
+                    .WithArguments("Value1")
                 .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
                     .WithLocation(12, 9)
-                    .WithArguments("MyNamespace", "MyClass")
+                    .WithArguments("Value2")
                 .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
                     .WithLocation(17, 9)
-                    .WithArguments("MyNamespace", "MyClass")
+                    .WithArguments("Value4")
                 .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
                     .WithLocation(20, 9)
-                    .WithArguments("MyNamespace", "MyClass")
+                    .WithArguments("Value5")
                 .VerifyAnalyzerAsync();
         }
 
@@ -134,16 +134,16 @@ namespace MyNamespace
             await source.CreateAnalyzer()
                 .Should().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
                     .WithLocation(9, 9)
-                    .WithArguments("MyNamespace", "MyClass")
+                    .WithArguments("Value1")
                 .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
                     .WithLocation(12, 9)
-                    .WithArguments("MyNamespace", "MyClass")
+                    .WithArguments("Value2")
                 .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
                     .WithLocation(17, 9)
-                    .WithArguments("MyNamespace", "MyClass")
+                    .WithArguments("Value4")
                 .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
                     .WithLocation(20, 9)
-                    .WithArguments("MyNamespace", "MyClass")
+                    .WithArguments("Value5")
                 .VerifyAnalyzerAsync();
         }
 
