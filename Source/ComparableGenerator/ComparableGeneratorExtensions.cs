@@ -77,6 +77,8 @@ namespace ComparableGenerator
 
         public static bool IsNotImplementedIComparable(this ITypeSymbol typeSymbol)
         {
+            if (typeSymbol.Name == "Object") return true;
+
             if (typeSymbol.Interfaces.Any(x =>
                 x.ContainingNamespace.Name == "System"
                 && x.Name == "IComparable")) return false;
@@ -91,7 +93,7 @@ namespace ComparableGenerator
             if (typeSymbol.GetAttributes()
                 .Any(x => x.AttributeClass!.Name is "Comparable" or "ComparableAttribute")) return false;
 
-            return true;
+            return typeSymbol.BaseType?.IsNotImplementedIComparable() ?? true;
         }
     }
 }

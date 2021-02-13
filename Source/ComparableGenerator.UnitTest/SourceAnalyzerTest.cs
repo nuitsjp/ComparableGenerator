@@ -36,6 +36,13 @@ namespace ComparableGenerator.UnitTest
                 .VerifyAnalyzerAsync();
         }
 
+        public override async Task Should_be_generated_for_nested(string source)
+        {
+            await source.CreateAnalyzer()
+                .Should().BeEmpty()
+                .VerifyAnalyzerAsync();
+        }
+
         public override async Task Should_be_error_When_Comparable_is_defined_and_CompareBy_is_undefined_for_class(string source)
         {
             await source.CreateAnalyzer()

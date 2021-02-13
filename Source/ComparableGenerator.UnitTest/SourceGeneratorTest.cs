@@ -169,6 +169,44 @@ namespace MyNamespace
                 .Should().BeGeneratedAsync(expected);
         }
 
+        public override async Task Should_be_generated_for_nested(string source)
+        {
+            #region Expected
+            var expected = CSharpSyntaxTree.ParseText(@"using System;
+
+namespace GenerateSource
+{
+    public partial class NestedValueClass : IComparable, IComparable<NestedValueClass>
+    {
+        public int CompareTo(object other)
+        {
+            if (other is null) return 1;
+
+            if (other is NestedValueClass concreteObject)
+            {
+                return CompareTo(concreteObject);
+            }
+
+            throw new ArgumentException(""Object is not a GenerateSource.NestedValueClass."");
+        }
+
+        public int CompareTo(NestedValueClass other)
+        {
+            if (other is null) return 1;
+
+            int compared;
+
+            return Value.CompareTo(other.Value);
+        }
+    }
+}
+");
+            #endregion
+
+            await source.RunGenerator()
+                .Should().BeGeneratedAsync(expected);
+        }
+
         public override async Task Should_be_error_When_Comparable_is_defined_and_CompareBy_is_undefined_for_class(string source)
         {
             await source.RunGenerator()

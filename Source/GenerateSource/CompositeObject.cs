@@ -6,6 +6,8 @@ namespace GenerateSource
     public partial class CompositeObject
     {
         [CompareBy]
-        public ClassObject Value { get; set; }
+        public CompositeChildValue? Value { get; set; }
     }
+
+    public class CompositeChildValue : ClassObject { }
 }
