@@ -100,7 +100,7 @@ namespace MyNamespace
                 .Should().BeGeneratedAsync(expected);
         }
 
-        public override async Task Should_be_generated_for_composite(string source)
+        public override async Task Should_be_generated_for_type_with_subclass_of_generated_code_as_member(string source)
         {
             #region Expected
 
@@ -169,7 +169,7 @@ namespace MyNamespace
                 .Should().BeGeneratedAsync(expected);
         }
 
-        public override async Task Should_be_generated_for_nested(string source)
+        public override async Task Should_be_generated_for_type_with_subclass_of_IComparable_as_member(string source)
         {
             #region Expected
             var expected = CSharpSyntaxTree.ParseText(@"using System;

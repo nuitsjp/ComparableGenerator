@@ -92,7 +92,7 @@ namespace MyNamespace
     }
 }
 ")]
-        public abstract Task Should_be_generated_for_composite(string source);
+        public abstract Task Should_be_generated_for_type_with_subclass_of_generated_code_as_member(string source);
 
         [Theory]
         [InlineData(@"
@@ -136,7 +136,7 @@ namespace GenerateSource
         }
     }
 }")]
-        public abstract Task Should_be_generated_for_nested(string source);
+        public abstract Task Should_be_generated_for_type_with_subclass_of_IComparable_as_member(string source);
 
         [Theory]
         [InlineData(@"

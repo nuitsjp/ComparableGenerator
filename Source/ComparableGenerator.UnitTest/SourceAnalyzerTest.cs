@@ -29,14 +29,14 @@ namespace ComparableGenerator.UnitTest
                 .VerifyAnalyzerAsync();
         }
 
-        public override async Task Should_be_generated_for_composite(string source)
+        public override async Task Should_be_generated_for_type_with_subclass_of_generated_code_as_member(string source)
         {
             await source.CreateAnalyzer()
                 .Should().BeEmpty()
                 .VerifyAnalyzerAsync();
         }
 
-        public override async Task Should_be_generated_for_nested(string source)
+        public override async Task Should_be_generated_for_type_with_subclass_of_IComparable_as_member(string source)
         {
             await source.CreateAnalyzer()
                 .Should().BeEmpty()

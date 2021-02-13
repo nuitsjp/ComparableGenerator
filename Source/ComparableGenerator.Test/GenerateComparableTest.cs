@@ -127,7 +127,7 @@ namespace ComparableGenerator.Test
         }
 
         [Fact]
-        public void Should_return_CompareTo_result_for_composite_object()
+        public void Should_return_CompareTo_result_for_type_with_subclass_of_generated_code_as_member()
         {
             var instance0 = new CompositeObject {Value = new CompositeChildValue {Value1 = 1}};
             var instance1 = new CompositeObject {Value = new CompositeChildValue { Value1 = 2}};
@@ -137,7 +137,7 @@ namespace ComparableGenerator.Test
         }
 
         [Fact]
-        public void Should_return_CompareTo_result_for_nested_object()
+        public void Should_return_CompareTo_result_for_type_with_subclass_of_IComparable_as_member()
         {
             var instance0 = new NestedValueClass { Value = new () { Value = 1 } };
             var instance1 = new NestedValueClass { Value = new() { Value = 2 } };
