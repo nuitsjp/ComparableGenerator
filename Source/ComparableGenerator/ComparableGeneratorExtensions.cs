@@ -7,7 +7,7 @@ namespace ComparableGenerator
 {
     public static class ComparableGeneratorExtensions
     {
-        public static IEnumerable<(MemberDeclarationSyntax Member, int Priority)> GetCompareByMembers(this TypeDeclarationSyntax typeDeclarationSyntax)
+        public static IEnumerable<(MemberDeclarationSyntax Member, AttributeSyntax CompareBy, int Priority)> GetCompareByMembers(this TypeDeclarationSyntax typeDeclarationSyntax)
         {
             return typeDeclarationSyntax.Members
                 .Select(x =>
@@ -25,19 +25,19 @@ namespace ComparableGenerator
                     var argument = compareBy?.ArgumentList?.Arguments.SingleOrDefault();
                     if (argument is null)
                     {
-                        return (x.Member, Priority: 0);
+                        return (x.Member, x.CompareBy, Priority: 0);
                     }
 
                     var expression = (LiteralExpressionSyntax) argument.Expression;
-                    return (x.Member, Priority: (int) expression.Token.Value!);
+                return (x.Member, x.CompareBy, Priority: (int) expression.Token.Value!);
                 });
         }
 
-        public static IEnumerable<MemberDeclarationSyntax> GetSamePriorityMembers(
-            this IEnumerable<(MemberDeclarationSyntax Member, int Priority)> members)
+        public static IEnumerable<(MemberDeclarationSyntax Member, AttributeSyntax CompareBy, int Priority)> GetSamePriorityMembers(
+            this IEnumerable<(MemberDeclarationSyntax Member, AttributeSyntax CompareBy, int Priority)> members)
         {
             return members
-                .GroupBy(x => x.Priority, x => x.Member)
+                .GroupBy(x => x.Priority, x => x)
                 .Where(x => 1 < x.Count())
                 .SelectMany(x => x);;
         }

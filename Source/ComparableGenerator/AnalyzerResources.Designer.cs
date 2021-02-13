@@ -61,7 +61,7 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Type that declares CompareByAttribute should declare ComparableAttribute. に類似しているローカライズされた文字列を検索します。
+        ///   Have a member declared CompareByAttribute, we need to declare a ComparableAttribute. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DescriptionWhereComparableIsNotDefined {
             get {
@@ -97,7 +97,7 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Type &quot;{0}.{1}&quot; does not declare ComparableAttribute に類似しているローカライズされた文字列を検索します。
+        ///   &quot;{0}&quot; does not declare ComparableAttribute に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MessageFormatWhereComparableIsNotDefined {
             get {
@@ -106,7 +106,7 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   Type &quot;{0}.{1}&quot; does not have any member with CompareByAttribute declared に類似しているローカライズされた文字列を検索します。
+        ///   &quot;{0}&quot; does not have any member with CompareByAttribute declared に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MessageFormatWhereCompareByIsNotDefined {
             get {
@@ -115,7 +115,7 @@ namespace ComparableGenerator {
         }
         
         /// <summary>
-        ///   There is a member with the same priority as the priority of &quot;{0}&quot; に類似しているローカライズされた文字列を検索します。
+        ///   &quot;{0}&quot; has members with the same priority に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MessageFormatWhereMemberWithSamePriority {
             get {

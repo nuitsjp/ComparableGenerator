@@ -103,27 +103,19 @@ namespace ComparableGenerator
 
             if (!isDefinedComparable && isDefinedCompareBy)
             {
-                var namespaceDeclarationSyntax = (NamespaceDeclarationSyntax)typeDeclarationSyntax.Parent!;
-                var namespaceName = (IdentifierNameSyntax)namespaceDeclarationSyntax.Name;
-
                 context.ReportDiagnostic(
                     Diagnostic.Create(
                         ComparableIsNotDefined.Rule,
                         typeDeclarationSyntax.Identifier.GetLocation(),
-                        namespaceName.Identifier.Value,
                         typeDeclarationSyntax.Identifier.Value));
             }
 
             if (isDefinedComparable && !isDefinedCompareBy)
             {
-                var namespaceDeclarationSyntax = (NamespaceDeclarationSyntax)typeDeclarationSyntax.Parent!;
-                var namespaceName = (IdentifierNameSyntax)namespaceDeclarationSyntax.Name;
-
                 context.ReportDiagnostic(
                     Diagnostic.Create(
                         CompareByIsNotDefined.Rule,
                         typeDeclarationSyntax.Identifier.GetLocation(),
-                        namespaceName.Identifier.Value,
                         typeDeclarationSyntax.Identifier.Value));
             }
 
@@ -133,8 +125,8 @@ namespace ComparableGenerator
                 context.ReportDiagnostic(
                     Diagnostic.Create(
                         MemberWithSamePriority.Rule,
-                        memberDeclarationSyntax.GetLocation(),
-                        memberDeclarationSyntax.GetName()));
+                        memberDeclarationSyntax.CompareBy.GetLocation(),
+                        memberDeclarationSyntax.Member.GetName()));
             }
         }
     }

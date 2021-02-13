@@ -48,7 +48,7 @@ namespace ComparableGenerator.UnitTest
             await source.CreateAnalyzer()
                 .Should().Contain(SourceAnalyzer.CompareByIsNotDefined.Rule)
                     .WithLocation(7, 18)
-                    .WithArguments("MyNamespace", "MyClass")
+                    .WithArguments("MyClass")
                 .VerifyAnalyzerAsync();
         }
 
@@ -57,7 +57,7 @@ namespace ComparableGenerator.UnitTest
             await source.CreateAnalyzer()
                 .Should().Contain(SourceAnalyzer.CompareByIsNotDefined.Rule)
                     .WithLocation(7, 19)
-                    .WithArguments("MyNamespace", "MyClass")
+                    .WithArguments("MyClass")
                 .VerifyAnalyzerAsync();
         }
 
@@ -81,7 +81,7 @@ namespace MyNamespace
             await source.CreateAnalyzer()
                 .Should().Contain(SourceAnalyzer.ComparableIsNotDefined.Rule)
                     .WithLocation(6, 18)
-                    .WithArguments("MyNamespace", "MyClass")
+                    .WithArguments("MyClass")
                     .WithCodeFix(fixedCode)
                 .VerifyCodeFixAsync();
         }
@@ -106,7 +106,7 @@ namespace MyNamespace
             await source.CreateAnalyzer()
                 .Should().Contain(SourceAnalyzer.ComparableIsNotDefined.Rule)
                     .WithLocation(6, 19)
-                    .WithArguments("MyNamespace", "MyClass")
+                    .WithArguments("MyClass")
                     .WithCodeFix(fixedCode)
                 .VerifyCodeFixAsync();
         }
@@ -115,16 +115,16 @@ namespace MyNamespace
         {
             await source.CreateAnalyzer()
                 .Should().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
-                    .WithLocation(9, 9)
+                    .WithLocation(9, 10)
                     .WithArguments("Value1")
                 .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
-                    .WithLocation(12, 9)
+                    .WithLocation(12, 10)
                     .WithArguments("Value2")
                 .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
-                    .WithLocation(17, 9)
+                    .WithLocation(17, 10)
                     .WithArguments("Value4")
                 .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
-                    .WithLocation(20, 9)
+                    .WithLocation(20, 10)
                     .WithArguments("Value5")
                 .VerifyAnalyzerAsync();
         }
@@ -133,16 +133,16 @@ namespace MyNamespace
         {
             await source.CreateAnalyzer()
                 .Should().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
-                    .WithLocation(9, 9)
+                    .WithLocation(9, 10)
                     .WithArguments("Value1")
                 .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
-                    .WithLocation(12, 9)
+                    .WithLocation(12, 10)
                     .WithArguments("Value2")
                 .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
-                    .WithLocation(17, 9)
+                    .WithLocation(17, 10)
                     .WithArguments("Value4")
                 .And().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
-                    .WithLocation(20, 9)
+                    .WithLocation(20, 10)
                     .WithArguments("Value5")
                 .VerifyAnalyzerAsync();
         }
