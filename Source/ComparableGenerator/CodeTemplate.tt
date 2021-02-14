@@ -10,7 +10,9 @@ namespace <#= Namespace #>
 {
     public partial <#= Type #> <#= Name #> : IComparable, IComparable<<#= Name #>>
     {
+#nullable disable
         public int CompareTo(object other)
+#nullable enable
         {
             if (other is null) return 1;
 
@@ -22,7 +24,21 @@ namespace <#= Namespace #>
             throw new ArgumentException("Object is not a <#= Namespace #>.<#= Name #>.");
         }
 
+<#
+if(Type == "class") {
+#>
+#nullable disable
+<#
+}
+#>
         public int CompareTo(<#= Name #> other)
+<#
+if(Type == "class") {
+#>
+#nullable enable
+<#
+}
+#>
         {
 <#
 if(Type == "class") {
@@ -31,10 +47,13 @@ if(Type == "class") {
 
 <#
 }
+if(1 < Members.Count)
+{
 #>
             int compared;
 
 <#
+}
 foreach(var member in Members) { 
 #>
 <# 

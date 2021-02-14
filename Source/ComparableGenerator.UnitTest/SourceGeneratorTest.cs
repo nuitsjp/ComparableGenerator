@@ -23,7 +23,9 @@ namespace MyNamespace
 {
     public partial class ClassObject : IComparable, IComparable<ClassObject>
     {
+#nullable disable
         public int CompareTo(object other)
+#nullable enable
         {
             if (other is null) return 1;
 
@@ -35,7 +37,9 @@ namespace MyNamespace
             throw new ArgumentException(""Object is not a MyNamespace.ClassObject."");
         }
 
+#nullable disable
         public int CompareTo(ClassObject other)
+#nullable enable
         {
             if (other is null) return 1;
 
@@ -67,7 +71,9 @@ namespace MyNamespace
 {
     public partial struct StructObject : IComparable, IComparable<StructObject>
     {
+#nullable disable
         public int CompareTo(object other)
+#nullable enable
         {
             if (other is null) return 1;
 
@@ -112,7 +118,9 @@ namespace MyNamespace
 {
     public partial struct CompositeObject : IComparable, IComparable<CompositeObject>
     {
+#nullable disable
         public int CompareTo(object other)
+#nullable enable
         {
             if (other is null) return 1;
 
@@ -126,8 +134,6 @@ namespace MyNamespace
 
         public int CompareTo(CompositeObject other)
         {
-            int compared;
-
             return Value.CompareTo(other.Value);
         }
     }
@@ -139,7 +145,9 @@ namespace MyNamespace
 {
     public partial class ClassObject : IComparable, IComparable<ClassObject>
     {
+#nullable disable
         public int CompareTo(object other)
+#nullable enable
         {
             if (other is null) return 1;
 
@@ -151,11 +159,11 @@ namespace MyNamespace
             throw new ArgumentException(""Object is not a MyNamespace.ClassObject."");
         }
 
+#nullable disable
         public int CompareTo(ClassObject other)
+#nullable enable
         {
             if (other is null) return 1;
-
-            int compared;
 
             return Value.CompareTo(other.Value);
         }
@@ -178,7 +186,9 @@ namespace GenerateSource
 {
     public partial class NestedValueClass : IComparable, IComparable<NestedValueClass>
     {
+#nullable disable
         public int CompareTo(object other)
+#nullable enable
         {
             if (other is null) return 1;
 
@@ -190,11 +200,11 @@ namespace GenerateSource
             throw new ArgumentException(""Object is not a GenerateSource.NestedValueClass."");
         }
 
+#nullable disable
         public int CompareTo(NestedValueClass other)
+#nullable enable
         {
             if (other is null) return 1;
-
-            int compared;
 
             return Value.CompareTo(other.Value);
         }
