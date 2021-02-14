@@ -11,7 +11,7 @@ namespace ComparableGenerator.UnitTest.Assertions
         private readonly AnalyzerAssertions _analyzerAssertions;
         private DiagnosticResult _diagnosticResult;
         private string _fixedCode;
-        public ContainAssertions(AnalyzerAssertions analyzerAssertions, Analyzer analyzer, DiagnosticDescriptor rule)
+        public ContainAssertions(AnalyzerAssertions analyzerAssertions, DiagnosticDescriptor rule)
         {
             _analyzerAssertions = analyzerAssertions;
             _diagnosticResult = CSharpAnalyzerVerifier<SourceAnalyzer>.Diagnostic(rule);

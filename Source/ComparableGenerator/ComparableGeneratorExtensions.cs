@@ -39,7 +39,7 @@ namespace ComparableGenerator
             return members
                 .GroupBy(x => x.Priority, x => x)
                 .Where(x => 1 < x.Count())
-                .SelectMany(x => x);;
+                .SelectMany(x => x);
         }
 
         public static TypeSyntax GetTypeSymbol(this MemberDeclarationSyntax memberDeclarationSyntax)

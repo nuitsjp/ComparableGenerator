@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using ComparableGenerator.UnitTest.Assertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace ComparableGenerator.UnitTest

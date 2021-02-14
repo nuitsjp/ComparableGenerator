@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -28,8 +27,7 @@ namespace ComparableGenerator
         {
             try
             {
-                var receiver = context.SyntaxReceiver as SyntaxReceiver;
-                if (receiver == null) return;
+                var receiver = (SyntaxReceiver)context.SyntaxReceiver!;
 
                 foreach (var targetType in receiver.Targets)
                 {

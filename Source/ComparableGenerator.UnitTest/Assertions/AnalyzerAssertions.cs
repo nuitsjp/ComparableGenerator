@@ -7,7 +7,7 @@ namespace ComparableGenerator.UnitTest.Assertions
 {
     public class AnalyzerAssertions : ReferenceTypeAssertions<Analyzer, AnalyzerAssertions>
     {
-        private List<DiagnosticResult> _diagnosticResults = new();
+        private readonly List<DiagnosticResult> _diagnosticResults = new();
         public IEnumerable<DiagnosticResult> DiagnosticResults => _diagnosticResults;
 
         public AnalyzerAssertions(Analyzer instance)
@@ -21,7 +21,7 @@ namespace ComparableGenerator.UnitTest.Assertions
 
         public ContainAssertions Contain(DiagnosticDescriptor rule)
         {
-            return new(this, Subject, rule);
+            return new(this, rule);
         }
 
         public BeEmptyAssertions BeEmpty()

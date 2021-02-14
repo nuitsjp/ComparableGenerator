@@ -2,8 +2,10 @@
 
 namespace ComparableGenerator
 {
+    // ReSharper disable once UnusedMember.Global
     public static class Compare
     {
+        // ReSharper disable once UnusedMember.Global
         public static int Invoke<T>(T? self, T? other) where T : IComparable
         {
             if (self is null && other is null) return 0;
