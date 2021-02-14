@@ -15,13 +15,14 @@
 
     <PackageVersion>$(Version)</PackageVersion>
     <Authors>nuits.jp</Authors>
-    <Copyright>© nuits.jp, Inc.</Copyright>
-    <PackageTags>sourcegenerator</PackageTags>
+    <Copyright>© 2021 nuits.jp</Copyright>
+    <PackageTags>sourcegenerator icomparable</PackageTags>
     <PackageProjectUrl>https://github.com/nuitsjp/ComparableGenerator</PackageProjectUrl>
     <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0-pre1</Version>
   </PropertyGroup>
 
   <ItemGroup>
