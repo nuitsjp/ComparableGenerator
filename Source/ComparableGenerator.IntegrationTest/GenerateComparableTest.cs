@@ -4,7 +4,7 @@ using FluentAssertions;
 using GenerateSource;
 using Xunit;
 
-namespace ComparableGenerator.Test
+namespace ComparableGenerator.IntegrationTest
 {
     public class GenerateComparableTest
     {
