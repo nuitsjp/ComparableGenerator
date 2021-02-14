@@ -264,5 +264,11 @@ namespace GenerateSource
             await source.RunGenerator()
                 .Should().BeNotGeneratedAsync();
         }
+
+        public override async Task Should_be_error_When_multiple_variables_field(string source)
+        {
+            await source.RunGenerator()
+                .Should().BeNotGeneratedAsync();
+        }
     }
 }

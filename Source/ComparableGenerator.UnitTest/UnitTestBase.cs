@@ -290,5 +290,22 @@ namespace MyNamespace
 }
 ")]
         public abstract Task Should_be_error_When_CompareBy_field_does_not_implement_IComparable(string source);
+
+
+        [Theory]
+        [InlineData(@"
+using ComparableGenerator;
+
+namespace MyNamespace
+{
+    [Comparable]
+    public struct MyClass
+    {
+        [CompareBy]
+        public int Value1, Value2;
+    }
+}
+")]
+        public abstract Task Should_be_error_When_multiple_variables_field(string source);
     }
 }

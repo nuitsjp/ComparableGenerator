@@ -128,6 +128,21 @@ namespace ComparableGenerator
                         memberDeclarationSyntax.CompareBy.GetLocation(),
                         memberDeclarationSyntax.Member.GetName()));
             }
+
+            // Multiple variable fields exist.
+            var multipleVariablesFields =
+                compareByMembers
+                    .Select(x => x.Member)
+                    .OfType<FieldDeclarationSyntax>()
+                    .Where(x => 1 < x.Declaration.Variables.Count);
+            foreach (var fieldDeclarationSyntax in multipleVariablesFields)
+            {
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        MemberWithSamePriority.Rule,
+                        fieldDeclarationSyntax.Declaration.Variables.First().GetLocation(),
+                        fieldDeclarationSyntax.GetName()));
+            }
         }
     }
 }

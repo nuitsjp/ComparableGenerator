@@ -164,5 +164,14 @@ namespace MyNamespace
                 .WithArguments("Value")
                 .VerifyAnalyzerAsync();
         }
+
+        public override async Task Should_be_error_When_multiple_variables_field(string source)
+        {
+            await source.CreateAnalyzer()
+                .Should().Contain(SourceAnalyzer.MemberWithSamePriority.Rule)
+                .WithLocation(10, 20)
+                .WithArguments("Value1")
+                .VerifyAnalyzerAsync();
+        }
     }
 }
