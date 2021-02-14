@@ -59,11 +59,11 @@ foreach(var member in Members) {
 <# 
     if(member == Members.Last()) { 
 #>
-            return <#= member #>.CompareTo(other.<#= member #>);
+            return ComparableGenerator.Compare.Invoke(<#= member #>, other.<#= member #>);
 <# 
     } else { 
 #>
-            compared = <#= member #>.CompareTo(other.<#= member #>);
+            compared = ComparableGenerator.Compare.Invoke(<#= member #>, other.<#= member #>);
             if (compared != 0) return compared;
 
 <# 

@@ -4,7 +4,9 @@ namespace MyNamespace
 {
     public partial struct StructObject : IComparable, IComparable<StructObject>
     {
+#nullable disable
         public int CompareTo(object other)
+#nullable enable
         {
             if (other is null) return 1;
 

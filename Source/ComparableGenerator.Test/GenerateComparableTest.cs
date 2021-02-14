@@ -49,6 +49,33 @@ namespace ComparableGenerator.Test
             comparable.CompareTo(null!).Should().Be(1);
         }
 
+        [Fact]
+        public void Should_return_minus1_for_self_member_is_null()
+        {
+            var instance0 = new CompositeObject { Value = null };
+            var instance1 = new CompositeObject { Value = new CompositeChildValue { Value1 = 2 } };
+
+            instance0.CompareTo(instance1).Should().Be(-1);
+        }
+
+        [Fact]
+        public void Should_return_1_for_other_member_is_null()
+        {
+            var instance0 = new CompositeObject { Value = new CompositeChildValue { Value1 = 1 } };
+            var instance1 = new CompositeObject { Value = null };
+
+            instance0.CompareTo(instance1).Should().Be(1);
+        }
+
+        [Fact]
+        public void Should_return_0_for_both_member_is_null()
+        {
+            var instance0 = new CompositeObject { Value = null };
+            var instance1 = new CompositeObject { Value = null };
+
+            instance0.CompareTo(instance1).Should().Be(0);
+        }
+
         [Theory]
         [MemberData(nameof(CompareWith))]
         public void Should_throw_ArgumentException_for_CompareTo_different_type(Type compareWith)

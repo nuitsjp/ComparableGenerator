@@ -8,7 +8,7 @@ namespace ComparableGenerator
         public const int DefaultPriority = 0;
 
         /// <summary>
-        /// Priority in CompareTo.
+        /// Priority in Compare.
         /// </summary>
         // ReSharper disable once MemberInitializerValueIgnored
         public int Priority { get; set; } = DefaultPriority;

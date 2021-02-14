@@ -45,13 +45,13 @@ namespace MyNamespace
 
             int compared;
 
-            compared = Value1.CompareTo(other.Value1);
+            compared = ComparableGenerator.Compare.Invoke(Value1, other.Value1);
             if (compared != 0) return compared;
 
-            compared = Value3.CompareTo(other.Value3);
+            compared = ComparableGenerator.Compare.Invoke(Value3, other.Value3);
             if (compared != 0) return compared;
 
-            return Value2.CompareTo(other.Value2);
+            return ComparableGenerator.Compare.Invoke(Value2, other.Value2);
         }
     }
 }
@@ -89,13 +89,13 @@ namespace MyNamespace
         {
             int compared;
 
-            compared = Value1.CompareTo(other.Value1);
+            compared = ComparableGenerator.Compare.Invoke(Value1, other.Value1);
             if (compared != 0) return compared;
 
-            compared = Value3.CompareTo(other.Value3);
+            compared = ComparableGenerator.Compare.Invoke(Value3, other.Value3);
             if (compared != 0) return compared;
 
-            return Value2.CompareTo(other.Value2);
+            return ComparableGenerator.Compare.Invoke(Value2, other.Value2);
         }
     }
 }
@@ -134,7 +134,7 @@ namespace MyNamespace
 
         public int CompareTo(CompositeObject other)
         {
-            return Value.CompareTo(other.Value);
+            return ComparableGenerator.Compare.Invoke(Value, other.Value);
         }
     }
 }
@@ -165,7 +165,7 @@ namespace MyNamespace
         {
             if (other is null) return 1;
 
-            return Value.CompareTo(other.Value);
+            return ComparableGenerator.Compare.Invoke(Value, other.Value);
         }
     }
 }
@@ -206,7 +206,7 @@ namespace GenerateSource
         {
             if (other is null) return 1;
 
-            return Value.CompareTo(other.Value);
+            return ComparableGenerator.Compare.Invoke(Value, other.Value);
         }
     }
 }

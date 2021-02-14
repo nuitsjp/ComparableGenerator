@@ -78,17 +78,17 @@ foreach(var member in Members) {
  
     if(member == Members.Last()) { 
 
-            this.Write("            return ");
+            this.Write("            return ComparableGenerator.Compare.Invoke(");
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
-            this.Write(".CompareTo(other.");
+            this.Write(", other.");
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
             this.Write(");\r\n");
  
     } else { 
 
-            this.Write("            compared = ");
+            this.Write("            compared = ComparableGenerator.Compare.Invoke(");
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
-            this.Write(".CompareTo(other.");
+            this.Write(", other.");
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
             this.Write(");\r\n            if (compared != 0) return compared;\r\n\r\n");
  
