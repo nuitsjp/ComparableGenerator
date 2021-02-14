@@ -69,8 +69,8 @@ namespace ComparableGenerator
         {
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.None);
             context.EnableConcurrentExecution();
-            context.RegisterSyntaxNodeAction(AnalyzeClassNode, SyntaxKind.ClassDeclaration);
-            context.RegisterSyntaxNodeAction(AnalyzeClassNode, SyntaxKind.StructDeclaration);
+            context.RegisterSyntaxNodeAction(AnalyzeTypeNode, SyntaxKind.ClassDeclaration);
+            context.RegisterSyntaxNodeAction(AnalyzeTypeNode, SyntaxKind.StructDeclaration);
             context.RegisterSyntaxNodeAction(AnalyzeMember, SyntaxKind.PropertyDeclaration);
             context.RegisterSyntaxNodeAction(AnalyzeMember, SyntaxKind.FieldDeclaration);
         }
@@ -89,7 +89,7 @@ namespace ComparableGenerator
             }
         }
 
-        private void AnalyzeClassNode(SyntaxNodeAnalysisContext context)
+        private void AnalyzeTypeNode(SyntaxNodeAnalysisContext context)
         {
             var typeDeclarationSyntax = (TypeDeclarationSyntax)context.Node;
 

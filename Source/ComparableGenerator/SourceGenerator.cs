@@ -34,9 +34,11 @@ namespace ComparableGenerator
                     var typeSymbol = context.Compilation.GetSemanticModel(targetType.SyntaxTree).GetDeclaredSymbol(targetType);
                     if (typeSymbol == null) throw new Exception("can not get typeSymbol.");
 
+                    // Type has members with the same priority.
                     var compareByMembers = targetType.GetCompareByMembers().ToArray();
-                    if(compareByMembers.GetSamePriorityMembers().Any()) continue;
+                    if (compareByMembers.GetSamePriorityMembers().Any()) continue;
 
+                    // Member is not implemented IComparable.
                     if (compareByMembers.Select(x => x.Member)
                         .Any(x => context
                                 .Compilation
@@ -44,6 +46,12 @@ namespace ComparableGenerator
                                 .GetTypeInfo(x.GetTypeSymbol())
                                 .Type!
                             .IsNotImplementedIComparable())) continue;
+
+                    // Multiple variable fields exist.
+                    if (compareByMembers
+                        .Select(x => x.Member)
+                        .OfType<FieldDeclarationSyntax>()
+                        .Any(x => 1 < x.Declaration.Variables.Count)) continue;
 
                     var members =
                         compareByMembers.OrderBy(x => x.Priority)
@@ -96,14 +104,6 @@ namespace ComparableGenerator
                             .SelectMany(x => x.Attributes)
                             .FirstOrDefault(x => x.Name.ToString() is "Comparable" or "ComparableAttribute");
                     if (attr == null) return;
-
-                    // Multiple variable fields exist.
-                    var multipleVariablesFields =
-                        typeDeclarationSyntax
-                            .Members
-                            .OfType<FieldDeclarationSyntax>()
-                            .Where(x => 1 < x.Declaration.Variables.Count);
-                    if (multipleVariablesFields.Any()) return;
 
                     Targets.Add(typeDeclarationSyntax);
                 }

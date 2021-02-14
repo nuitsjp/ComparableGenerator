@@ -55,7 +55,7 @@ namespace MyNamespace
         [CompareBy(Priority = 1)]
         public int Value3 { get; set; }
 
-        public int NotApplicable { get; set; }
+        public int NotApplicable1, NotApplicable2;
     }
 }")]
         public abstract Task Should_be_generated_for_class(string source);
