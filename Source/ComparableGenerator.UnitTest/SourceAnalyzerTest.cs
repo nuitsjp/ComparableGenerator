@@ -15,6 +15,13 @@ namespace ComparableGenerator.UnitTest
                 .VerifyAnalyzerAsync();
         }
 
+        public override async Task Should_not_be_generated_When_ComparableAttribute_is_not_included(string source)
+        {
+            await source.CreateAnalyzer()
+                .Should().BeEmpty()
+                .VerifyAnalyzerAsync();
+        }
+
         public override async Task Should_be_generated_for_class(string source)
         {
             await source.CreateAnalyzer()

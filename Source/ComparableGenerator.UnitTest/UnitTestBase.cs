@@ -11,14 +11,30 @@ namespace ComparableGenerator.UnitTest
         [InlineData(@"
 using ComparableGenerator;
 
-    namespace MyNamespace
-    {
-        public class MyClass
+namespace MyNamespace
+{
+    public class MyClass
     {
     }
 }
 ")]
         public abstract Task Should_not_be_generated_When_Comparable_and_CompareBy_is_undefined(string source);
+
+        [Theory]
+        [InlineData(@"
+using ComparableGenerator;
+
+namespace MyNamespace
+{
+    public class MyAttribute : System.Attribute {}
+
+    [MyAttribute]
+    public class MyClass
+    {
+    }
+}
+")]
+        public abstract Task Should_not_be_generated_When_ComparableAttribute_is_not_included(string source);
 
         [Theory]
         [InlineData(@"

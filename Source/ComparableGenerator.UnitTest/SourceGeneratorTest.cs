@@ -14,6 +14,12 @@ namespace ComparableGenerator.UnitTest
                 .Should().BeNotGeneratedAsync();
         }
 
+        public override async Task Should_not_be_generated_When_ComparableAttribute_is_not_included(string source)
+        {
+            await source.RunGenerator()
+                .Should().BeNotGeneratedAsync();
+        }
+
         public override async Task Should_be_generated_for_class(string source)
         {
             #region Expected
