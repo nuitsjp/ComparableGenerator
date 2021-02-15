@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>GenerateSource</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\GenerateSource\ClassObject.cs" Link="ClassObject.cs" />
+    <Compile Include="..\GenerateSource\CompositeObject.cs" Link="CompositeObject.cs" />
+    <Compile Include="..\GenerateSource\NestedValueClass.cs" Link="NestedValueClass.cs" />
+    <Compile Include="..\GenerateSource\NoComparable\ClassObject.cs" Link="NoComparable\ClassObject.cs" />
+    <Compile Include="..\GenerateSource\NoComparable\StructObject.cs" Link="NoComparable\StructObject.cs" />
+    <Compile Include="..\GenerateSource\StructObject.cs" Link="StructObject.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="NoComparable\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ComparableGenerator" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>

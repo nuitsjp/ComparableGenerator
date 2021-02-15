@@ -78,14 +78,20 @@ namespace ComparableGenerator
         private void AnalyzeMember(SyntaxNodeAnalysisContext context)
         {
             var memberDeclarationSyntax = (MemberDeclarationSyntax)context.Node;
-            var typeInfo = context.SemanticModel.GetTypeInfo(memberDeclarationSyntax.GetTypeSymbol())!;
-            if (typeInfo.Type!.IsNotImplementedIComparable())
+            if (memberDeclarationSyntax
+                .AttributeLists
+                .SelectMany(attribute => attribute.Attributes)
+                .Any(attribute => attribute.Name.ToString() is "CompareBy" or "CompareByAttribute"))
             {
-                context.ReportDiagnostic(
-                    Diagnostic.Create(
-                        NotImplementedIComparable.Rule,
-                        memberDeclarationSyntax.GetTypeLocation(),
-                        memberDeclarationSyntax.GetName()));
+                var typeInfo = context.SemanticModel.GetTypeInfo(memberDeclarationSyntax.GetTypeSymbol())!;
+                if (typeInfo.Type!.IsNotImplementedIComparable())
+                {
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(
+                            NotImplementedIComparable.Rule,
+                            memberDeclarationSyntax.GetTypeLocation(),
+                            memberDeclarationSyntax.GetName()));
+                }
             }
         }
 

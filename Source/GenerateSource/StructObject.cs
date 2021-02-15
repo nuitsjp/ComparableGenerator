@@ -15,6 +15,6 @@ namespace GenerateSource
         public int Value3 { get; set; }
 
         // ReSharper disable once UnusedMember.Global
-        public int NotApplicable { get; set; }
+        public object NotApplicable;
     }
 }

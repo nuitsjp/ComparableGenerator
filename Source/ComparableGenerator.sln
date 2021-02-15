@@ -11,13 +11,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComparableGenerator.UnitTes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComparableGenerator.IntegrationTest", "ComparableGenerator.IntegrationTest\ComparableGenerator.IntegrationTest.csproj", "{060987D3-A0B4-40FC-AEA5-9E84F4515A76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparableGenerator.Analyzer", "ComparableGenerator.Analyzer\ComparableGenerator.Analyzer.csproj", "{2A2D5B44-B204-41E9-AEDC-62901BEFB971}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComparableGenerator.Analyzer", "ComparableGenerator.Analyzer\ComparableGenerator.Analyzer.csproj", "{2A2D5B44-B204-41E9-AEDC-62901BEFB971}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparableGenerator.Package", "ComparableGenerator.Package\ComparableGenerator.Package.csproj", "{6989216C-6942-4050-8637-9D5062867281}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComparableGenerator.Package", "ComparableGenerator.Package\ComparableGenerator.Package.csproj", "{6989216C-6942-4050-8637-9D5062867281}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparableGenerator.Generator", "ComparableGenerator.Generator\ComparableGenerator.Generator.csproj", "{9CD92ADE-B50D-4A86-A7CE-17B9B05F5E64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComparableGenerator.Generator", "ComparableGenerator.Generator\ComparableGenerator.Generator.csproj", "{9CD92ADE-B50D-4A86-A7CE-17B9B05F5E64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparableGenerator", "ComparableGenerator\ComparableGenerator.csproj", "{1070E4B9-D016-4380-9D7A-845E4980B427}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComparableGenerator", "ComparableGenerator\ComparableGenerator.csproj", "{1070E4B9-D016-4380-9D7A-845E4980B427}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateSourceByNuGet", "GenerateSourceByNuGet\GenerateSourceByNuGet.csproj", "{8C583D0B-2DBE-4B25-8B43-06221157C048}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparableGenerator.SystemTest", "ComparableGenerator.SystemTest\ComparableGenerator.SystemTest.csproj", "{8BB7EB90-8875-4F29-B6AB-64418F5664E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{1070E4B9-D016-4380-9D7A-845E4980B427}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1070E4B9-D016-4380-9D7A-845E4980B427}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1070E4B9-D016-4380-9D7A-845E4980B427}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C583D0B-2DBE-4B25-8B43-06221157C048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C583D0B-2DBE-4B25-8B43-06221157C048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C583D0B-2DBE-4B25-8B43-06221157C048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C583D0B-2DBE-4B25-8B43-06221157C048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB7EB90-8875-4F29-B6AB-64418F5664E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB7EB90-8875-4F29-B6AB-64418F5664E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB7EB90-8875-4F29-B6AB-64418F5664E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB7EB90-8875-4F29-B6AB-64418F5664E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
