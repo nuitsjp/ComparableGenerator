@@ -1,12 +1,10 @@
 # ComparableGenerator
 
-[Japanese](README-ja.md)
+IComparableを実装するためのC#ソースジェネレーターです。
 
-C# Source Generator to implement IComparable.
+IComparableを正しく実装するのはやや面倒です。毎回テストするのはさらに面倒です。
 
-Implementing IComparable correctly is somewhat tedious. It is even more tedious to test each time.
-
-ComparableGenerator provides a high quality implementation of IComparable.
+ComparableGeneratorはIComparableの高品質な実装を提供します。
 
 NuGet : [ComparableGenerator](https://www.nuget.org/packages/ComparableGenerator/)
 
@@ -16,7 +14,7 @@ Install-Package ComparableGenerator
 
 ## Introduction
 
-For example, if you want to sort the Employee class by the Id property, declare the Comparable and CompareBy attributes.
+たとえば、EmployeeクラスをIdプロパティでソートしたい場合は、Comparable属性とCompareBy属性を宣言します。
 
 ```cs
 using ComparableGenerator;
@@ -32,7 +30,7 @@ namespace GenerateSource
 }
 ```
 
-The ComparableGenerator generates the following code.
+ComparableGeneratorは以下のコードを生成します。
 
 ```cs
 using System;
@@ -63,7 +61,7 @@ namespace GenerateSource
 }
 ```
 
-Of course, it also supports classes and multiple members.
+もちろん、クラスや複数のメンバーにも対応しています。
 
 ```cs
 [Comparable]
@@ -80,21 +78,20 @@ public partial class ClassObject
 }
 ```
 
-When declaring CompareBy for multiple members, specify a unique priority for each.
+複数のメンバーに対してCompareByを宣言する場合は、それぞれにユニークな優先度を指定します。
 
-[Here](https://github.com/nuitsjp/ComparableGenerator/blob/main/Source/Sample/ClassObject.Partial.cs) is the code generated in this case.
+この場合に生成されるコードは[こちら](https://github.com/nuitsjp/ComparableGenerator/blob/main/Source/Sample/ClassObject.Partial.cs)を参照してください。
 
 
 ## Environments
 
-- Supports C# 9.0 and higher
+- C# 9.0以上をサポート
 
 ## Constraints
 
-- Inner classes are not supported.
-- Comparable and CompareBy contained in different "partial sources" are not supported.
+- インナークラスはサポートされていません。
+- ComparableとCompareByを異なるpartialファイルに宣言することはサポートされていません。
 
-## License
+## ライセンス
 
-This library is under the MIT License.
-
+このライブラリはMITライセンスに基づいています。
