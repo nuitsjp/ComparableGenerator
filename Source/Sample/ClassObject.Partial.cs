@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MyNamespace
+namespace GenerateSource
 {
     public partial class ClassObject : IComparable, IComparable<ClassObject>
     {
@@ -15,7 +15,7 @@ namespace MyNamespace
                 return CompareTo(concreteObject);
             }
 
-            throw new ArgumentException("Object is not a MyNamespace.ClassObject.");
+            throw new ArgumentException("Object is not a GenerateSource.ClassObject.");
         }
 
 #nullable disable
@@ -35,9 +35,8 @@ namespace MyNamespace
                 return left.CompareTo(right);
             }
 
-            // ReSharper disable once JoinDeclarationAndInitializer
             int compared;
-            
+
             compared = LocalCompareTo(Value1, other.Value1);
             if (compared != 0) return compared;
 

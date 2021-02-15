@@ -1,4 +1,4 @@
-﻿namespace MyNamespace
+﻿namespace GenerateSource
 {
     public partial class ClassObject
     {

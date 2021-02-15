@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MyNamespace
+namespace GenerateSource
 {
     public partial struct StructObject : IComparable, IComparable<StructObject>
     {
@@ -15,12 +15,11 @@ namespace MyNamespace
                 return CompareTo(concreteObject);
             }
 
-            throw new ArgumentException("Object is not a MyNamespace.StructObject.");
+            throw new ArgumentException("Object is not a GenerateSource.StructObject.");
         }
 
         public int CompareTo(StructObject other)
         {
-            // ReSharper disable once JoinDeclarationAndInitializer
             int compared;
 
             compared = Value1.CompareTo(other.Value1);

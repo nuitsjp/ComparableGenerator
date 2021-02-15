@@ -103,26 +103,15 @@ namespace MyNamespace
 
         public int CompareTo(StructObject other)
         {
-            static int LocalCompareTo<T>(T? left, T? right) where T : IComparable
-            {
-                if (left is null && right is null) return 0;
-
-                if (left is null) return -1;
-
-                if (right is null) return 1;
-
-                return left.CompareTo(right);
-            }
-
             int compared;
 
-            compared = LocalCompareTo(Value1, other.Value1);
+            compared = Value1.CompareTo(other.Value1);
             if (compared != 0) return compared;
 
-            compared = LocalCompareTo(Value3, other.Value3);
+            compared = Value3.CompareTo(other.Value3);
             if (compared != 0) return compared;
 
-            return LocalCompareTo(Value2, other.Value2);
+            return Value2.CompareTo(other.Value2);
         }
     }
 }
@@ -161,18 +150,7 @@ namespace MyNamespace
 
         public int CompareTo(CompositeObject other)
         {
-            static int LocalCompareTo<T>(T? left, T? right) where T : IComparable
-            {
-                if (left is null && right is null) return 0;
-
-                if (left is null) return -1;
-
-                if (right is null) return 1;
-
-                return left.CompareTo(right);
-            }
-
-            return LocalCompareTo(Value, other.Value);
+            return Value.CompareTo(other.Value);
         }
     }
 }

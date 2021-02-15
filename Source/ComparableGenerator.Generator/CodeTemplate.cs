@@ -64,11 +64,9 @@ if(Type == "class") {
 
 if(Type == "class") {
 
-            this.Write("            if (other is null) return 1;\r\n\r\n");
+            this.Write(@"            if (other is null) return 1;
 
-}
-
-            this.Write(@"            static int LocalCompareTo<T>(T? left, T? right) where T : IComparable
+            static int LocalCompareTo<T>(T? left, T? right) where T : IComparable
             {
                 if (left is null && right is null) return 0;
 
@@ -81,6 +79,7 @@ if(Type == "class") {
 
 ");
 
+}
 if(1 < Members.Count)
 {
 
@@ -91,6 +90,7 @@ foreach(var member in Members) {
 
  
     if(member == Members.Last()) { 
+        if(Type == "class") {
 
             this.Write("            return LocalCompareTo(");
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
@@ -98,13 +98,41 @@ foreach(var member in Members) {
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
             this.Write(");\r\n");
  
-    } else { 
+        } 
+        else 
+        {
+
+            this.Write("            return ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(member));
+            this.Write(".CompareTo(other.");
+            this.Write(this.ToStringHelper.ToStringWithCulture(member));
+            this.Write(");\r\n");
+
+        }
+    } 
+    else 
+    { 
+        if(Type == "class") {
 
             this.Write("            compared = LocalCompareTo(");
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
             this.Write(", other.");
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
-            this.Write(");\r\n            if (compared != 0) return compared;\r\n\r\n");
+            this.Write(");\r\n");
+
+        }
+        else 
+        {
+
+            this.Write("            compared = ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(member));
+            this.Write(".CompareTo(other.");
+            this.Write(this.ToStringHelper.ToStringWithCulture(member));
+            this.Write(");\r\n");
+
+        }
+
+            this.Write("            if (compared != 0) return compared;\r\n\r\n");
  
     }
 }
