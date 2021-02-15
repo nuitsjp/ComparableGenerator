@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using GenerateSource;
 using Xunit;
 
 namespace ComparableGenerator.IntegrationTest
@@ -11,8 +10,10 @@ namespace ComparableGenerator.IntegrationTest
         public static IEnumerable<object[]> CompareWith { get; } =
             new List<object[]>
             {
-                new object[]{typeof(ClassObject) },
-                new object[]{typeof(StructObject)}
+                new object[]{typeof(GenerateSource.ClassObject) },
+                new object[]{typeof(GenerateSource.StructObject)},
+                new object[]{typeof(GenerateSourceForNotNullable.ClassObject) },
+                new object[]{typeof(GenerateSourceForNotNullable.StructObject)},
             };
 
         [Theory]
@@ -45,15 +46,15 @@ namespace ComparableGenerator.IntegrationTest
         [Fact]
         public void Should_return_1_for_CompareTo_by_null_concrete_object()
         {
-            var comparable = new ClassObject();
+            var comparable = new GenerateSource.ClassObject();
             comparable.CompareTo(null!).Should().Be(1);
         }
 
         [Fact]
         public void Should_return_minus1_for_self_member_is_null()
         {
-            var instance0 = new CompositeObject { Value = null };
-            var instance1 = new CompositeObject { Value = new CompositeChildValue { Value1 = 2 } };
+            var instance0 = new GenerateSource.CompositeObject { Value = null };
+            var instance1 = new GenerateSource.CompositeObject { Value = new GenerateSource.CompositeChildValue { Value1 = 2 } };
 
             instance0.CompareTo(instance1).Should().Be(-1);
         }
@@ -61,8 +62,8 @@ namespace ComparableGenerator.IntegrationTest
         [Fact]
         public void Should_return_1_for_other_member_is_null()
         {
-            var instance0 = new CompositeObject { Value = new CompositeChildValue { Value1 = 1 } };
-            var instance1 = new CompositeObject { Value = null };
+            var instance0 = new GenerateSource.CompositeObject { Value = new GenerateSource.CompositeChildValue { Value1 = 1 } };
+            var instance1 = new GenerateSource.CompositeObject { Value = null };
 
             instance0.CompareTo(instance1).Should().Be(1);
         }
@@ -70,8 +71,8 @@ namespace ComparableGenerator.IntegrationTest
         [Fact]
         public void Should_return_0_for_both_member_is_null()
         {
-            var instance0 = new CompositeObject { Value = null };
-            var instance1 = new CompositeObject { Value = null };
+            var instance0 = new GenerateSource.CompositeObject { Value = null };
+            var instance1 = new GenerateSource.CompositeObject { Value = null };
 
             instance0.CompareTo(instance1).Should().Be(0);
         }
@@ -156,8 +157,8 @@ namespace ComparableGenerator.IntegrationTest
         [Fact]
         public void Should_return_CompareTo_result_for_type_with_subclass_of_generated_code_as_member()
         {
-            var instance0 = new CompositeObject {Value = new CompositeChildValue {Value1 = 1}};
-            var instance1 = new CompositeObject {Value = new CompositeChildValue { Value1 = 2}};
+            var instance0 = new GenerateSource.CompositeObject {Value = new GenerateSource.CompositeChildValue {Value1 = 1}};
+            var instance1 = new GenerateSource.CompositeObject {Value = new GenerateSource.CompositeChildValue { Value1 = 2}};
 
             instance0.CompareTo(instance1)
                 .Should().Be(instance0.Value.Value1.CompareTo(instance1.Value.Value1));
@@ -166,8 +167,8 @@ namespace ComparableGenerator.IntegrationTest
         [Fact]
         public void Should_return_CompareTo_result_for_type_with_subclass_of_IComparable_as_member()
         {
-            var instance0 = new NestedValueClass { Value = new () { Value = 1 } };
-            var instance1 = new NestedValueClass { Value = new() { Value = 2 } };
+            var instance0 = new GenerateSource.NestedValueClass { Value = new () { Value = 1 } };
+            var instance1 = new GenerateSource.NestedValueClass { Value = new() { Value = 2 } };
 
             instance0.CompareTo(instance1)
                 .Should().Be(instance0.Value.Value.CompareTo(instance1.Value.Value));

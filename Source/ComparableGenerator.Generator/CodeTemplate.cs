@@ -67,6 +67,20 @@ if(Type == "class") {
             this.Write("            if (other is null) return 1;\r\n\r\n");
 
 }
+
+            this.Write(@"            static int LocalCompareTo<T>(T? left, T? right) where T : IComparable
+            {
+                if (left is null && right is null) return 0;
+
+                if (left is null) return -1;
+
+                if (right is null) return 1;
+
+                return left.CompareTo(right);
+            }
+
+");
+
 if(1 < Members.Count)
 {
 
@@ -78,7 +92,7 @@ foreach(var member in Members) {
  
     if(member == Members.Last()) { 
 
-            this.Write("            return ComparableGenerator.Compare.Invoke(");
+            this.Write("            return LocalCompareTo(");
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
             this.Write(", other.");
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
@@ -86,7 +100,7 @@ foreach(var member in Members) {
  
     } else { 
 
-            this.Write("            compared = ComparableGenerator.Compare.Invoke(");
+            this.Write("            compared = LocalCompareTo(");
             this.Write(this.ToStringHelper.ToStringWithCulture(member));
             this.Write(", other.");
             this.Write(this.ToStringHelper.ToStringWithCulture(member));

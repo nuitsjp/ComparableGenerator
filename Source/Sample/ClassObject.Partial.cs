@@ -24,16 +24,27 @@ namespace MyNamespace
         {
             if (other is null) return 1;
 
+            static int LocalCompareTo<T>(T? left, T? right) where T : IComparable
+            {
+                if (left is null && right is null) return 0;
+
+                if (left is null) return -1;
+
+                if (right is null) return 1;
+
+                return left.CompareTo(right);
+            }
+
             // ReSharper disable once JoinDeclarationAndInitializer
             int compared;
             
-            compared = MyNamespace.CompareTo.Invoke(Value1, other.Value1);
+            compared = LocalCompareTo(Value1, other.Value1);
             if (compared != 0) return compared;
 
-            compared = MyNamespace.CompareTo.Invoke(Value3, other.Value3);
+            compared = LocalCompareTo(Value3, other.Value3);
             if (compared != 0) return compared;
 
-            return MyNamespace.CompareTo.Invoke(Value2, other.Value2);
+            return LocalCompareTo(Value2, other.Value2);
         }
     }
 }

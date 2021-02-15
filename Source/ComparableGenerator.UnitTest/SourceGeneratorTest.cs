@@ -48,15 +48,26 @@ namespace MyNamespace
         {
             if (other is null) return 1;
 
+            static int LocalCompareTo<T>(T? left, T? right) where T : IComparable
+            {
+                if (left is null && right is null) return 0;
+
+                if (left is null) return -1;
+
+                if (right is null) return 1;
+
+                return left.CompareTo(right);
+            }
+
             int compared;
 
-            compared = ComparableGenerator.Compare.Invoke(Value1, other.Value1);
+            compared = LocalCompareTo(Value1, other.Value1);
             if (compared != 0) return compared;
 
-            compared = ComparableGenerator.Compare.Invoke(Value3, other.Value3);
+            compared = LocalCompareTo(Value3, other.Value3);
             if (compared != 0) return compared;
 
-            return ComparableGenerator.Compare.Invoke(Value2, other.Value2);
+            return LocalCompareTo(Value2, other.Value2);
         }
     }
 }
@@ -92,15 +103,26 @@ namespace MyNamespace
 
         public int CompareTo(StructObject other)
         {
+            static int LocalCompareTo<T>(T? left, T? right) where T : IComparable
+            {
+                if (left is null && right is null) return 0;
+
+                if (left is null) return -1;
+
+                if (right is null) return 1;
+
+                return left.CompareTo(right);
+            }
+
             int compared;
 
-            compared = ComparableGenerator.Compare.Invoke(Value1, other.Value1);
+            compared = LocalCompareTo(Value1, other.Value1);
             if (compared != 0) return compared;
 
-            compared = ComparableGenerator.Compare.Invoke(Value3, other.Value3);
+            compared = LocalCompareTo(Value3, other.Value3);
             if (compared != 0) return compared;
 
-            return ComparableGenerator.Compare.Invoke(Value2, other.Value2);
+            return LocalCompareTo(Value2, other.Value2);
         }
     }
 }
@@ -139,7 +161,18 @@ namespace MyNamespace
 
         public int CompareTo(CompositeObject other)
         {
-            return ComparableGenerator.Compare.Invoke(Value, other.Value);
+            static int LocalCompareTo<T>(T? left, T? right) where T : IComparable
+            {
+                if (left is null && right is null) return 0;
+
+                if (left is null) return -1;
+
+                if (right is null) return 1;
+
+                return left.CompareTo(right);
+            }
+
+            return LocalCompareTo(Value, other.Value);
         }
     }
 }
@@ -170,7 +203,18 @@ namespace MyNamespace
         {
             if (other is null) return 1;
 
-            return ComparableGenerator.Compare.Invoke(Value, other.Value);
+            static int LocalCompareTo<T>(T? left, T? right) where T : IComparable
+            {
+                if (left is null && right is null) return 0;
+
+                if (left is null) return -1;
+
+                if (right is null) return 1;
+
+                return left.CompareTo(right);
+            }
+
+            return LocalCompareTo(Value, other.Value);
         }
     }
 }
@@ -211,7 +255,18 @@ namespace GenerateSource
         {
             if (other is null) return 1;
 
-            return ComparableGenerator.Compare.Invoke(Value, other.Value);
+            static int LocalCompareTo<T>(T? left, T? right) where T : IComparable
+            {
+                if (left is null && right is null) return 0;
+
+                if (left is null) return -1;
+
+                if (right is null) return 1;
+
+                return left.CompareTo(right);
+            }
+
+            return LocalCompareTo(Value, other.Value);
         }
     }
 }

@@ -47,6 +47,19 @@ if(Type == "class") {
 
 <#
 }
+#>
+            static int LocalCompareTo<T>(T? left, T? right) where T : IComparable
+            {
+                if (left is null && right is null) return 0;
+
+                if (left is null) return -1;
+
+                if (right is null) return 1;
+
+                return left.CompareTo(right);
+            }
+
+<#
 if(1 < Members.Count)
 {
 #>
@@ -59,11 +72,11 @@ foreach(var member in Members) {
 <# 
     if(member == Members.Last()) { 
 #>
-            return ComparableGenerator.Compare.Invoke(<#= member #>, other.<#= member #>);
+            return LocalCompareTo(<#= member #>, other.<#= member #>);
 <# 
     } else { 
 #>
-            compared = ComparableGenerator.Compare.Invoke(<#= member #>, other.<#= member #>);
+            compared = LocalCompareTo(<#= member #>, other.<#= member #>);
             if (compared != 0) return compared;
 
 <# 
