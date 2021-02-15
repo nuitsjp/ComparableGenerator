@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    <!-- does not need runtime self -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
+
+  <!-- NuGet -->
+  <PropertyGroup>
+    <PackageId>ComparableGenerator</PackageId>  
+    <Description>C# Source Generator to IComparable.</Description>
+    <PackageVersion>$(Version)</PackageVersion>
+    <Authors>nuits.jp</Authors>
+    <Copyright>© 2021 nuits.jp</Copyright>
+    <PackageTags>sourcegenerator icomparable</PackageTags>
+    <PackageProjectUrl>https://github.com/nuitsjp/ComparableGenerator</PackageProjectUrl>
+    <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0-pre1</Version>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ComparableGenerator.Analyzer\ComparableGenerator.Analyzer.csproj" />
+    <ProjectReference Include="..\ComparableGenerator.Generator\ComparableGenerator.Generator.csproj" />
+    <ProjectReference Include="..\ComparableGenerator\ComparableGenerator.csproj" />
+  </ItemGroup>
+
+  <Target Name="_AddAnalyzersToOutput">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(OutputPath)\ComparableGenerator.dll" PackagePath="lib/$(TargetFramework)" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\ComparableGenerator.Analyzer.dll" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\ComparableGenerator.Generator.dll" PackagePath="analyzers/dotnet/cs" />
+    </ItemGroup>
+  </Target>
+
+</Project>

@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ComparableGenerator\ComparableGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
+    <ProjectReference Include="..\ComparableGenerator.Analyzer\ComparableGenerator.Analyzer.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\ComparableGenerator.Generator\ComparableGenerator.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\ComparableGenerator\ComparableGenerator.csproj" />
   </ItemGroup>
 
 </Project>

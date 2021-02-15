@@ -3,15 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComparableGenerator", "ComparableGenerator\ComparableGenerator.csproj", "{6606D8E3-171F-49ED-B6AC-6865E52604A7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenerateSource", "GenerateSource\GenerateSource.csproj", "{89F6E14F-1B2E-41E2-8FEE-FA252127CB82}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "Sample\Sample.csproj", "{3C5FB043-3C45-46DF-AE8C-0FC3E77F057D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComparableGenerator.UnitTest", "ComparableGenerator.UnitTest\ComparableGenerator.UnitTest.csproj", "{013F25B2-C746-4E56-AA57-D401E649D302}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparableGenerator.IntegrationTest", "ComparableGenerator.IntegrationTest\ComparableGenerator.IntegrationTest.csproj", "{060987D3-A0B4-40FC-AEA5-9E84F4515A76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComparableGenerator.IntegrationTest", "ComparableGenerator.IntegrationTest\ComparableGenerator.IntegrationTest.csproj", "{060987D3-A0B4-40FC-AEA5-9E84F4515A76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparableGenerator.Analyzer", "ComparableGenerator.Analyzer\ComparableGenerator.Analyzer.csproj", "{2A2D5B44-B204-41E9-AEDC-62901BEFB971}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparableGenerator.Package", "ComparableGenerator.Package\ComparableGenerator.Package.csproj", "{6989216C-6942-4050-8637-9D5062867281}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparableGenerator.Generator", "ComparableGenerator.Generator\ComparableGenerator.Generator.csproj", "{9CD92ADE-B50D-4A86-A7CE-17B9B05F5E64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparableGenerator", "ComparableGenerator\ComparableGenerator.csproj", "{1070E4B9-D016-4380-9D7A-845E4980B427}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6606D8E3-171F-49ED-B6AC-6865E52604A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6606D8E3-171F-49ED-B6AC-6865E52604A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6606D8E3-171F-49ED-B6AC-6865E52604A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6606D8E3-171F-49ED-B6AC-6865E52604A7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{89F6E14F-1B2E-41E2-8FEE-FA252127CB82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{89F6E14F-1B2E-41E2-8FEE-FA252127CB82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89F6E14F-1B2E-41E2-8FEE-FA252127CB82}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +41,22 @@ Global
 		{060987D3-A0B4-40FC-AEA5-9E84F4515A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{060987D3-A0B4-40FC-AEA5-9E84F4515A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{060987D3-A0B4-40FC-AEA5-9E84F4515A76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A2D5B44-B204-41E9-AEDC-62901BEFB971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A2D5B44-B204-41E9-AEDC-62901BEFB971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A2D5B44-B204-41E9-AEDC-62901BEFB971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A2D5B44-B204-41E9-AEDC-62901BEFB971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6989216C-6942-4050-8637-9D5062867281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6989216C-6942-4050-8637-9D5062867281}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6989216C-6942-4050-8637-9D5062867281}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6989216C-6942-4050-8637-9D5062867281}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CD92ADE-B50D-4A86-A7CE-17B9B05F5E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CD92ADE-B50D-4A86-A7CE-17B9B05F5E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CD92ADE-B50D-4A86-A7CE-17B9B05F5E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CD92ADE-B50D-4A86-A7CE-17B9B05F5E64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1070E4B9-D016-4380-9D7A-845E4980B427}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1070E4B9-D016-4380-9D7A-845E4980B427}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1070E4B9-D016-4380-9D7A-845E4980B427}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1070E4B9-D016-4380-9D7A-845E4980B427}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

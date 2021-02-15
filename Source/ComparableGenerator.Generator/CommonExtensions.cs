@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ComparableGenerator
 {
-    public static class ComparableGeneratorExtensions
+    public static class CommonExtensions
     {
         public static IEnumerable<(MemberDeclarationSyntax Member, AttributeSyntax CompareBy, int Priority)> GetCompareByMembers(this TypeDeclarationSyntax typeDeclarationSyntax)
         {
@@ -32,7 +32,6 @@ namespace ComparableGenerator
                 return (x.Member, x.CompareBy, Priority: (int) expression.Token.Value!);
                 });
         }
-
         public static IEnumerable<(MemberDeclarationSyntax Member, AttributeSyntax CompareBy, int Priority)> GetSamePriorityMembers(
             this IEnumerable<(MemberDeclarationSyntax Member, AttributeSyntax CompareBy, int Priority)> members)
         {
@@ -51,28 +50,6 @@ namespace ComparableGenerator
 
             var fieldDeclarationSyntax = (FieldDeclarationSyntax)memberDeclarationSyntax;
             return fieldDeclarationSyntax.Declaration.Type;
-        }
-
-        public static string GetName(this MemberDeclarationSyntax memberDeclarationSyntax)
-        {
-            if (memberDeclarationSyntax is PropertyDeclarationSyntax propertyDeclarationSyntax)
-            {
-                return propertyDeclarationSyntax.Identifier.Text;
-            }
-
-            var fieldDeclarationSyntax = (FieldDeclarationSyntax)memberDeclarationSyntax;
-            return fieldDeclarationSyntax.Declaration.Variables.First().Identifier.Text;
-        }
-
-        public static Location GetTypeLocation(this MemberDeclarationSyntax memberDeclarationSyntax)
-        {
-            if (memberDeclarationSyntax is PropertyDeclarationSyntax propertyDeclarationSyntax)
-            {
-                return propertyDeclarationSyntax.Type.GetLocation();
-            }
-
-            var fieldDeclarationSyntax = (FieldDeclarationSyntax)memberDeclarationSyntax;
-            return fieldDeclarationSyntax.Declaration.Type.GetLocation();
         }
 
         public static bool IsNotImplementedIComparable(this ITypeSymbol typeSymbol)

@@ -27,6 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ComparableGenerator.Analyzer\ComparableGenerator.Analyzer.csproj" />
+    <ProjectReference Include="..\ComparableGenerator.Generator\ComparableGenerator.Generator.csproj" />
     <ProjectReference Include="..\ComparableGenerator\ComparableGenerator.csproj" />
   </ItemGroup>
 
