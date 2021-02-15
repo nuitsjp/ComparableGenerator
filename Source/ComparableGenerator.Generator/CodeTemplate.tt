@@ -8,7 +8,7 @@ using System;
 
 namespace <#= Namespace #>
 {
-    public partial <#= Type #> <#= Name #> : IComparable, IComparable<<#= Name #>>
+    <#= Accessibility #> partial <#= Type #> <#= Name #> : IComparable, IComparable<<#= Name #>>
     {
 #nullable disable
         public int CompareTo(object other)

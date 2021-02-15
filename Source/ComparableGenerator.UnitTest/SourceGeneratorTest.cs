@@ -26,7 +26,7 @@ namespace ComparableGenerator.UnitTest
 
 namespace MyNamespace
 {
-    public partial class ClassObject : IComparable, IComparable<ClassObject>
+    internal partial class ClassObject : IComparable, IComparable<ClassObject>
     {
 #nullable disable
         public int CompareTo(object other)

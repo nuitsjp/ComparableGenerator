@@ -44,7 +44,7 @@ using ComparableGenerator;
 namespace MyNamespace
 {
     [Comparable]
-    public partial class ClassObject
+    internal partial class ClassObject
     {
         [CompareBy]
         public int Value1 { get; set; }

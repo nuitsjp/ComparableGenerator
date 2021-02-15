@@ -27,7 +27,9 @@ namespace ComparableGenerator
         {
             this.Write("using System;\r\n\r\nnamespace ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
-            this.Write("\r\n{\r\n    public partial ");
+            this.Write("\r\n{\r\n    ");
+            this.Write(this.ToStringHelper.ToStringWithCulture(Accessibility));
+            this.Write(" partial ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Type));
             this.Write(" ");
             this.Write(this.ToStringHelper.ToStringWithCulture(Name));

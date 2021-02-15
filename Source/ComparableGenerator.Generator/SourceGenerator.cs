@@ -74,6 +74,12 @@ namespace ComparableGenerator
                         Namespace = typeSymbol.ContainingNamespace.ToDisplayString(),
                         Name = typeSymbol.Name,
                         Type = targetType is StructDeclarationSyntax ? "struct" : "class",
+                        Accessibility = typeSymbol.DeclaredAccessibility switch
+                        {
+                            Accessibility.Public => "public",
+                            Accessibility.Internal => "internal",
+                            _ => throw new NotSupportedException($"Accessibility is {typeSymbol.DeclaredAccessibility}")
+                        },
                         Members = members
                     };
 

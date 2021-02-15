@@ -3,7 +3,7 @@
 namespace GenerateSourceForNotNullable
 {
     [Comparable]
-    public partial class CompositeObject
+    internal partial class CompositeObject
     {
         [CompareBy]
         public CompositeChildValue Value { get; set; }
