@@ -19,11 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComparableGenerator.Generat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComparableGenerator", "ComparableGenerator\ComparableGenerator.csproj", "{1070E4B9-D016-4380-9D7A-845E4980B427}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateSourceByNuGet", "GenerateSourceByNuGet\GenerateSourceByNuGet.csproj", "{8C583D0B-2DBE-4B25-8B43-06221157C048}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenerateSourceByNuGet", "GenerateSourceByNuGet\GenerateSourceByNuGet.csproj", "{8C583D0B-2DBE-4B25-8B43-06221157C048}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparableGenerator.SystemTest", "ComparableGenerator.SystemTest\ComparableGenerator.SystemTest.csproj", "{8BB7EB90-8875-4F29-B6AB-64418F5664E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComparableGenerator.SystemTest", "ComparableGenerator.SystemTest\ComparableGenerator.SystemTest.csproj", "{8BB7EB90-8875-4F29-B6AB-64418F5664E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateSourceForNotNullable", "GenerateSourceForNotNullable\GenerateSourceForNotNullable.csproj", "{80CE76F0-C35F-4196-BB74-D968016442C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenerateSourceForNotNullable", "GenerateSourceForNotNullable\GenerateSourceForNotNullable.csproj", "{80CE76F0-C35F-4196-BB74-D968016442C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleConsoleApp", "SampleConsoleApp\SampleConsoleApp.csproj", "{5F41A1BF-0CCE-4D8B-85D4-A21FC3ECD100}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{80CE76F0-C35F-4196-BB74-D968016442C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80CE76F0-C35F-4196-BB74-D968016442C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80CE76F0-C35F-4196-BB74-D968016442C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F41A1BF-0CCE-4D8B-85D4-A21FC3ECD100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F41A1BF-0CCE-4D8B-85D4-A21FC3ECD100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F41A1BF-0CCE-4D8B-85D4-A21FC3ECD100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F41A1BF-0CCE-4D8B-85D4-A21FC3ECD100}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
