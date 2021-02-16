@@ -20,21 +20,19 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2.1</Version>
+    <Version>1.2.2</Version>
     <NoPackageAnalysis>true</NoPackageAnalysis>
 
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ComparableGenerator.Analyzer\ComparableGenerator.Analyzer.csproj" PrivateAssets="All" />
-    <ProjectReference Include="..\ComparableGenerator.Generator\ComparableGenerator.Generator.csproj" PrivateAssets="All" />
+    <ProjectReference Include="..\ComparableGenerator.CodeAnalysis\ComparableGenerator.CodeAnalysis.csproj" PrivateAssets="All" />
   </ItemGroup>
 
   <Target Name="_AddAnalyzersToOutput">
     <ItemGroup>
-      <TfmSpecificPackageFile Include="$(OutputPath)\ComparableGenerator.Analyzer.dll" PackagePath="analyzers/dotnet/cs" />
-      <TfmSpecificPackageFile Include="$(OutputPath)\ComparableGenerator.Generator.dll" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\ComparableGenerator.CodeAnalysis.dll" PackagePath="analyzers/dotnet/cs" />
     </ItemGroup>
   </Target>
 

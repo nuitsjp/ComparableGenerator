@@ -3,13 +3,14 @@ using System.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ComparableGenerator.CodeAnalysis.Analyzer;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace ComparableGenerator
+namespace ComparableGenerator.CodeAnalysis.CodeFix
 {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(SourceFixProvider)), Shared]
     public class SourceFixProvider : CodeFixProvider

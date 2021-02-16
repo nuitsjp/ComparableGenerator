@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace ComparableGenerator
+namespace ComparableGenerator.CodeAnalysis.Generator
 {
     [Generator]
     public class SourceGenerator : ISourceGenerator

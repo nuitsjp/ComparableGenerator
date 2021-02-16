@@ -3,9 +3,9 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace ComparableGenerator
+namespace ComparableGenerator.CodeAnalysis
 {
-    public static class CommonExtensions
+    public static class ComparableGeneratorExtensions
     {
         public static IEnumerable<(MemberDeclarationSyntax Member, AttributeSyntax CompareBy, int Priority)> GetCompareByMembers(this TypeDeclarationSyntax typeDeclarationSyntax)
         {
@@ -28,10 +28,11 @@ namespace ComparableGenerator
                         return (x.Member, x.CompareBy, Priority: 0);
                     }
 
-                    var expression = (LiteralExpressionSyntax) argument.Expression;
-                return (x.Member, x.CompareBy, Priority: (int) expression.Token.Value!);
+                    var expression = (LiteralExpressionSyntax)argument.Expression;
+                    return (x.Member, x.CompareBy, Priority: (int)expression.Token.Value!);
                 });
         }
+
         public static IEnumerable<(MemberDeclarationSyntax Member, AttributeSyntax CompareBy, int Priority)> GetSamePriorityMembers(
             this IEnumerable<(MemberDeclarationSyntax Member, AttributeSyntax CompareBy, int Priority)> members)
         {
@@ -71,6 +72,28 @@ namespace ComparableGenerator
                 .Any(x => x.AttributeClass!.Name is "Comparable" or "ComparableAttribute")) return false;
 
             return typeSymbol.BaseType?.IsNotImplementedIComparable() ?? true;
+        }
+
+        public static string GetName(this MemberDeclarationSyntax memberDeclarationSyntax)
+        {
+            if (memberDeclarationSyntax is PropertyDeclarationSyntax propertyDeclarationSyntax)
+            {
+                return propertyDeclarationSyntax.Identifier.Text;
+            }
+
+            var fieldDeclarationSyntax = (FieldDeclarationSyntax)memberDeclarationSyntax;
+            return fieldDeclarationSyntax.Declaration.Variables.First().Identifier.Text;
+        }
+
+        public static Location GetTypeLocation(this MemberDeclarationSyntax memberDeclarationSyntax)
+        {
+            if (memberDeclarationSyntax is PropertyDeclarationSyntax propertyDeclarationSyntax)
+            {
+                return propertyDeclarationSyntax.Type.GetLocation();
+            }
+
+            var fieldDeclarationSyntax = (FieldDeclarationSyntax)memberDeclarationSyntax;
+            return fieldDeclarationSyntax.Declaration.Type.GetLocation();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Reflection;
+using ComparableGenerator.CodeAnalysis.Generator;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 

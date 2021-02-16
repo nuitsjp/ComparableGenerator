@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using ComparableGenerator.CodeAnalysis.Analyzer;
+using ComparableGenerator.CodeAnalysis.CodeFix;
 using ComparableGenerator.UnitTest.Verifiers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;

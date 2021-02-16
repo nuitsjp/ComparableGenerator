@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ComparableGenerator {
+namespace ComparableGenerator.CodeAnalysis.Analyzer {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ComparableGenerator {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComparableGenerator.AnalyzerResources", typeof(AnalyzerResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComparableGenerator.CodeAnalysis.Analyzer.AnalyzerResources", typeof(AnalyzerResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

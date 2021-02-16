@@ -7,7 +7,7 @@
 //     コードが再生成されると失われます。
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace ComparableGenerator
+namespace ComparableGenerator.CodeAnalysis.Generator
 {
     using System.Linq;
     using System.Text;

@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
+using ComparableGenerator.CodeAnalysis.Analyzer;
 using ComparableGenerator.UnitTest.Assertions;
-using VerifyCS = ComparableGenerator.UnitTest.Verifiers.CSharpAnalyzerVerifier<
-    ComparableGenerator.SourceAnalyzer>;
 
 namespace ComparableGenerator.UnitTest
 {
