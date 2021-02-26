@@ -69,19 +69,19 @@ namespace ComparableGenerator.CodeAnalysis.Generator
                             })
                             .ToList();
 
-                    var codeTemplate = new CodeTemplate
-                    {
-                        Namespace = typeSymbol.ContainingNamespace.ToDisplayString(),
-                        Name = typeSymbol.Name,
-                        Type = targetType is StructDeclarationSyntax ? "struct" : "class",
-                        Accessibility = typeSymbol.DeclaredAccessibility switch
-                        {
-                            Accessibility.Public => "public",
-                            Accessibility.Internal => "internal",
-                            _ => throw new NotSupportedException($"Accessibility is {typeSymbol.DeclaredAccessibility}")
-                        },
-                        Members = members
-                    };
+                    var codeTemplate =
+                        new CodeTemplate(
+                            typeSymbol.ContainingNamespace.ToDisplayString(),
+                            typeSymbol.Name,
+                            targetType is StructDeclarationSyntax ? "struct" : "class",
+                            typeSymbol.DeclaredAccessibility switch
+                            {
+                                Accessibility.Public => "public",
+                                Accessibility.Internal => "internal",
+                                _ => throw new NotSupportedException(
+                                    $"Accessibility is {typeSymbol.DeclaredAccessibility}")
+                            },
+                            members);
 
                     if (members.Any())
                     {

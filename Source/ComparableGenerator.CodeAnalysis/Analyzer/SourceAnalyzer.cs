@@ -10,7 +10,7 @@ namespace ComparableGenerator.CodeAnalysis.Analyzer
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class SourceAnalyzer : DiagnosticAnalyzer
     {
-        public class CompareByIsNotDefined
+        public static class CompareByIsNotDefined
         {
             public const string DiagnosticId = "CG0001";
 
@@ -22,7 +22,7 @@ namespace ComparableGenerator.CodeAnalysis.Analyzer
             public static readonly DiagnosticDescriptor Rule = new(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Error, true, Description);
         }
 
-        public class ComparableIsNotDefined
+        public static class ComparableIsNotDefined
         {
             public const string DiagnosticId = "CG0002";
 
@@ -34,7 +34,7 @@ namespace ComparableGenerator.CodeAnalysis.Analyzer
             public static readonly DiagnosticDescriptor Rule = new(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Error, true, Description);
         }
 
-        public class MemberWithSamePriority
+        public static class MemberWithSamePriority
         {
             public const string DiagnosticId = "CG0003";
 
@@ -46,7 +46,7 @@ namespace ComparableGenerator.CodeAnalysis.Analyzer
             public static readonly DiagnosticDescriptor Rule = new(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Error, true, Description);
         }
 
-        public class NotImplementedIComparable
+        public static class NotImplementedIComparable
         {
             public const string DiagnosticId = "CG0004";
 

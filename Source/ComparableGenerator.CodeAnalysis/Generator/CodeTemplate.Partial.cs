@@ -4,10 +4,19 @@ namespace ComparableGenerator.CodeAnalysis.Generator
 {
     public partial class CodeTemplate
     {
-        public string? Namespace { get; set; }
-        public string? Name { get; set; }
-        public string? Type { get; set; }
-        public string? Accessibility { get; set; }
-        public List<string> Members { get; set; } = new();
+        public CodeTemplate(string ns, string name, string type, string accessibility, List<string> members)
+        {
+            Namespace = ns;
+            Name = name;
+            Type = type;
+            Accessibility = accessibility;
+            Members = members;
+        }
+
+        public string Namespace { get; }
+        public string Name { get; }
+        public string Type { get; }
+        public string Accessibility { get; }
+        public List<string> Members { get; }
     }
 }
