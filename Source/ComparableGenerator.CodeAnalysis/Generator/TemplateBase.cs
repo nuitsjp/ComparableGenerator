@@ -2,7 +2,7 @@
 
 namespace ComparableGenerator.CodeAnalysis.Generator
 {
-    public abstract class BaseTemplate
+    public abstract class TemplateBase
     {
         protected StringBuilder GenerationEnvironment { get; } = new();
 

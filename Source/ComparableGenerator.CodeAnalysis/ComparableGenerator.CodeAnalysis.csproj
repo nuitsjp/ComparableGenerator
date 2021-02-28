@@ -44,6 +44,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CodeTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Generator\CodeTemplate.Partial.cs">
+      <DependentUpon>CodeTemplate.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

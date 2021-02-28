@@ -18,7 +18,7 @@ namespace ComparableGenerator.CodeAnalysis.Generator
     /// Class to produce the template output
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class CodeTemplate : BaseTemplate
+    public partial class CodeTemplate : TemplateBase
     {
         /// <summary>
         /// Create the template output
